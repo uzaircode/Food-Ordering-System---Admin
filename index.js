@@ -11,13 +11,29 @@ closeBtn.addEventListener("click", () => {
   sideMenu.style.display = "none";
 });
 
-themeToggler.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme-variables");
-  localStorage.setItem("toggled", "true");
+const lightModeSpan = themeToggler.querySelector("span:nth-child(1)");
+const darkModeSpan = themeToggler.querySelector("span:nth-child(2)");
 
-  //   themeToggler.querySelector("span").classList.toggle("active");
-  themeToggler.querySelector("span:nth-child(1)").classList.toggle("active");
-  themeToggler.querySelector("span:nth-child(2)").classList.toggle("active");
+const theme = localStorage.getItem("theme");
+
+if (theme === "dark") {
+  document.body.classList.add("dark-theme-variables");
+  lightModeSpan.classList.remove("active");
+  darkModeSpan.classList.add("active");
+}
+
+themeToggler.addEventListener("click", () => {
+  if (document.body.classList.contains("dark-theme-variables")) {
+    document.body.classList.remove("dark-theme-variables");
+    lightModeSpan.classList.add("active");
+    darkModeSpan.classList.remove("active");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.add("dark-theme-variables");
+    lightModeSpan.classList.remove("active");
+    darkModeSpan.classList.add("active");
+    localStorage.setItem("theme", "dark");
+  }
 });
 
 Orders.forEach((order) => {
