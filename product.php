@@ -1,8 +1,9 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+include('server.php');
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -85,8 +86,8 @@
           <div class="recent-table-list-title-section">
             <h2>Recent Products</h2>
             <div class="recent-table-list-title-section-right">
-            <button onclick="window.location.href='/editProduct.html'">Edit Product</button>
-            <button onclick="window.location.href='/addProduct.html'">Add Product</button>
+            <button onclick="window.location.href='editProduct.php'">Edit Product</button>
+            <button onclick="window.location.href='addProduct.php'">Add Product</button>
           </div>
           </div>
             <table>
@@ -100,13 +101,17 @@
                     </tr>
                 </thread>
                 <tbody>
-                    <!-- <tr>
-                        <td>Foldable Mini Drone</td>
-                        <td>85631</td>
-                        <td>Due</td>
+                  <?php while($row = mysqli_fetch_array($results)) { ?>
+                    <tr>
+                        <!-- <td><img src="images/<?php echo $row['product_image']; ?>" alt="product image"></td> -->
+                        <!-- <td><img src="images/pizza2.jpeg" alt=""></td> -->
+                        <td><?php echo $row['product_image']; ?></td>
+                        <td><?php echo $row['product_name']; ?></td>
+                        <!-- <td>Due</td>
                         <td class="warning">Pending</td>
-                        <td class="primary">Details</td>
-                    </tr> -->
+                        <td class="primary">Details</td> -->
+                    </tr>
+                  <?php } ?>
                 </tbody>
             </table>
             <a href="#">Show All</a>
