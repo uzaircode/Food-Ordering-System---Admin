@@ -3,6 +3,20 @@ const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
 const themeToggler = document.querySelector(".theme-toggler");
 
+const input = document.getElementById("upload");
+const text = document.getElementById("text");
+const btn = document.getElementById("upload-btn");
+
+input.addEventListener("change", () => {
+  const path = input.value.split("\\");
+  const filename = path[path.length - 1];
+
+  text.innerText = filename ? filename : "Product image";
+
+  if (filename) btn.classList.add("chosen");
+  else btn.classList.remove("chosen");
+});
+
 menuBtn.addEventListener("click", () => {
   sideMenu.style.display = "block";
 });
@@ -11,13 +25,29 @@ closeBtn.addEventListener("click", () => {
   sideMenu.style.display = "none";
 });
 
-themeToggler.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme-variables");
-  localStorage.setItem("toggled", "true");
+const lightModeSpan = themeToggler.querySelector("span:nth-child(1)");
+const darkModeSpan = themeToggler.querySelector("span:nth-child(2)");
 
-  //   themeToggler.querySelector("span").classList.toggle("active");
-  themeToggler.querySelector("span:nth-child(1)").classList.toggle("active");
-  themeToggler.querySelector("span:nth-child(2)").classList.toggle("active");
+const theme = localStorage.getItem("theme");
+
+if (theme === "dark") {
+  document.body.classList.add("dark-theme-variables");
+  lightModeSpan.classList.remove("active");
+  darkModeSpan.classList.add("active");
+}
+
+themeToggler.addEventListener("click", () => {
+  if (document.body.classList.contains("dark-theme-variables")) {
+    document.body.classList.remove("dark-theme-variables");
+    lightModeSpan.classList.add("active");
+    darkModeSpan.classList.remove("active");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.add("dark-theme-variables");
+    lightModeSpan.classList.remove("active");
+    darkModeSpan.classList.add("active");
+    localStorage.setItem("theme", "dark");
+  }
 });
 
 Orders.forEach((order) => {
