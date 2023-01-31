@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body style="background-color: white">
     <div class="container">
       <aside>
         <div class="top">
@@ -30,7 +30,7 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html" class="active">
+          <a href="index.html">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
@@ -51,7 +51,7 @@
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html">
+          <a href="#" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
@@ -81,89 +81,71 @@
             <input type="date">
         </div>
 
-        <div class="insights">
-            <div class="sales">
-                <span class="material-symbols-outlined">monitoring</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Sales</h3>
-                        <h1>$25,024</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>81%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-
-            <div class="expenses">
-                <span class="material-symbols-outlined">bar_chart</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Expenses</h3>
-                        <h1>$14,160</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>62%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-
-            <div class="income">
-                <span class="material-symbols-outlined">stacked_line_chart</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Income</h3>
-                        <h1>$10,0864</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>44%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-        </div>
-
         <div class="recent-table-list">
-            <h2>Recent Products</h2>
-            <table>
-                <thread>
-                    <tr>
-                        <th>Product Image</th>
-                        <th>Product Name</th>
-                        <th>Product Number</th>
-                        <th>Payment</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thread>
-                <tbody>
-                    <!-- <tr>
-                        <td>Foldable Mini Drone</td>
-                        <td>85631</td>
-                        <td>Due</td>
-                        <td class="warning">Pending</td>
-                        <td class="primary">Details</td>
-                    </tr> -->
-                </tbody>
-            </table>
-            <a href="#">Show All</a>
+          <div class="recent-table-list-title-section">
+            <h2>Edit Profile</h2>
+            <div class="recent-table-list-title-section-right">
+          </div>
+          </div>
+            <div class="container-login">
+                <form action="">
+                  <div class="form-group">
+                    <p>Name</p>
+                    <input
+                      type="email"
+                      name="fname"
+                      required
+                      type="email"
+                      placeholder="Full Name"
+                    />
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <p>Email</p>
+                    <input
+                      type="email"
+                      name="fname"
+                      required
+                      type="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <br />
+                    <div class="form-group">
+                      <p>Contact Number</p>
+                      <input
+                        type="password"
+                        name="fname"
+                        required
+                        type="password"
+                        placeholder="Contact Number"
+                      />
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <p>Password</p>
+                    <input
+                      type="password"
+                      name="fname"
+                      required
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <br>
+                  <div>
+                    <button
+                      class="button-login"
+                      input
+                      type="submit"
+                      onClick="location.href='index.html'"
+                      style="background-color: black"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
         </div>
       </main>
 
@@ -250,26 +232,7 @@
                     <h3>1100</h3>
                 </div>
             </div>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">person</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>NEW CUSTOMERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="danger">+25%</h5>
-                    <h3>849</h3>
-                </div>
-            </div>
-            <div class="item add-product">
-                <div>
-                    <span class="material-symbols-outlined">add</span>
-                    <h3>Add Product</h3>
-                </div>
-            </div>
-        </div>
+
       </div>
     </div>
     <script src="orders.js" async defer></script>

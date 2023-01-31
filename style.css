@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 :root {
+  /* Color */
   --color-primary: #7380ec;
   --color-danger: #ff7782;
   --color-success: #41f1b6;
@@ -13,15 +14,30 @@
   --color-dark-variant: #677483;
   --color-background: #f6f6f9;
 
+  /* Font Family */
+  --ff-primary: "poppins", sans-serif;
+  --ff-body: var(--ff-primary);
+
   --card-border-radius: 2rem;
   --border-radius-1: 0.4rem;
   --border-radius-2: 0.8rem;
   --border-radius-3: 1.2rem;
 
+  /* Padding */
   --card-padding: 1.8rem;
   --padding-1: 1.2rem;
+  --size-1000: 10rem;
 
   --box-shadow: 0 2rem 3rem var(--color-light);
+
+  /* Font size */
+  --fs-button: var(--fs-100);
+
+  /* Font weight */
+  --fw-thin: 300;
+  --fw-regular: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 600;
 }
 
 .dark-theme-variables {
@@ -51,7 +67,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: poppins, sans-serif;
+  font-family: var(--ff-body);
   font-size: 0.88rem;
   background-color: var(--color-background);
   user-select: none;
@@ -133,6 +149,10 @@ b {
   color: var(--color-warning);
 }
 
+.padding-block-1000 {
+  padding-block: var(--size-1000);
+}
+
 aside {
   height: 100vh;
 }
@@ -188,6 +208,10 @@ aside .sidebar a:last-child {
   position: absolute;
   bottom: 2rem;
   width: 100%;
+}
+
+aside .sidebar a:last-child:hover {
+  color: var(--color-danger);
 }
 
 aside .close {
@@ -346,15 +370,49 @@ main .insights small {
 }
 
 /* TABLE RECENT ORDER */
-main .recent-orders {
+main .recent-table-list {
   margin-top: 2rem;
 }
 
-main .recent-orders h2 {
+main .recent-table-list h2 {
   margin-bottom: 0.8rem;
 }
 
-main .recent-orders table {
+main .recent-table-list-title-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+main .recent-table-list-title-section button {
+  background-color: transparent;
+  border: 2px dashed var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 0.5rem;
+  width: 20%;
+}
+
+main .recent-table-list-title-section-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  width: 60%;
+}
+
+main .recent-table-list-title-section-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  width: 60%;
+}
+
+main .recent-table-list-title-section button:hover {
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+}
+
+main .recent-table-list table {
   background: var(--color-white);
   width: 100%;
   border-radius: var(--card-border-radius);
@@ -364,12 +422,18 @@ main .recent-orders table {
   transition: all 300ms ease;
 }
 
-main .recent-orders table:hover {
+.recent-table-list-center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+main .recent-table-list table:hover {
   box-shadow: none;
 }
 
 main table tbody td {
-  height: 2.8rem;
+  height: 6rem;
   border-bottom: 1px solid var(--color-light);
   color: var(--color-dark-variant);
 }
@@ -378,11 +442,18 @@ main table tbody tr:last-child td {
   border: none;
 }
 
-main .recent-orders a {
+main .recent-table-list a {
   text-align: center;
   display: block;
   margin: 1rem auto;
   color: var(--color-primary);
+}
+
+main .profile-photo {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 /* RIGHT */
@@ -447,6 +518,7 @@ main .recent-orders a {
 
 .right .recent-updates .updates:hover {
   box-shadow: none;
+  filter: none;
 }
 
 .right .recent-updates .updates .update {
@@ -456,7 +528,16 @@ main .recent-orders a {
   margin-bottom: 1rem;
 }
 
+.updates {
+  margin-top: 1rem;
+}
+
 /* SALES ANALYTICS */
+
+.sales-analytics {
+  margin-top: 2rem;
+}
+
 .right .sales-analytics h2 {
   margin-bottom: 0.8rem;
 }
@@ -526,6 +607,216 @@ main .recent-orders a {
   font-weight: 600;
 }
 
+/* LOGIN */
+
+.container-login {
+  --max-width: 1110px;
+  --padding: 1rem;
+
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+.even-columns {
+  display: flex;
+  margin: auto;
+  gap: 5rem;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+input[type="email"],
+input[type="password"] {
+  background-color: hsl(203, 29%, 95%);
+  border-bottom: 1px solid hsl(202, 28%, 92%);
+  font-family: 14px;
+  height: 75px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 7px;
+  border-style: none;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+object {
+  width: 100%;
+  height: 30%;
+  object-fit: contain;
+}
+
+.signup-svg {
+  height: 477px;
+  width: 540px;
+}
+
+.content-right {
+  width: 380px;
+  padding: 0 15px 0 15px;
+}
+
+.button-login {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 1.25em 2.5em;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-button);
+  line-height: 1;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  box-shadow: 0 1.125em 1em -1em var(--clr-accent-500);
+}
+
+/* ADD PRODUCT */
+.accountDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.accountDetails button {
+  background-color: var(--color-primary);
+  cursor: pointer;
+  color: white;
+  border-radius: 0.5rem;
+  width: 60%;
+  height: 50px;
+  display: inline-block;
+  margin: auto;
+}
+
+.accountDetails button:hover {
+  background-color: var(--color-primary-variant);
+}
+
+.acc-detail {
+  padding: 2rem;
+}
+
+.acc-detail form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+form .user-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.user-details .input-box .details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.user-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+form .gender-details .gender-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+form .gender-details .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+  margin-right: 50px;
+}
+
+.gender-details .category label {
+  display: flex;
+}
+
+.gender-details .category .dot {
+  height: 18px;
+  width: 18px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 5px solid transparent;
+}
+
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two {
+  border-color: #d9d9d9;
+  background: #000000;
+}
+
+form input[type="radio"] {
+  display: none;
+}
+
+form .bttn {
+  height: 40px;
+  width: 100px;
+  display: inline-block;
+}
+
+form .bttn1 {
+  height: 30px;
+  display: inline-block;
+}
+
+form .bttn input {
+  height: 100%;
+  outline: none;
+  width: 350px;
+  margin-left: 300px;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  background: #1b1b1b;
+}
+
+form .bttn input:hover {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  cursor: pointer;
+}
+
+form .bttn1 input:hover {
+  background: grey;
+}
+
 /* MEDIA QUERIES TABLET */
 @media screen and (max-width: 1200px) {
   .container {
@@ -555,7 +846,7 @@ main .recent-orders a {
     gap: 0;
   }
 
-  main .recent-orders {
+  main .recent-table-list {
     width: 94%;
     position: absolute;
     left: 50%;
@@ -563,7 +854,7 @@ main .recent-orders a {
     margin: 2rem 0 0;
   }
 
-  main .recent-orders table {
+  main .recent-table-list table {
     width: 83vw;
   }
 
@@ -631,13 +922,13 @@ main .recent-orders a {
     padding: 0 1rem;
   }
 
-  main .recent-orders {
+  main .recent-table-list {
     position: relative;
     margin: 3rem 0 0 0;
     width: 100%;
   }
 
-  main .recent-orders table {
+  main .recent-table-list table {
     width: 100%;
     margin: 0;
   }
@@ -682,5 +973,10 @@ main .recent-orders a {
 
   .right .top button span {
     font-size: 2rem;
+  }
+
+  main .recent-table-list-title-section button {
+    padding: 0.5rem;
+    width: 50%;
   }
 }

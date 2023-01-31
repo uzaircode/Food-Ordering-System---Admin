@@ -30,7 +30,7 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html" class="active">
+          <a href="index.html">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
@@ -51,7 +51,7 @@
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html">
+          <a href="#" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
@@ -81,76 +81,22 @@
             <input type="date">
         </div>
 
-        <div class="insights">
-            <div class="sales">
-                <span class="material-symbols-outlined">monitoring</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Sales</h3>
-                        <h1>$25,024</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>81%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-
-            <div class="expenses">
-                <span class="material-symbols-outlined">bar_chart</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Expenses</h3>
-                        <h1>$14,160</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>62%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-
-            <div class="income">
-                <span class="material-symbols-outlined">stacked_line_chart</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total Income</h3>
-                        <h1>$10,0864</h1>
-                    </div>
-                    <div class="progress">
-                        <svg>
-                            <circle cx='38' cy='38' r='36'></circle>
-                        </svg>
-                        <div class="number">
-                            <p>44%</p>
-                        </div>
-                    </div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-        </div>
-
         <div class="recent-table-list">
+          <div class="recent-table-list-title-section">
             <h2>Recent Products</h2>
+            <div class="recent-table-list-title-section-right">
+            <button onclick="window.location.href='/editProduct.html'">Edit Product</button>
+            <button onclick="window.location.href='/addProduct.html'">Add Product</button>
+          </div>
+          </div>
             <table>
                 <thread>
                     <tr>
                         <th>Product Image</th>
                         <th>Product Name</th>
                         <th>Product Number</th>
-                        <th>Payment</th>
-                        <th>Status</th>
-                        <th></th>
+                        <th>Categories</th>
+                        <th>Edit</th>
                     </tr>
                 </thread>
                 <tbody>
@@ -250,26 +196,6 @@
                     <h3>1100</h3>
                 </div>
             </div>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">person</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>NEW CUSTOMERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="danger">+25%</h5>
-                    <h3>849</h3>
-                </div>
-            </div>
-            <div class="item add-product">
-                <div>
-                    <span class="material-symbols-outlined">add</span>
-                    <h3>Add Product</h3>
-                </div>
-            </div>
-        </div>
       </div>
     </div>
     <script src="orders.js" async defer></script>
