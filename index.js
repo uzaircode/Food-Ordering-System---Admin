@@ -3,6 +3,20 @@ const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
 const themeToggler = document.querySelector(".theme-toggler");
 
+const input = document.getElementById("upload");
+const text = document.getElementById("text");
+const btn = document.getElementById("upload-btn");
+
+input.addEventListener("change", () => {
+  const path = input.value.split("\\");
+  const filename = path[path.length - 1];
+
+  text.innerText = filename ? filename : "Product image";
+
+  if (filename) btn.classList.add("chosen");
+  else btn.classList.remove("chosen");
+});
+
 menuBtn.addEventListener("click", () => {
   sideMenu.style.display = "block";
 });
