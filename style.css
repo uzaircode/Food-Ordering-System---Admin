@@ -629,6 +629,7 @@ main .profile-photo {
   align-items: center;
 }
 
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   background-color: hsl(203, 29%, 95%);
