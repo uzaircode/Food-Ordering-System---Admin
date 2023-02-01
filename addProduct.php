@@ -33,7 +33,7 @@ include('server.php');
         <div class="sidebar">
           <a href="index.html">
             <span class="material-symbols-outlined">dashboard</span>
-            <h3>Dashboard</h3>
+            <h3>testttt</h3>
           </a>
           <a href="customer.html">
             <span class="material-symbols-outlined">person</span>
