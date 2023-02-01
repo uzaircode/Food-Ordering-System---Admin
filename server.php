@@ -33,6 +33,13 @@ if (isset($_POST['update'])) {
     header('location: product.php');
 }
 
+// delete records
+if (isset($_GET['del'])) {
+    $id = $_GET['del'];
+    mysqli_query($db, "DELETE FROM product WHERE product_id=$id");
+    header('location: product.php');
+}
+
 // retrieve records
 $results = mysqli_query($db, "SELECT * FROM product");
 ?>
