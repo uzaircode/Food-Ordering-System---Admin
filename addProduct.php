@@ -37,7 +37,7 @@ include('server.php');
           </a>
           <a href="customer.html">
             <span class="material-symbols-outlined">person</span>
-            <h3>Customer</h3>
+            <h3>testttt</h3>
           </a>
           <a href="order.html">
             <span class="material-symbols-outlined">receipt_long</span>
