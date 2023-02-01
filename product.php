@@ -1,7 +1,13 @@
 <?php
+session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
+if(isset($_SESSION['admin_name'])) {
+  echo "Username: ".$_SESSION['admin_name'];
+} else {
+  echo "Session variable 'admin_name' is not set.";
+}
 
 ?>
 <!DOCTYPE html>
@@ -69,7 +75,7 @@ include('server.php');
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
@@ -131,8 +137,10 @@ include('server.php');
             </div>
             <div class="profile">
                 <div class="info">
-                    <p>Hey, <b>Uzair</b></p>
+                  <?php if (isset($_SESSION["admin_name"])): ?>
+                    <p>Hey, <b><?php echo $_SESSION['admin_name']; ?></b></p>
                     <small class="text-muted">Admin</small>
+                    <?php endif ?>
                 </div>
                 <div class="profile-photo">
                     <img src="images/uzair.jpg" alt="">

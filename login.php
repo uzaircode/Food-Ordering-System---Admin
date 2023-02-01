@@ -1,9 +1,22 @@
+<?php
+session_start();
+include('server.php');
+
+if(isset($_SESSION["admin_name"])) {
+    echo "The session for admin_name is set: " . $_SESSION["admin_name"];
+} else {
+    echo "The session for admin_name is not set.";
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Sign up</title>
+    <title>Login</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,7 +34,7 @@
           <div class="even-columns">
             <img src="images/svg-login.svg" class="signup-svg" />
             <div class="content-right">
-              <h1 class="fs-200 text-neutral-400">Sign Up</h1>
+              <h1 class="fs-200 text-neutral-400">Sign In</h1>
               <p class="fs-150 text-neutral-200 fw-thin">
                 Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
                 consectetur adipisicing.
@@ -31,30 +44,20 @@
                 <form action="">
                   <div class="form-group">
                     <input
-                      type="email"
-                      name="fname"
+                      name="admin_email"
                       required
                       type="email"
-                      placeholder="Full Name"
-                    />
-                  </div>
-                  <br />
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      name="fname"
-                      required
-                      type="email"
+                      value="<?php echo $email; ?>"
                       placeholder="Email"
                     />
                   </div>
                   <br />
                   <div class="form-group">
                     <input
-                      type="password"
-                      name="fname"
                       required
+                      name="admin_password"
                       type="password"
+                      value="<?php echo $password; ?>"
                       placeholder="Password"
                     />
                   </div>
@@ -64,9 +67,10 @@
                       href=""
                       class="text-neutral-300"
                       style="text-decoration: none"
-                      ><span class="fs-100"
-                        >I agree all statements in Terms of service</span
-                      ></a
+                      ><span class="fs-100">Remember me</span></a
+                    >
+                    <a href="" class="text-neutral-300"
+                      ><span class="fs-100">Forgot password?</span></a
                     >
                   </div>
                   <br />
@@ -75,6 +79,7 @@
                       class="button-login"
                       input
                       type="submit"
+                      name="login"
                       onClick="location.href='index.html'"
                     >
                       Log In
@@ -82,8 +87,10 @@
                   </div>
                   <br />
                   <span class="fs-100 text-neutral-300"
-                    >Already have an account?</span
-                  ><a href="" class="fs-100 text-neutral-300"> Sign in</a>
+                    >Don’t have an account?</span
+                  ><a href="register.php" class="fs-100 text-neutral-300">
+                    Sign up</a
+                  >
                 </form>
               </div>
             </div>
