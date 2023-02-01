@@ -41,7 +41,7 @@ if(isset($_SESSION["admin_name"])) {
               </p>
               <br />
               <div class="container-login">
-                <form action="">
+                <form method="post" action="login.php">
                   <div class="form-group">
                     <input
                       name="admin_email"

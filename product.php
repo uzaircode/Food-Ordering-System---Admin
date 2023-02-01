@@ -75,7 +75,7 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.php">
+          <a href="login.php?logout='1'">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
