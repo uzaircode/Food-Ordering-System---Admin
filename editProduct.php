@@ -1,8 +1,19 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+include('server.php');
+if (isset($_GET['edit'])) {
+  $id = $_GET['edit'];
+  $rec = mysqli_query($db, "SELECT * FROM product WHERE product_id=$id");
+  $record = mysqli_fetch_array($rec);
+  $name = $record['product_name'];
+  $price = $record['product_price'];
+  $description = $record['product_description'];
+  $product_image = $record['product_image'];
+}
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -85,25 +96,28 @@
             <h2>Update Product</h2>
             <div class="accountDetails">
                 <div class="acc-detail">
-                    <form action="#">
+                    <form method="post" action="server.php">
+                      <input type="hidden" name="id" value="<?php echo $id; ?>">
                         <div class="user-details">
                         <div class="input-box">
                             <span class="details">Product Name</span>
-                            <input type="text" name="ptName" required />
+                            <input type="text" name="product_name" value="<?php echo $name; ?>"/>
                         </div>
                         <div class="input-box">
                             <span class="details">Price</span>
-                            <input type="text" name="ptPrice" required />
+                            <input type="text" name="product_price" value="<?php echo $price; ?>"/>
                         </div>
                         <div class="input-box">
                             <span class="details">Description</span>
-                            <input type="type" name="ptSales" />
+                            <input type="type" name="product_description" value="<?php echo $description; ?>"/>
                         </div>
                         <div class="input-box">
-                            <span class="details">Product image</span>
-                            <input type="file" name="ptimg" multiple />
+                          <label for="upload" id="upload-btn">
+                            <span class="details" id="text">Product image</span>
+                            <input type="file" name="upload" id="upload"  />
+                          </label>
                         </div>
-                            <button type="submit">
+                            <button type="submit" name="update" >
                             UPDATE PRODUCT
                         </button>
                         </div>

@@ -1,8 +1,9 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+include('server.php');
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -51,7 +52,7 @@
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="#" class="active">
+          <a href="product.html" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
@@ -63,7 +64,7 @@
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="#">
+          <a href="addProduct.html">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
@@ -82,34 +83,36 @@
         </div>
 
         <div class="recent-table-list">
-          <div class="recent-table-list-title-section">
-            <h2>Recent Products</h2>
-            <div class="recent-table-list-title-section-right">
-            <button onclick="window.location.href='/editProduct.html'">Edit Product</button>
-            <button onclick="window.location.href='/addProduct.html'">Add Product</button>
-          </div>
-          </div>
-            <table>
-                <thread>
-                    <tr>
-                        <th>Product Image</th>
-                        <th>Product Name</th>
-                        <th>Product Number</th>
-                        <th>Categories</th>
-                        <th>Edit</th>
-                    </tr>
-                </thread>
-                <tbody>
-                    <!-- <tr>
-                        <td>Foldable Mini Drone</td>
-                        <td>85631</td>
-                        <td>Due</td>
-                        <td class="warning">Pending</td>
-                        <td class="primary">Details</td>
-                    </tr> -->
-                </tbody>
-            </table>
-            <a href="#">Show All</a>
+            <h2>Add Product</h2>
+            <div class="accountDetails">
+                <div class="acc-detail">
+                    <form method="post" action="server.php">
+                        <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Product Name</span>
+                            <input type="text" name="product_name" required />
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Price</span>
+                            <input type="text" name="product_price" required />
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Description</span>
+                            <input type="type" name="product_description" />
+                        </div>
+                        <div class="input-box">
+                          <label for="upload" id="upload-btn">
+                            <span class="details" id="text">Product image</span>
+                            <input type="file" name="upload" id="upload"  />
+                          </label>
+                        </div>
+                            <button type="submit" name="save">
+                            ADD PRODUCT
+                        </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
       </main>
 
@@ -196,6 +199,7 @@
                     <h3>1100</h3>
                 </div>
             </div>
+
       </div>
     </div>
     <script src="orders.js" async defer></script>

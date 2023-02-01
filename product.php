@@ -1,8 +1,10 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+include('server.php');
+
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -51,7 +53,7 @@
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html" class="active">
+          <a href="#" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
@@ -63,7 +65,7 @@
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="addProduct.html">
+          <a href="#">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
@@ -82,36 +84,39 @@
         </div>
 
         <div class="recent-table-list">
-            <h2>Add Product</h2>
-            <div class="accountDetails">
-                <div class="acc-detail">
-                    <form action="#">
-                        <div class="user-details">
-                        <div class="input-box">
-                            <span class="details">Product Name</span>
-                            <input type="text" name="ptName" required />
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Price</span>
-                            <input type="text" name="ptPrice" required />
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Description</span>
-                            <input type="type" name="ptSales" />
-                        </div>
-                        <div class="input-box">
-                          <label for="upload" id="upload-btn">
-                            <span class="details" id="text">Product image</span>
-                            <input type="file" name="upload" id="upload"  />
-                          </label>
-                        </div>
-                            <button type="submit">
-                            ADD PRODUCT
-                        </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          <div class="recent-table-list-title-section">
+            <h2>Recent Products</h2>
+            <div class="recent-table-list-title-section-right">
+            <button onclick="window.location.href='editProduct.php'">Edit Product</button>
+            <button onclick="window.location.href='addProduct.php'">Add Product</button>
+          </div>
+          </div>
+            <table>
+                <thread>
+                    <tr>
+                        <th>Product Image</th>
+                        <th>Product Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thread>
+                <tbody>
+                  <?php while($row = mysqli_fetch_array($results)) { ?>
+                    <tr>
+                        <!-- <td><img src="images/<?php echo $row['product_image']; ?>" alt="product image"></td> -->
+                        <!-- <td><img src="images/pizza2.jpeg" alt=""></td> -->
+                        <td><?php echo $row['product_image']; ?></td>
+                        <td><?php echo $row['product_name']; ?></td>
+                        <td><a href="editProduct.php?edit=<?php echo $row['product_id']; ?>">Edit</a></td>
+                        <td><a href="server.php?del=<?php echo $row['product_id']; ?>">Delete</a></td>                      <!-- <td>Due</td>
+                        <!-- <td>Due</td>
+                        <!-- <td class="warning">Pending</td>
+                        <td class="primary">Details</td> -->
+                    </tr>
+                  <?php } ?>
+                </tbody>
+            </table>
+            <a href="#">Show All</a>
         </div>
       </main>
 
@@ -198,7 +203,6 @@
                     <h3>1100</h3>
                 </div>
             </div>
-
       </div>
     </div>
     <script src="orders.js" async defer></script>
