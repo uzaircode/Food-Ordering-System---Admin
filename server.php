@@ -81,23 +81,19 @@ if (isset($_POST['register'])) {
 
 }
 
-if(isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['admin_name']);
-    header('location: login.php');
-}
-
 if (isset($_POST['login'])) {
   $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
   $password = mysqli_real_escape_string($db, $_POST['admin_password']);
 
   // Check if the user exists in the database
+  $password = md5($password);
   $query = "SELECT * FROM user WHERE admin_email='$admin_email' AND admin_password='$password'";
   $results = mysqli_query($db, $query);
 
   if (mysqli_num_rows($results) == 1) {
-    // Store the user's information in a session
+    // Fetch the user's information
     $row = mysqli_fetch_assoc($results);
+    // Store the user's information in a session
     $_SESSION['admin_name'] = $row['admin_name'];
     $_SESSION['admin_email'] = $row['admin_email'];
     header("location: product.php");
@@ -107,4 +103,11 @@ if (isset($_POST['login'])) {
   }
 
 }
+
+if(isset($_GET['logout'])) {
+    $_SESSION = array();
+    session_destroy();
+    header('location: login.php');
+}
+
 ?>
