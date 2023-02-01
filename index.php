@@ -1,8 +1,9 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+include('server.php');
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -30,23 +31,23 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html" class="active">
+          <a href="index.php" class="active">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
             <h3>Customer</h3>
           </a>
-          <a href="order.html">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
@@ -55,11 +56,11 @@
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
@@ -67,7 +68,7 @@
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>

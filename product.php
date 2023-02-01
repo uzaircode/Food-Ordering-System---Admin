@@ -38,23 +38,23 @@ if(isset($_SESSION['admin_name'])) {
         </div>
 
         <div class="sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
             <h3>Customer</h3>
           </a>
-          <a href="order.html">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
@@ -63,11 +63,11 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
@@ -131,7 +131,7 @@ if(isset($_SESSION['admin_name'])) {
             <button id="menu-btn">
                 <span class="material-symbols-outlined">menu</span>
             </button>
-            <div class="theme-toggler">
+            <div class="theme-toggler" id="themeToggler">
                 <span class="material-symbols-outlined active">light_mode</span>
                 <span class="material-symbols-outlined">dark_mode</span>
             </div>
@@ -213,8 +213,7 @@ if(isset($_SESSION['admin_name'])) {
             </div>
       </div>
     </div>
-    <script src="orders.js" async defer></script>
-    <script src="index.js" async defer></script>
 
+    <script src="index.js?newversion"></script>
   </body>
 </html>

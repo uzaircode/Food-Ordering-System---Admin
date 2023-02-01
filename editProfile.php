@@ -30,36 +30,36 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
             <h3>Customer</h3>
           </a>
-          <a href="order.html">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html" class="active">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html">
+          <a href="#" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
@@ -67,7 +67,7 @@
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
@@ -82,56 +82,69 @@
         </div>
 
         <div class="recent-table-list">
-          <h2>Recent Feedbacks</h2>
-          <table>
-              <thread>
-                  <tr>
-                      <th>Feedback <br> ID</th>
-                      <th>Customer <br> Name</th>
-                      <th>Feedback <br> Date</th>
-                      <th>Feedback Description</th>
-                      <th>Feedback Rating</th>
-                  </tr>
-              </thread>
-              <tbody>
-                  <tr>
-                      <td>#12049</td>
-                      <td>Nik Uzair</td>
-                      <td>19/1/2023</td>
-                      <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, magna aliqua.</td>
-                      <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                  </tr>
-                  <tr>
-                      <td>#36472</td>
-                      <td>Nur Anise Nabila</td>
-                      <td>19/1/2023</td>
-                      <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, magna aliqua.</td>
-                      <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                  </tr>
-                  <tr>
-                      <td>#86940</td>
-                      <td>Haziq Fikri</td>
-                      <td>19/1/2023</td>
-                      <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, magna aliqua.</td>
-                      <td class="primary">⭐️⭐️⭐️⭐️</td>
-                  </tr>
-                  <tr>
-                      <td>#18594</td>
-                      <td>Faiz Imtiyaz</td>
-                      <td>19/1/2023</td>
-                      <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, magna aliqua.</td>
-                      <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                  </tr>
-                  <tr>
-                      <td>#39483</td>
-                      <td>Lisa Elizabeth</td>
-                      <td>19/1/2023</td>
-                      <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, magna aliqua.</td>
-                      <td class="primary">⭐️⭐️⭐️⭐️</td>
-                  </tr>
-              </tbody>
-          </table>
-          <a href="#">Show All</a>
+          <div class="recent-table-list-title-section">
+            <h2>Edit Profile</h2>
+            <div class="recent-table-list-title-section-right">
+          </div>
+          </div>
+            <div class="container-login">
+                <form action="">
+                  <div class="form-group">
+                    <p>Name</p>
+                    <input
+                      type="email"
+                      name="fname"
+                      required
+                      type="email"
+                      placeholder="Full Name"
+                    />
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <p>Email</p>
+                    <input
+                      type="email"
+                      name="fname"
+                      required
+                      type="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <br />
+                    <div class="form-group">
+                      <p>Contact Number</p>
+                      <input
+                        type="password"
+                        name="fname"
+                        required
+                        type="password"
+                        placeholder="Contact Number"
+                      />
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <p>Password</p>
+                    <input
+                      type="password"
+                      name="fname"
+                      required
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <br>
+                  <div>
+                    <button
+                      class="button-login"
+                      input
+                      type="submit"
+                      onClick="location.href='index.html'"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
         </div>
       </main>
 
@@ -169,7 +182,7 @@
                 </div>
                 <div class="update">
                     <div class="profile-photo">
-                        <img src="./images/haziq.jpeg" alt="">
+                        <img src="images/haziq.jpeg" alt="">
                     </div>
                     <div class="message">
                         <p><b>Haziq Fikri</b> received his order of Night lion tech GPS drone.</p>
@@ -179,7 +192,7 @@
                 </div>
                 <div class="update">
                     <div class="profile-photo">
-                        <img src="./images/nik-fikri.jpg" alt="">
+                        <img src="images/nik-fikri.jpg" alt="">
                     </div>
                     <div class="message">
                         <p><b>Nik Fikri</b> received his order of Night lion tech GPS drone.</p>

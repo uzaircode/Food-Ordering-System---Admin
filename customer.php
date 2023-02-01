@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -26,36 +27,36 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php" class="active">
             <span class="material-symbols-outlined">person</span>
             <h3>Customer</h3>
           </a>
-          <a href="order.html"  class="active">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html">
+          <a href="product.php">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
@@ -63,7 +64,7 @@
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
@@ -78,43 +79,24 @@
         </div>
 
         <div class="recent-table-list">
-          <div class="recent-table-list-title-section">
-            <h2>Recent Orders</h2>
-          </div>
+            <h2>Recent Customers</h2>
             <table>
                 <thread>
                     <tr>
-                        <th>Order ID</th>
                         <th>Customer Name</th>
-                        <th>Status</th>
+                        <th>Product Name</th>
+                        <th>Product Number</th>
+                        <th>Categories</th>
                     </tr>
                 </thread>
                 <tbody>
-                    <tr>
-                        <td>#18402</td>
-                        <td>Mr. Raan</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#34859</td>
-                        <td>Addina Ramli</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#28473</td>
-                        <td>Ayu Amira</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#19473</td>
-                        <td>Muhammad Naufal</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#49506</td>
-                        <td>Abu Talib</td>
-                        <td class="success">PAID</td>
-                    </tr>
+                    <!-- <tr>
+                        <td>Foldable Mini Drone</td>
+                        <td>85631</td>
+                        <td>Due</td>
+                        <td class="warning">Pending</td>
+                        <td class="primary">Details</td>
+                    </tr> -->
                 </tbody>
             </table>
             <a href="#">Show All</a>
@@ -158,14 +140,14 @@
                         <img src="./images/haziq.jpeg" alt="">
                     </div>
                     <div class="message">
-                        <p><b>Haziq Fikri</b> received his order of Night lion tech GPS drone.</p>
+                        <p><b>Muhammad Haziq</b> received his order of Night lion tech GPS drone.</p>
                         <small class="text-muted">2 Minutes Ago</small>
                         <p>hello</p>
                     </div>
                 </div>
                 <div class="update">
                     <div class="profile-photo">
-                        <img src="./images/nik-fikri.jpg" alt="">
+                        <img src="images/nik-fikri.JPG" alt="">
                     </div>
                     <div class="message">
                         <p><b>Nik Fikri</b> received his order of Night lion tech GPS drone.</p>
@@ -207,8 +189,6 @@
 
       </div>
     </div>
-    <script src="orders.js" async defer></script>
-    <script src="index.js" async defer></script>
-
+    <script src="index.js?newversion"></script>
   </body>
 </html>

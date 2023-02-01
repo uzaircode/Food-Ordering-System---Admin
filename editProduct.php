@@ -40,49 +40,49 @@ if (isset($_GET['edit'])) {
           </div>
         </div>
 
-        <div class="sidebar">
-          <a href="index.html">
+        <!-- <div class="sidebar"> -->
+          <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
             <h3>Customer</h3>
           </a>
-          <a href="order.html">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html" class="active">
+          <a href="product.php" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="addProduct.html">
+          <a href="addProduct.php">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
-        </div>
+        <!-- </div> -->
       </aside>
 
       <main>
@@ -137,84 +137,19 @@ if (isset($_GET['edit'])) {
                 <span class="material-symbols-outlined">dark_mode</span>
             </div>
             <div class="profile">
-                <div class="info">
-                    <p>Hey, <b>Uzair</b></p>
+               <div class="info">
+                  <?php if (isset($_SESSION["admin_name"])): ?>
+                    <p>Hey, <b><?php echo $_SESSION['admin_name']; ?></b></p>
                     <small class="text-muted">Admin</small>
+                    <?php endif ?>
                 </div>
                 <div class="profile-photo">
                     <img src="images/uzair.jpg" alt="">
                 </div>
             </div>
         </div>
-        <div class="recent-updates">
-            <h2>Recent Updates</h2>
-            <div class="updates">
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/anise.jpg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Anise</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/haziq.jpeg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Haziq Fikri</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/nik-fikri.jpg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Nik Fikri</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sales-analytics">
-            <h2>Sales Analytics</h2>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">shopping_cart</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>ONLINE ORDERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="success">+39%</h5>
-                    <h3>3849</h3>
-                </div>
-            </div>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">local_mall</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>ONLINE ORDERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="danger">-17%</h5>
-                    <h3>1100</h3>
-                </div>
-            </div>
-
       </div>
-    </div>
-    <script src="orders.js" async defer></script>
-    <script src="index.js" async defer></script>
+    <script src="index.js?newversion"></script>
 
   </body>
 </html>
