@@ -2,6 +2,7 @@
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,9 +96,8 @@ include('server.php');
                     <tr>
                         <th>Product Image</th>
                         <th>Product Name</th>
-                        <th>Product Number</th>
-                        <th>Categories</th>
                         <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thread>
                 <tbody>
@@ -107,8 +107,10 @@ include('server.php');
                         <!-- <td><img src="images/pizza2.jpeg" alt=""></td> -->
                         <td><?php echo $row['product_image']; ?></td>
                         <td><?php echo $row['product_name']; ?></td>
+                        <td><a href="editProduct.php?edit=<?php echo $row['product_id']; ?>">Edit</a></td>
+                        <td><a href="server.php?del=<?php echo $row['product_id']; ?>">Delete</a></td>                      <!-- <td>Due</td>
                         <!-- <td>Due</td>
-                        <td class="warning">Pending</td>
+                        <!-- <td class="warning">Pending</td>
                         <td class="primary">Details</td> -->
                     </tr>
                   <?php } ?>
