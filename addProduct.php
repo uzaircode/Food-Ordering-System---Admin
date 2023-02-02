@@ -50,10 +50,6 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.php">
-            <span class="material-symbols-outlined">insights</span>
-            <h3>Analytics</h3>
-          </a>
           <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
@@ -67,7 +63,7 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.php">
+          <a href="editProfile.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>

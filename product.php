@@ -22,7 +22,7 @@ if(isset($_SESSION['admin_name'])) {
     />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
   </head>
   <body>
     <div class="container">
@@ -50,10 +50,6 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.php">
-            <span class="material-symbols-outlined">insights</span>
-            <h3>Analytics</h3>
-          </a>
           <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
@@ -67,11 +63,11 @@ if(isset($_SESSION['admin_name'])) {
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.php">
+          <a href="editProfile.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="#">
+          <a href="addProduct.php">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
@@ -93,9 +89,8 @@ if(isset($_SESSION['admin_name'])) {
           <div class="recent-table-list-title-section">
             <h2>Recent Products</h2>
             <div class="recent-table-list-title-section-right">
-            <button onclick="window.location.href='editProduct.php'">Edit Product</button>
-            <button onclick="window.location.href='addProduct.php'">Add Product</button>
-          </div>
+              <button onclick="window.location.href='addProduct.php'">Add Product</button>
+            </div>
           </div>
             <table>
                 <thread>
@@ -109,14 +104,12 @@ if(isset($_SESSION['admin_name'])) {
                 <tbody>
                   <?php while($row = mysqli_fetch_array($results)) { ?>
                     <tr>
-                        <!-- <td><img src="images/<?php echo $row['product_image']; ?>" alt="product image"></td> -->
+                        <td><img src="images/<?php echo $row['product_image']; ?>" alt="product image"></td>
                         <!-- <td><img src="images/pizza2.jpeg" alt=""></td> -->
-                        <td><?php echo $row['product_image']; ?></td>
                         <td><?php echo $row['product_name']; ?></td>
-                        <td><a href="editProduct.php?edit=<?php echo $row['product_id']; ?>">Edit</a></td>
-                        <td><a href="server.php?del=<?php echo $row['product_id']; ?>">Delete</a></td>                      <!-- <td>Due</td>
+                        <td><a href="editProduct.php?edit=<?php echo $row['product_id']; ?>"><span class="material-symbols-outlined warning">edit_note</span></a></td>
+                        <td><a href="server.php?del=<?php echo $row['product_id']; ?>"><span class="material-symbols-outlined danger">delete_sweep</span></a></td>
                         <!-- <td>Due</td>
-                        <!-- <td class="warning">Pending</td>
                         <td class="primary">Details</td> -->
                     </tr>
                   <?php } ?>

@@ -42,16 +42,12 @@
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.php">
-            <span class="material-symbols-outlined">insights</span>
-            <h3>Analytics</h3>
-          </a>
           <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="#" class="active">
+          <a href="product.php">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
@@ -59,11 +55,11 @@
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.php">
+          <a href="editProfile.php" class="active">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="#">
+          <a href="addProduct.php">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
