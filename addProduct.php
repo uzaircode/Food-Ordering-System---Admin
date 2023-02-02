@@ -1,7 +1,14 @@
 <?php
+session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
+if(isset($_SESSION['admin_name'])) {
+  echo "Username: ".$_SESSION['admin_name'];
+} else {
+  echo "Session variable 'admin_name' is not set.";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +30,7 @@ include('server.php');
         <div class="top">
           <div class="logo">
             <!-- <img src=".images/logo.png" alt="logo" /> -->
-            <h2">AD<span class="danger">MIN</span></h2>
+            <h2">AD<span class="danger">MINcdc</span></h2>
           </div>
           <div class="close" id="close-btn">
             <span class="material-symbols-outlined">close</span>
@@ -31,44 +38,44 @@ include('server.php');
         </div>
 
         <div class="sidebar">
-          <a href="index.html">
+          <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
             <h3>Dashboard</h3>
           </a>
-          <a href="customer.html">
+          <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
             <h3>testttt</h3>
           </a>
-          <a href="order.html">
+          <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.html">
+          <a href="analytics.php">
             <span class="material-symbols-outlined">insights</span>
             <h3>Analytics</h3>
           </a>
-          <a href="feedback.html">
+          <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
             <span class="message-count">26</span>
           </a>
-          <a href="product.html" class="active">
+          <a href="product.php" class="active">
             <span class="material-symbols-outlined">inventory</span>
             <h3>Products</h3>
           </a>
-          <a href="invoice.html">
+          <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
             <h3>Invoice</h3>
           </a>
-          <a href="setting.html">
+          <a href="setting.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
           </a>
-          <a href="addProduct.html">
+          <a href="addProduct.php">
             <span class="material-symbols-outlined">add</span>
             <h3>Add Product</h3>
           </a>
-          <a href="login.html">
+          <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
             <h3>Logout</h3>
           </a>
@@ -127,8 +134,10 @@ include('server.php');
             </div>
             <div class="profile">
                 <div class="info">
-                    <p>Hey, <b>Uzair</b></p>
+                  <?php if (isset($_SESSION["admin_name"])): ?>
+                    <p>Hey, <b><?php echo $_SESSION['admin_name']; ?></b></p>
                     <small class="text-muted">Admin</small>
+                    <?php endif ?>
                 </div>
                 <div class="profile-photo">
                     <img src="images/uzair.jpg" alt="">
@@ -202,8 +211,6 @@ include('server.php');
 
       </div>
     </div>
-    <script src="orders.js" async defer></script>
-    <script src="index.js" async defer></script>
-
+    <script src="index.js?newversion"></script>
   </body>
 </html>

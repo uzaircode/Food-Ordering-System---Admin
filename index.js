@@ -37,17 +37,18 @@ if (theme === "dark") {
 }
 
 themeToggler.addEventListener("click", () => {
-  if (document.body.classList.contains("dark-theme-variables")) {
-    document.body.classList.remove("dark-theme-variables");
-    lightModeSpan.classList.add("active");
-    darkModeSpan.classList.remove("active");
-    localStorage.setItem("theme", "light");
-  } else {
-    document.body.classList.add("dark-theme-variables");
-    lightModeSpan.classList.remove("active");
-    darkModeSpan.classList.add("active");
-    localStorage.setItem("theme", "dark");
-  }
+  alert("hello");
+  // if (document.body.classList.contains("dark-theme-variables")) {
+  //   document.body.classList.remove("dark-theme-variables");
+  //   lightModeSpan.classList.add("active");
+  //   darkModeSpan.classList.remove("active");
+  //   localStorage.setItem("theme", "light");
+  // } else {
+  //   document.body.classList.add("dark-theme-variables");
+  //   lightModeSpan.classList.remove("active");
+  //   darkModeSpan.classList.add("active");
+  //   localStorage.setItem("theme", "dark");
+  // }
 });
 
 Orders.forEach((order) => {
