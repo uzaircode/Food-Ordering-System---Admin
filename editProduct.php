@@ -25,21 +25,11 @@ if (isset($_GET['edit'])) {
     />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
   </head>
   <body>
     <div class="container">
       <aside>
-        <div class="top">
-          <div class="logo">
-            <!-- <img src=".images/logo.png" alt="logo" /> -->
-            <h2">AD<span class="danger">MIN</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-symbols-outlined">close</span>
-          </div>
-        </div>
-
         <!-- <div class="sidebar"> -->
           <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
@@ -47,20 +37,15 @@ if (isset($_GET['edit'])) {
           </a>
           <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
-            <h3>Customer</h3>
+            <h3>Customers</h3>
           </a>
           <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
             <h3>Orders</h3>
           </a>
-          <a href="analytics.php">
-            <span class="material-symbols-outlined">insights</span>
-            <h3>Analytics</h3>
-          </a>
           <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
-            <span class="message-count">26</span>
           </a>
           <a href="product.php" class="active">
             <span class="material-symbols-outlined">inventory</span>
@@ -68,15 +53,11 @@ if (isset($_GET['edit'])) {
           </a>
           <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
-            <h3>Invoice</h3>
+            <h3>Invoices</h3>
           </a>
-          <a href="setting.php">
+          <a href="editProfile.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
-          </a>
-          <a href="addProduct.php">
-            <span class="material-symbols-outlined">add</span>
-            <h3>Add Product</h3>
           </a>
           <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
@@ -87,11 +68,6 @@ if (isset($_GET['edit'])) {
 
       <main>
         <h1>Dashboard</h1>
-
-        <div class="date">
-            <input type="date">
-        </div>
-
         <div class="recent-table-list">
             <h2>Update Product</h2>
             <div class="accountDetails">
@@ -137,19 +113,19 @@ if (isset($_GET['edit'])) {
                 <span class="material-symbols-outlined">dark_mode</span>
             </div>
             <div class="profile">
-               <div class="info">
+                <div class="info">
                   <?php if (isset($_SESSION["admin_name"])): ?>
                     <p>Hey, <b><?php echo $_SESSION['admin_name']; ?></b></p>
                     <small class="text-muted">Admin</small>
                     <?php endif ?>
                 </div>
                 <div class="profile-photo">
-                    <img src="images/uzair.jpg" alt="">
+                    <span class="material-symbols-outlined">account_circle</span>
                 </div>
             </div>
         </div>
       </div>
-    <script src="index.js?newversion"></script>
+    <script src="index.js"></script>
 
   </body>
 </html>

@@ -1,14 +1,8 @@
 <?php
 session_start();
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
 include('server.php');
-
-if(isset($_SESSION["admin_name"])) {
-    echo "The session for admin_name is set: " . $_SESSION["admin_name"];
-} else {
-    echo "The session for admin_name is not set.";
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +19,7 @@ if(isset($_SESSION["admin_name"])) {
     />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
   </head>
   <body>
     <main>
