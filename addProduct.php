@@ -111,7 +111,7 @@ include('server.php');
                     <?php endif ?>
                 </div>
                 <div class="profile-photo">
-                    <img src="images/uzair.jpg" alt="">
+                    <span class="material-symbols-outlined">account_circle</span>
                 </div>
             </div>
         </div>
