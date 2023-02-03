@@ -122,6 +122,14 @@ small {
   height: 2.8rem;
   border-radius: 50%;
   overflow: hidden;
+  position: relative;
+}
+
+.profile-photo span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -60%);
 }
 
 .text-muted {
@@ -374,14 +382,8 @@ main .recent-table-list {
   margin-top: 2rem;
 }
 
-main .recent-table-list h2 {
-  margin-bottom: 0.8rem;
-}
-
 main .recent-table-list-title-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  background-color: red;
 }
 
 main .recent-table-list-title-section button {
@@ -389,21 +391,13 @@ main .recent-table-list-title-section button {
   border: 2px dashed var(--color-primary);
   color: var(--color-primary);
   border-radius: 0.5rem;
-  width: 20%;
+  width: 100px;
+  height: 40px;
 }
 
 main .recent-table-list-title-section-right {
-  display: flex;
-  justify-content: flex-end;
-  gap: 2rem;
-  width: 60%;
-}
-
-main .recent-table-list-title-section-right {
-  display: flex;
-  justify-content: flex-end;
-  gap: 2rem;
-  width: 60%;
+  float: right;
+  margin-bottom: 10px;
 }
 
 main .recent-table-list-title-section button:hover {
@@ -439,6 +433,26 @@ main .recent-table-list table:hover {
 main .recent-table-list span {
   color: var(--color-danger);
 } */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+}
 
 main table tbody td {
   height: 6rem;
@@ -514,7 +528,7 @@ main .profile-photo {
 
 .right .top .profile {
   display: flex;
-  gap: 2rem;
+  gap: 0.5rem;
   text-align: right;
 }
 

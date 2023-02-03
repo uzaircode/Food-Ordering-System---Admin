@@ -3,13 +3,8 @@ session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
-if(isset($_SESSION['admin_name'])) {
-  echo "Username: ".$_SESSION['admin_name'];
-} else {
-  echo "Session variable 'admin_name' is not set.";
-}
-
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,21 +17,11 @@ if(isset($_SESSION['admin_name'])) {
     />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
   </head>
   <body>
     <div class="container">
       <aside>
-        <div class="top">
-          <div class="logo">
-            <!-- <img src=".images/logo.png" alt="logo" /> -->
-            <h2">AD<span class="danger">MINcdc</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-symbols-outlined">close</span>
-          </div>
-        </div>
-
         <div class="sidebar">
           <a href="index.php">
             <span class="material-symbols-outlined">dashboard</span>
@@ -44,7 +29,7 @@ if(isset($_SESSION['admin_name'])) {
           </a>
           <a href="customer.php">
             <span class="material-symbols-outlined">person</span>
-            <h3>testttt</h3>
+            <h3>Customers</h3>
           </a>
           <a href="order.php">
             <span class="material-symbols-outlined">receipt_long</span>
@@ -53,7 +38,6 @@ if(isset($_SESSION['admin_name'])) {
           <a href="feedback.php">
             <span class="material-symbols-outlined">auto_awesome</span>
             <h3>Feedbacks</h3>
-            <span class="message-count">26</span>
           </a>
           <a href="product.php" class="active">
             <span class="material-symbols-outlined">inventory</span>
@@ -61,15 +45,11 @@ if(isset($_SESSION['admin_name'])) {
           </a>
           <a href="invoice.php">
             <span class="material-symbols-outlined">receipt</span>
-            <h3>Invoice</h3>
+            <h3>Invoices</h3>
           </a>
           <a href="editProfile.php">
             <span class="material-symbols-outlined">settings</span>
             <h3>Settings</h3>
-          </a>
-          <a href="addProduct.php">
-            <span class="material-symbols-outlined">add</span>
-            <h3>Add Product</h3>
           </a>
           <a href="login.php">
             <span class="material-symbols-outlined">logout</span>
@@ -80,11 +60,6 @@ if(isset($_SESSION['admin_name'])) {
 
       <main>
         <h1>Dashboard</h1>
-
-        <div class="date">
-            <input type="date">
-        </div>
-
         <div class="recent-table-list">
             <h2>Add Product</h2>
             <div class="accountDetails">
@@ -124,7 +99,7 @@ if(isset($_SESSION['admin_name'])) {
             <button id="menu-btn">
                 <span class="material-symbols-outlined">menu</span>
             </button>
-            <div class="theme-toggler">
+            <div class="theme-toggler" id="themeToggler">
                 <span class="material-symbols-outlined active">light_mode</span>
                 <span class="material-symbols-outlined">dark_mode</span>
             </div>
@@ -140,73 +115,8 @@ if(isset($_SESSION['admin_name'])) {
                 </div>
             </div>
         </div>
-        <div class="recent-updates">
-            <h2>Recent Updates</h2>
-            <div class="updates">
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/anise.jpg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Anise</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/haziq.jpeg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Haziq Fikri</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="images/nik-fikri.jpg" alt="">
-                    </div>
-                    <div class="message">
-                        <p><b>Nik Fikri</b> received his order of Night lion tech GPS drone.</p>
-                        <small class="text-muted">2 Minutes Ago</small>
-                        <p>hello</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sales-analytics">
-            <h2>Sales Analytics</h2>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">shopping_cart</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>ONLINE ORDERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="success">+39%</h5>
-                    <h3>3849</h3>
-                </div>
-            </div>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-symbols-outlined">local_mall</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>ONLINE ORDERS</h3>
-                        <small class="text-muted">Last 24 Hours</small>
-                    </div>
-                    <h5 class="danger">-17%</h5>
-                    <h3>1100</h3>
-                </div>
-            </div>
-
-      </div>
     </div>
-    <script src="index.js?newversion"></script>
+  </div>
+    <script src="index.js"></script>
   </body>
 </html>
