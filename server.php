@@ -12,7 +12,7 @@ $errors = array();
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
-// if button is clicked
+// add product records
 if(isset($_POST['save'])) {
     $name = $_POST['product_name'];
     $price = $_POST['product_price'];
@@ -24,7 +24,7 @@ if(isset($_POST['save'])) {
     header('location: product.php');
 }
 
-// update records
+// update product records
 if (isset($_POST['update'])) {
     $name = mysqli_real_escape_string($db, $_POST['product_name']);
     $price = mysqli_real_escape_string($db, $_POST['product_price']);
@@ -37,14 +37,14 @@ if (isset($_POST['update'])) {
     header('location: product.php');
 }
 
-// delete records
+// delete product records
 if (isset($_GET['del'])) {
     $id = $_GET['del'];
     mysqli_query($db, "DELETE FROM product WHERE product_id=$id");
     header('location: product.php');
 }
 
-// retrieve records
+// retrieve product records
 $results = mysqli_query($db, "SELECT * FROM product");
 
 // if the register button is clicked
@@ -52,20 +52,6 @@ if (isset($_POST['register'])) {
     $username = mysqli_real_escape_string($db, $_POST['admin_name']);
     $email = mysqli_real_escape_string($db, $_POST['admin_email']);
     $password = mysqli_real_escape_string($db, $_POST['admin_password']);
-
-    // if (empty($username)) {
-    //     array_push($errors, "Username is required");
-    // }
-    // if (empty($email)) {
-    // array_push($errors, "email is required");
-    // }
-    // if (empty($password)) {
-    // array_push($errors, "password is required");
-    // }
-
-    // if(count($errors) == 0) {
-
-    // }
 
     $password = md5($password);
     $sql = "INSERT INTO user (admin_name, admin_email, admin_password) VALUES ('$username', '$email', '$password')";
@@ -81,6 +67,7 @@ if (isset($_POST['register'])) {
 
 }
 
+// if the login button is clicked
 if (isset($_POST['login'])) {
   $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
   $password = mysqli_real_escape_string($db, $_POST['admin_password']);
@@ -104,10 +91,13 @@ if (isset($_POST['login'])) {
 
 }
 
+// if the logout button is clicked
 if(isset($_GET['logout'])) {
     $_SESSION = array();
     session_destroy();
     header('location: login.php');
 }
 
+// retrieve customer records
+$customer_records = mysqli_query($db, "SELECT * FROM customer");
 ?>

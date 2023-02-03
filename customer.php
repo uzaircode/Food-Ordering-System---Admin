@@ -64,20 +64,21 @@ include('server.php');
             <table>
                 <thread>
                     <tr>
+                        <th>Customer Id</th>
                         <th>Customer Name</th>
-                        <th>Product Name</th>
-                        <th>Product Number</th>
-                        <th>Categories</th>
+                        <th>Customer Email</th>
+                        <th>Customer Phone Number</th>
                     </tr>
                 </thread>
                 <tbody>
-                    <!-- <tr>
-                        <td>Foldable Mini Drone</td>
-                        <td>85631</td>
-                        <td>Due</td>
-                        <td class="warning">Pending</td>
-                        <td class="primary">Details</td>
-                    </tr> -->
+                  <?php while($row = mysqli_fetch_array($customer_records)) { ?>
+                    <tr>
+                        <td><?php echo $row['customer_id']; ?></td>
+                        <td><?php echo $row['customer_name']; ?></td>
+                        <td><?php echo $row['customer_email']; ?></td>
+                        <td><?php echo $row['customer_phone']; ?></td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -105,6 +106,6 @@ include('server.php');
             </div>
         </div>
     </div>
-    <script src="index.js?newversion"></script>
+    <script src="index.js"></script>
   </body>
 </html>
