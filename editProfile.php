@@ -74,7 +74,6 @@ include('server.php');
                       name="fname"
                       required
                       type="email"
-                      placeholder="Full Name"
                     />
                   </div>
                   <br />
@@ -85,7 +84,6 @@ include('server.php');
                       name="fname"
                       required
                       type="email"
-                      placeholder="Email"
                     />
                   </div>
                   <br />
@@ -96,7 +94,6 @@ include('server.php');
                         name="fname"
                         required
                         type="password"
-                        placeholder="Contact Number"
                       />
                   </div>
                   <br>
@@ -107,7 +104,6 @@ include('server.php');
                       name="fname"
                       required
                       type="password"
-                      placeholder="Password"
                     />
                   </div>
                   <br>

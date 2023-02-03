@@ -72,31 +72,11 @@ include('server.php');
                     </tr>
                 </thread>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>#18402</td>
                         <td>Mr. Raan</td>
                         <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#34859</td>
-                        <td>Addina Ramli</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#28473</td>
-                        <td>Ayu Amira</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#19473</td>
-                        <td>Muhammad Naufal</td>
-                        <td class="success">PAID</td>
-                    </tr>
-                    <tr>
-                        <td>#49506</td>
-                        <td>Abu Talib</td>
-                        <td class="success">PAID</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
