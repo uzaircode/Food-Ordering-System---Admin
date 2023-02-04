@@ -152,11 +152,40 @@ $customer_records = mysqli_query($db, "SELECT * FROM customer");
 $order_records = mysqli_query($db, "SELECT `order`.*, `customer`.`customer_name` FROM `order` INNER JOIN `customer` ON `order`.`customer_id` = `customer`.`customer_id`");
 
 
-if(isset($_GET['product_id'])) {
-    $customer_id = $_GET['customer_id'];
-    $product_id = $_GET['product_id'];
+// record order when customer order
+// if(isset($_GET['product_id'])) {
+//     $customer_id = $_GET['customer_id'];
+//     $product_id = $_GET['product_id'];
 
-    // Perform your database operation here to record the order
-    mysqli_query($db, "INSERT INTO `order` (customer_id, product_id) VALUES ('$customer_id', '$product_id')");
+//     // Perform your database operation here to record the order
+//     mysqli_query($db, "INSERT INTO `order` (customer_id, product_id) VALUES ('$customer_id', '$product_id')");
+// }
+
+// record cart when customer place add to cart
+if(isset($_GET['product_id'])) {
+  $customer_id = $_GET['customer_id'];
+  $product_id = $_GET['product_id'];
+
+  // Check if a cart item with the same customer ID and product ID already exists
+  $check_cart_item = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+  if(mysqli_num_rows($check_cart_item) > 0) {
+    // If it exists, update the quantity of that item
+    mysqli_query($db, "UPDATE cart SET cart_quantity = cart_quantity + 1 WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+  } else {
+    // If it doesn't exist, insert a new cart item
+    mysqli_query($db, "INSERT INTO cart (customer_id, product_id, cart_quantity) VALUES ('$customer_id', '$product_id', 1)");
+  }
+  echo "<script>window.location.reload();</script>";
+  header("location: userHomepage.php");
+
 }
+
+
+//record cart when customer order
+// if(isset($_GET['cart_id'])) {
+//   $customer_id = $_GET['customer_id'];
+//   $product_id = $_GET['product_id'];
+
+//   mysqli_query($db, "INSERT INTO cart (customer_id, product_id) VALUES ('$customer_id', '$product_id)");
+// }
 ?>
