@@ -71,12 +71,21 @@ include('server.php');
                             <th>Status</th>
                         </tr>
                     </thread>
+                    <!-- <tbody>
+                        <tr>
+                            <td>#18402</td>
+                            <td>Mr. Raan</td>
+                            <td class="success">PAID</td>
+                        </tr>
+                    </tbody> -->
                     <tbody>
-                        <!-- <tr>
-                        <td>#18402</td>
-                        <td>Mr. Raan</td>
-                        <td class="success">PAID</td>
-                    </tr> -->
+                        <?php while($row = mysqli_fetch_array($order_records)) { ?>
+                        <tr>
+                            <td>#<?php echo $row['order_id']; ?></td>
+                            <td><?php echo $row['customer_name']; ?></td>
+                            <td class="success">PAID</td>
+                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
