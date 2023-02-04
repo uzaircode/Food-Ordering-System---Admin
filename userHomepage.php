@@ -2,6 +2,8 @@
 session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include('server.php');
 ?>
 
@@ -70,7 +72,8 @@ include('server.php');
                     <br />
                     <p><?php echo $row['product_description']; ?></p>
                     <br />
-                    <button>Order</button>
+                    <button
+                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=1'">Order</button>
                 </div>
             </div>
             <?php
