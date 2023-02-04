@@ -63,6 +63,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+const minus = document.querySelector(".fas.fa-times");
+const quantity = document.querySelector("#quantity");
+
+minus.addEventListener("click", function () {
+  if (quantity.value > 0) {
+    quantity.value--;
+  }
+});
+
 // Orders.forEach((order) => {
 //   const tr = document.createElement("tr");
 //   const trContent = `

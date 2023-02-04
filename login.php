@@ -33,7 +33,7 @@ include('server.php');
                         </p>
                         <br />
                         <div class="container-login">
-                            <form method="post" action="login.php">
+                            <form method="post" action="server.php">
                                 <div class="form-group">
                                     <input name="admin_email" required type="email" value="<?php echo $email; ?>"
                                         placeholder="Email" />
