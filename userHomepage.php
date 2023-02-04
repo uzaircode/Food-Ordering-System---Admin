@@ -19,6 +19,8 @@ include('server.php');
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -95,30 +97,21 @@ include('server.php');
         </div>
 
         <div class="order-wrapper">
+            <?php
+          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image FROM cart INNER JOIN product ON cart.product_id = product.product_id");
+          while($row = mysqli_fetch_array($cart_records)) {
+        ?>
             <div class="order-card">
-                <img src="images/pizza1.jpeg" alt="" class="order-image" />
+                <img src="images/<?php echo $row['product_image']; ?>" alt="" class="order-image" />
                 <div class="order-detail">
-                    <p>With salmon and spinach</p>
-                    <i class="fas fa-times"></i><input type="text" value="1" />
+                    <p><?php echo $row['product_name']; ?></p>
+                    <i class="fas fa-times"></i><input type="text" value="<?php echo $row['cart_quantity']; ?>" />
                 </div>
                 <h4 class="order-price">$35</h4>
             </div>
-            <div class="order-card">
-                <img src="images/pizza2.jpeg" alt="" class="order-image" />
-                <div class="order-detail">
-                    <p>Multi meat</p>
-                    <i class="fas fa-times"></i><input type="text" value="2" />
-                </div>
-                <h4 class="order-price">$35</h4>
-            </div>
-            <div class="order-card">
-                <img src="" alt="" class="order-image" />
-                <div class="order-detail">
-                    <p>Lorem ipsum dolor sit amet</p>
-                    <i class="fas fa-times"></i><input type="text" value="1" />
-                </div>
-                <h4 class="order-price">$35</h4>
-            </div>
+            <?php
+          }
+        ?>
         </div>
         <hr class="divider" />
         <div class="order-total">
