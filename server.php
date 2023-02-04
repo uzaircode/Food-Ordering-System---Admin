@@ -9,6 +9,9 @@ $username = "";
 $email = "";
 $errors = array();
 
+$productId = "";
+$customerId = "";
+
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
@@ -100,4 +103,16 @@ if(isset($_GET['logout'])) {
 
 // retrieve customer records
 $customer_records = mysqli_query($db, "SELECT * FROM customer");
+
+// retrieve order records
+$order_records = mysqli_query($db, "SELECT `order`.*, `customer`.`customer_name` FROM `order` INNER JOIN `customer` ON `order`.`customer_id` = `customer`.`customer_id`");
+
+
+if(isset($_GET['product_id'])) {
+    $customer_id = $_GET['customer_id'];
+    $product_id = $_GET['product_id'];
+
+    // Perform your database operation here to record the order
+    mysqli_query($db, "INSERT INTO `order` (customer_id, product_id) VALUES ('$customer_id', '$product_id')");
+}
 ?>
