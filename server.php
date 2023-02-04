@@ -7,7 +7,9 @@ $edit_state = false;
 
 $username = "";
 $email = "";
+$password = "";
 $errors = array();
+$customer_username = "";
 
 $productId = "";
 $customerId = "";
@@ -50,7 +52,7 @@ if (isset($_GET['del'])) {
 // retrieve product records
 $results = mysqli_query($db, "SELECT * FROM product");
 
-// if the register button is clicked
+// if the admin register button is clicked
 if (isset($_POST['register'])) {
     $username = mysqli_real_escape_string($db, $_POST['admin_name']);
     $email = mysqli_real_escape_string($db, $_POST['admin_email']);
@@ -70,6 +72,25 @@ if (isset($_POST['register'])) {
 
 }
 
+// if the customer register button is clicked
+if (isset($_POST['userRegister'])) {
+  $customer_username = mysqli_real_escape_string($db, $_POST['customer_name']);
+  $email = mysqli_real_escape_string($db, $_POST['customer_email']);
+  $password = mysqli_real_escape_string($db, $_POST['customer_password']);
+
+  $password = md5($password);
+  $sql = "INSERT INTO customer (customer_name, customer_email, customer_password) VALUES ('$customer_username', '$email', '$password')";
+  mysqli_query($db, $sql);
+
+  session_start();
+  // set session variable with the username
+  $_SESSION['customer_name'] = $username;
+
+  // redirect to register page
+  header('location: product.php');
+
+
+}
 // if the login button is clicked
 if (isset($_POST['login'])) {
   $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
@@ -92,6 +113,29 @@ if (isset($_POST['login'])) {
     header("location: login.php");
   }
 
+}
+
+// if the customer login button is clicked
+if (isset($_POST['customerLogin'])) {
+  $customer_email = mysqli_real_escape_string($db, $_POST['customer_email']);
+  $password = mysqli_real_escape_string($db, $_POST['customer_password']);
+
+  // Check if the user exists in the database
+  // $password = md5($password);
+  $query = "SELECT * FROM customer WHERE customer_email='$customer_email' AND customer_password='$password'";
+  $results = mysqli_query($db, $query);
+
+  if (mysqli_num_rows($results) == 1) {
+    // Fetch the user's information
+    $row = mysqli_fetch_assoc($results);
+    // Store the user's information in a session
+    $_SESSION['customer_name'] = $row['customer_name'];
+    $_SESSION['customer_email'] = $row['customer_email'];
+    header("location: product.php");
+  } else {
+    // If the login fails, redirect the user to the login page
+    header("location: login.php");
+  }
 }
 
 // if the logout button is clicked
