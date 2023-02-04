@@ -10,6 +10,7 @@ $email = "";
 $password = "";
 $errors = array();
 $customer_username = "";
+$customer_email = "";
 
 $productId = "";
 $customerId = "";
@@ -73,24 +74,24 @@ if (isset($_POST['register'])) {
 }
 
 // if the customer register button is clicked
-if (isset($_POST['userRegister'])) {
+if (isset($_POST['customerRegister'])) {
   $customer_username = mysqli_real_escape_string($db, $_POST['customer_name']);
-  $email = mysqli_real_escape_string($db, $_POST['customer_email']);
   $password = mysqli_real_escape_string($db, $_POST['customer_password']);
+  $email = mysqli_real_escape_string($db, $_POST['customer_email']);
 
   $password = md5($password);
-  $sql = "INSERT INTO customer (customer_name, customer_email, customer_password) VALUES ('$customer_username', '$email', '$password')";
+  $sql = "INSERT INTO customer (customer_name, customer_password, customer_email) VALUES ('$customer_username', '$password', '$email')";
   mysqli_query($db, $sql);
 
   session_start();
   // set session variable with the username
-  $_SESSION['customer_name'] = $username;
+  $_SESSION['customer_name'] = $customer_username;
 
   // redirect to register page
   header('location: product.php');
 
-
 }
+
 // if the login button is clicked
 if (isset($_POST['login'])) {
   $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
@@ -121,7 +122,7 @@ if (isset($_POST['customerLogin'])) {
   $password = mysqli_real_escape_string($db, $_POST['customer_password']);
 
   // Check if the user exists in the database
-  // $password = md5($password);
+  // $password = md5($password);x
   $query = "SELECT * FROM customer WHERE customer_email='$customer_email' AND customer_password='$password'";
   $results = mysqli_query($db, $query);
 
@@ -134,7 +135,7 @@ if (isset($_POST['customerLogin'])) {
     header("location: product.php");
   } else {
     // If the login fails, redirect the user to the login page
-    header("location: login.php");
+    header("location: userLogin.php");
   }
 }
 
