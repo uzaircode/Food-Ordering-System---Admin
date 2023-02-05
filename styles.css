@@ -412,6 +412,10 @@ label {
   background: #2c4893;
 }
 
+.card-div {
+  padding: 200px;
+}
+
 @media screen and (min-width: 900px) {
   .split-screen {
     flex-direction: row;

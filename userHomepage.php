@@ -1,10 +1,28 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
+include('server.php');
+
+$customer_id = $_SESSION['customer_id'];
+$customer_name = $_SESSION['customer_id'];
+
+echo $customer_id;
+
+
+
+
+
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include('server.php');
+if(isset($_SESSION['customer_name'])) {
+  echo "Customer name: ".$_SESSION['customer_name'];
+} else {
+  echo "Session variable 'customer_name' is not set.";
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +43,7 @@ include('server.php');
 
 <body>
     <input type="checkbox" id="cart" />
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <div class="sidebar-menu">
             <span class="fas fa-user"></span>
             <a href="#">Profile</a>
@@ -42,7 +60,7 @@ include('server.php');
             <span class="fas fa-sliders-h"></span>
             <a href="#">Setting</a>
         </div>
-    </div>
+    </div> -->
 
     <div class="dashboard">
         <div class="dashboard-banner">
@@ -75,7 +93,7 @@ include('server.php');
                     <p><?php echo $row['product_description']; ?></p>
                     <br />
                     <button
-                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=1'">Order</button>
+                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=<?php echo $customer_id; ?>'">Order</button>
                 </div>
             </div>
             <?php
@@ -98,7 +116,7 @@ include('server.php');
 
         <div class="order-wrapper">
             <?php
-          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image FROM cart INNER JOIN product ON cart.product_id = product.product_id");
+          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
           while($row = mysqli_fetch_array($cart_records)) {
         ?>
             <div class="order-card">
@@ -124,7 +142,8 @@ include('server.php');
             <p>Total <span>$174.6 </span></p>
             <br />
         </div>
-        <button class="checkout">Checkout</button>
+        <button class="checkout" onclick="window.location.href='payment.php'">Checkout</button>
+
     </div>
 
     <script src="" async defer></script>

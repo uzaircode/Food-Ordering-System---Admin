@@ -11,6 +11,7 @@ $password = "";
 $errors = array();
 $customer_username = "";
 $customer_email = "";
+$customer_id = "";
 
 $productId = "";
 $customerId = "";
@@ -66,6 +67,7 @@ if (isset($_POST['register'])) {
     session_start();
     // set session variable with the username
     $_SESSION['admin_name'] = $username;
+    $_SESSION['admin_email'] = $email;
 
     // redirect to register page
     header('location: product.php');
@@ -122,7 +124,6 @@ if (isset($_POST['customerLogin'])) {
   $password = mysqli_real_escape_string($db, $_POST['customer_password']);
 
   // Check if the user exists in the database
-  // $password = md5($password);x
   $query = "SELECT * FROM customer WHERE customer_email='$customer_email' AND customer_password='$password'";
   $results = mysqli_query($db, $query);
 
@@ -130,14 +131,19 @@ if (isset($_POST['customerLogin'])) {
     // Fetch the user's information
     $row = mysqli_fetch_assoc($results);
     // Store the user's information in a session
+    session_start();
     $_SESSION['customer_name'] = $row['customer_name'];
     $_SESSION['customer_email'] = $row['customer_email'];
-    header("location: product.php");
+    $_SESSION['customer_id'] = (int)$row['customer_id'];
+
+
+    header("location: userHomepage.php");
   } else {
     // If the login fails, redirect the user to the login page
     header("location: userLogin.php");
   }
 }
+
 
 // if the logout button is clicked
 if(isset($_GET['logout'])) {
@@ -154,13 +160,22 @@ $order_records = mysqli_query($db, "SELECT `order`.*, `customer`.`customer_name`
 
 
 // record order when customer order
-// if(isset($_GET['product_id'])) {
-//     $customer_id = $_GET['customer_id'];
-//     $product_id = $_GET['product_id'];
+if(isset($_POST['form_submitted'])) {
+  if(isset($_SESSION['customer_id'])) {
+    $customer_id = $_SESSION['customer_id'];
 
-//     // Perform your database operation here to record the order
-//     mysqli_query($db, "INSERT INTO `order` (customer_id, product_id) VALUES ('$customer_id', '$product_id')");
-// }
+    // Perform your database operation here to record the order
+    mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
+
+    header('location: payment.php');
+    exit();
+  }
+}
+
+
+
+
+
 
 // record cart when customer place add to cart
 if(isset($_GET['product_id'])) {
