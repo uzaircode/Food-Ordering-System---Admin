@@ -51,8 +51,7 @@ include('server.php');
                         Remember me
                     </label>
                 </div>
-                <button class="button-login" input type="submit" name="customerLogin"
-                    onClick="location.href='index.html'">
+                <button class="button-login" input type="submit" name="customerLogin">
                     Log In
                 </button>
                 <section class="copy legal">
