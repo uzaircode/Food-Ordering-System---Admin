@@ -165,20 +165,30 @@ if(isset($_POST['form_submitted'])) {
     $customer_id = $_SESSION['customer_id'];
 
     // Perform your database operation here to record the order
-    mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
+    $result = mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
 
-    header('location: payment.php');
-    exit();
+    if ($result) {
+        header('location: payment.php');
+        exit();
+    } else {
+        echo "Error: " . mysqli_error($db);
+    }
   }
 }
 
+// if(isset($_POST['save'])) {
+//     $name = $_POST['product_name'];
+//     $price = $_POST['product_price'];
+//     $description = $_POST['product_description'];
+//     $product_image = $_POST['upload'];
+
+//     $query = "INSERT INTO product (product_name, product_price, product_description, product_image) VALUES ('$name','$price','$description','$product_image')";
+//     mysqli_query($db, $query);
+//     header('location: product.php');
+// }
+
 
 // record cart when customer place add to cart
-
-
-
-
-
 if (isset($_POST['action_id'])) {
   $action_id = $_POST['action_id'];
   if ($action_id == "add_to_cart") {

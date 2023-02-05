@@ -8,21 +8,16 @@ include('server.php');
 $customer_id = $_SESSION['customer_id'];
 $customer_name = $_SESSION['customer_id'];
 
-echo $customer_id;
-
-
-
-
-
+// echo $customer_id;
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-if(isset($_SESSION['customer_name'])) {
-  echo "Customer name: ".$_SESSION['customer_name'];
-} else {
-  echo "Session variable 'customer_name' is not set.";
-}
+// if(isset($_SESSION['customer_name'])) {
+//   echo "Customer name: ".$_SESSION['customer_name'];
+// } else {
+//   echo "Session variable 'customer_name' is not set.";
+// }
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +40,7 @@ if(isset($_SESSION['customer_name'])) {
 
 <body>
     <input type="checkbox" id="cart" />
-    <!-- <div class="sidebar">
+    <div class="sidebar">
         <div class="sidebar-menu">
             <span class="fas fa-user"></span>
             <a href="#">Profile</a>
@@ -62,8 +57,7 @@ if(isset($_SESSION['customer_name'])) {
             <span class="fas fa-sliders-h"></span>
             <a href="#">Setting</a>
         </div>
-    </div> -->
-
+    </div>
     <div class="dashboard">
         <div class="dashboard-banner">
             <img src="images/background-wallpaper.png" alt="" />

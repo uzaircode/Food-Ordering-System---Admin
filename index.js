@@ -121,7 +121,7 @@ function removeFromCart(productId, customerId, action_id) {
           },
           success: function (data) {
             // update cart container with returned data
-            $(".order-wrapper").html(data);
+            $(".order-wrapper").load(location.href + " .order-wrapper");
           },
           error: function (jqXHR, textStatus, errorThrown) {
             console.error("AJAX error: ", errorThrown);
@@ -130,7 +130,6 @@ function removeFromCart(productId, customerId, action_id) {
         });
       } else {
         console.error("Something went wrong: ", data);
-        // alert("Something went wrong, please try again.");
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
@@ -151,7 +150,7 @@ function addToCart(customerId, productId, action_id) {
     },
     success: function (data) {
       console.log("Data received: ", data);
-      alert("Item added to cart successfully!");
+      // alert("Item added to cart successfully!");
       // refresh the order-card div
       $(".order-wrapper").load(location.href + " .order-wrapper");
     },
