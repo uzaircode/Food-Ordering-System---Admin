@@ -1,13 +1,15 @@
 <?php
-session_id($session_id);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
-
+$customer_name = $_SESSION['customer_id'];
 
 echo $customer_id;
-$customer_name = $_SESSION['customer_id'];
+
 
 
 
@@ -91,7 +93,7 @@ if(isset($_SESSION['customer_name'])) {
                     <p><?php echo $row['product_description']; ?></p>
                     <br />
                     <button
-                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=1'">Order</button>
+                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=<?php echo $customer_id; ?>'">Order</button>
                 </div>
             </div>
             <?php

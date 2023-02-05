@@ -133,6 +133,7 @@ if (isset($_POST['customerLogin'])) {
     // Store the user's information in a session
     session_start();
     $_SESSION['customer_name'] = $row['customer_name'];
+    $_SESSION['customer_email'] = $row['customer_email'];
     $_SESSION['customer_id'] = (int)$row['customer_id'];
 
 
@@ -159,16 +160,22 @@ $order_records = mysqli_query($db, "SELECT `order`.*, `customer`.`customer_name`
 
 
 // record order when customer order
-// if(isset($_SESSION['customer_id'])) {
+if(isset($_POST['form_submitted'])) {
+  if(isset($_SESSION['customer_id'])) {
+    $customer_id = $_SESSION['customer_id'];
 
-//     $cart_records = mysqli_query($db, "SELECT cart_id FROM cart WHERE customer_id = '$customer_id'");
-//     $row = mysqli_fetch_array($cart_records);
-//     $_SESSION['customer_id'] = $row['customer_id'];
-//     $_SESSION['cart_id'] = (int)$row['cart_id'];
+    // Perform your database operation here to record the order
+    mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
 
-//     // Perform your database operation here to record the order
-//     mysqli_query($db, "INSERT INTO `order` (customer_id, cart_id) VALUES ('$customer_id', '$cart_id')");
-// }
+    header('location: payment.php');
+    exit();
+  }
+}
+
+
+
+
+
 
 // record cart when customer place add to cart
 if(isset($_GET['product_id'])) {
