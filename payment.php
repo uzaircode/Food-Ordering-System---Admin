@@ -209,6 +209,19 @@ echo $customer_email;
                 </form>
             </div>
         </div>
+        <div class="col-25">
+            <div class="container">
+                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span>
+                </h4>
+                <?php
+                $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
+                while ($row = mysqli_fetch_array($cart_records)) {
+            ?>
+                <p><a href="#"><?php echo $row['product_name']; ?></a> <span
+                        class="price"><?php echo $row['product_price']; ?></span></p>
+                <?php
+            }
+            ?>
                 <hr>
                 <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
             </div>
