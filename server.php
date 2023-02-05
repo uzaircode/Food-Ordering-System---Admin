@@ -173,35 +173,49 @@ if(isset($_POST['form_submitted'])) {
 }
 
 
-
-
-
-
 // record cart when customer place add to cart
-if(isset($_GET['product_id'])) {
-  $customer_id = $_GET['customer_id'];
-  $product_id = $_GET['product_id'];
 
-  // Check if a cart item with the same customer ID and product ID already exists
-  $check_cart_item = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
-  if(mysqli_num_rows($check_cart_item) > 0) {
-    // If it exists, update the quantity of that item
-    mysqli_query($db, "UPDATE cart SET cart_quantity = cart_quantity + 1 WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+
+
+
+
+if (isset($_POST['action_id'])) {
+  $action_id = $_POST['action_id'];
+  if ($action_id == "add_to_cart") {
+    if(isset($_POST['product_id']) && isset($_POST['customer_id'])) {
+    $product_id = $_POST['product_id'];
+    $customer_id = $_POST['customer_id'];
+
+    // Check if a cart item with the same customer ID and product ID already exists
+    $check_cart_item = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+    if(mysqli_num_rows($check_cart_item) > 0) {
+      // If it exists, update the quantity of that item
+      mysqli_query($db, "UPDATE cart SET cart_quantity = cart_quantity + 1 WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+    } else {
+      // If it doesn't exist, insert a new cart item
+      mysqli_query($db, "INSERT INTO cart (customer_id, product_id, cart_quantity) VALUES ('$customer_id', '$product_id', 1)");
+    }
+    echo "success";
+    exit;
+}
+  } else if ($action_id == "delete_from_cart") {
+    if(isset($_POST['customer_id']) && isset($_POST['product_id'])) {
+    $customer_id = $_POST['customer_id'];
+    $product_id = $_POST['product_id'];
+
+    $delete_query = "DELETE FROM cart WHERE product_id = $product_id AND customer_id = $customer_id";
+    $result = mysqli_query($db, $delete_query);
+    if (!$result) {
+        die("Query failed: " . mysqli_error($db));
+    }
+    echo "success";
+    exit;
+}
   } else {
-    // If it doesn't exist, insert a new cart item
-    mysqli_query($db, "INSERT INTO cart (customer_id, product_id, cart_quantity) VALUES ('$customer_id', '$product_id', 1)");
+    // handle unknown action_id here
   }
-  echo "<script>window.location.reload();</script>";
-  header("location: userHomepage.php");
-
 }
 
 
-//record cart when customer order
-// if(isset($_GET['cart_id'])) {
-//   $customer_id = $_GET['customer_id'];
-//   $product_id = $_GET['product_id'];
 
-//   mysqli_query($db, "INSERT INTO cart (customer_id, product_id) VALUES ('$customer_id', '$product_id)");
-// }
 ?>

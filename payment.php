@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_id($session_id);
 session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
@@ -146,8 +145,7 @@ echo $customer_email;
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="/action_page.php">
-
+                <form method="post" action="server.php">
                     <div class="row">
                         <div class="col-50">
                             <h3>Billing Address</h3>
@@ -205,7 +203,7 @@ echo $customer_email;
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                     </label>
-                    <button type="submit" class="btn">Continue to checkout</button>
+                    <button type="submit" class="btn" name="form_submitted">Order</button>
                 </form>
             </div>
         </div>

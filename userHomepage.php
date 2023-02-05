@@ -34,6 +34,8 @@ if(isset($_SESSION['customer_name'])) {
     <title>Main Page</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -92,8 +94,9 @@ if(isset($_SESSION['customer_name'])) {
                     <br />
                     <p><?php echo $row['product_description']; ?></p>
                     <br />
-                    <button
-                        onclick="location.href='server.php?product_id=<?php echo $row['product_id']; ?>&customer_id=<?php echo $customer_id; ?>'">Order</button>
+                    <button class="order-button"
+                        onclick="addToCart(<?php echo $_SESSION['customer_id']; ?>, <?php echo $row['product_id']; ?>)">Order</button>
+
                 </div>
             </div>
             <?php
@@ -116,17 +119,20 @@ if(isset($_SESSION['customer_name'])) {
 
         <div class="order-wrapper">
             <?php
-          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
+          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
           while($row = mysqli_fetch_array($cart_records)) {
         ?>
-            <div class="order-card">
+            <div class="order-card" id="order-card-<?php echo $row['product_id']; ?>">
                 <img src="images/<?php echo $row['product_image']; ?>" alt="" class="order-image" />
                 <div class="order-detail">
                     <p><?php echo $row['product_name']; ?></p>
-                    <i class="fas fa-times"></i><input type="text" value="<?php echo $row['cart_quantity']; ?>" />
+                    <i id="remove_<?php echo $row['product_id']; ?>" class="fas fa-times"
+                        onclick="removeFromCart(<?php echo $row['product_id']; ?>, <?php echo $customer_id; ?>)"></i>
+                    <input type="text" value="<?php echo $row['cart_quantity']; ?>" disabled />
                 </div>
-                <h4 class="order-price">$35</h4>
+                <?php echo $row['product_price']; ?>
             </div>
+
             <?php
           }
         ?>
@@ -146,7 +152,7 @@ if(isset($_SESSION['customer_name'])) {
 
     </div>
 
-    <script src="" async defer></script>
+    <script src="index.js"></script>
 </body>
 
 </html>

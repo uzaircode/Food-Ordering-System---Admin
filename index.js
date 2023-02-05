@@ -95,3 +95,69 @@ minus.addEventListener("click", function () {
 //   tr.innerHTML = trContent;
 //   document.querySelector("table tbody").appendChild(tr);
 // });
+
+function removeFromCart(productId, customerId, action_id) {
+  $.ajax({
+    type: "POST",
+    url: "server.php",
+    data: {
+      product_id: productId,
+      customer_id: customerId,
+      action_id: "delete_from_cart",
+    },
+    success: function (data) {
+      console.log("Data received: ", data);
+      if (data == "success") {
+        $("#remove_" + productId)
+          .closest(".order-wrapper")
+          .remove();
+
+        // retrieve updated cart items
+        $.ajax({
+          type: "GET",
+          url: "server.php",
+          data: {
+            customer_id: customerId,
+          },
+          success: function (data) {
+            // update cart container with returned data
+            $(".order-wrapper").html(data);
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error: ", errorThrown);
+            alert("Something went wrong, please try again.");
+          },
+        });
+      } else {
+        console.error("Something went wrong: ", data);
+        // alert("Something went wrong, please try again.");
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error("AJAX error: ", errorThrown);
+      alert("Something went wrong, please try again.");
+    },
+  });
+}
+
+function addToCart(customerId, productId, action_id) {
+  $.ajax({
+    type: "POST",
+    url: "server.php",
+    data: {
+      product_id: productId,
+      customer_id: customerId,
+      action_id: "add_to_cart",
+    },
+    success: function (data) {
+      console.log("Data received: ", data);
+      alert("Item added to cart successfully!");
+      // refresh the order-card div
+      $(".order-wrapper").load(location.href + " .order-wrapper");
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error("AJAX error: ", errorThrown);
+      alert("Something went wrong, please try again.");
+    },
+  });
+}
