@@ -3,6 +3,9 @@ session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
+
+// $admin_id = $_SESSION['admin_id'];
+// echo $admin_id;
 ?>
 
 <!DOCTYPE html>
