@@ -1,3 +1,27 @@
+<?php
+// phpinfo(); // Works correctly
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+include('server.php');
+
+$customer_id = $_SESSION['customer_id'];
+
+
+if (isset($_GET['edit'])) {
+  $id = $_GET['edit'];
+  $rec = mysqli_query($db, "SELECT * FROM customer WHERE customer_id=$id");
+  $record = mysqli_fetch_array($rec);
+  $name = $record['customer_name'];
+  $email = $record['customer_email'];
+  $phone = $record['customer_phone'];
+  $productName = $record['product_name'];
+  $description = $record['product_description'];
+  $product_image = $record['product_image'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,9 +55,9 @@
         <!--Billed to-->
         <div class="billing-to">
             <div class="sub-title">
-                <p><strong>Sold to: </strong>Nik Uzair</p>
-                <p><strong>Email : </strong>nikuzairsc@gmail.com</p>
-                <p><strong>Phone Number: </strong>+60 189002414</p>
+                <p><strong>Sold to: </strong><?php echo $name; ?></p>
+                <p><strong>Email : </strong><?php echo $email; ?></p>
+                <p><strong>Phone Number: </strong>+60 <?php echo $phone; ?></p>
             </div>
 
             <div class="sub-title">
@@ -48,46 +72,30 @@
             <table>
                 <tr>
                     <th>Dish</th>
-                    <th>Quantity</th>
+                    <!-- <th>Quantity</th>
                     <th>Unit Price</th>
-                    <th>Price</th>
+                    <th>Price</th> -->
                 </tr>
+
+                <?php
+                // Fetch the product details from the order table that have a foreign key referenced in the invoice table
+                $product_records = mysqli_query($db, "SELECT `order`.*, product.*
+                FROM `order`
+                INNER JOIN product ON order.product_id = product.product_id
+                INNER JOIN receipt ON order.order_id = receipt.order_id
+                WHERE receipt.customer_id = '$customer_id'");
+
+                // Loop through the result set and display the product details
+                while($row = mysqli_fetch_array($order_records)) {
+                ?>
                 <tr>
-                    <td>PIZZA WITH SALMON AND SPINACH</td>
-                    <td>1</td>
-                    <td>19.50</td>
-                    <td>19.50</td>
+                    <td><?php echo $row['product_name']; ?></td>
+                    <td><?php echo $row['product_image']; ?></td>
+                    <td><?php echo $row['product_price']; ?></td>
                 </tr>
-                <tr>
-                    <td>PIZZA PREMIUM CHEESE</td>
-                    <td>1</td>
-                    <td>19.50</td>
-                    <td>19.50</td>
-                </tr>
-                <tr>
-                    <td>PIZZA MUTLI MEAT</td>
-                    <td>2</td>
-                    <td>19.50</td>
-                    <td>39</td>
-                </tr>
-                <tr>
-                    <td>PIZZA SALAMI</td>
-                    <td>3</td>
-                    <td>19.50</td>
-                    <td>58.50</td>
-                </tr>
-                <tr>
-                    <td>PIZZA WITH PORCINI MUSHROOMS AND CHANTERELLES</td>
-                    <td>1</td>
-                    <td>19.50</td>
-                    <td>19.50</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Subtotal</td>
-                    <td>246.00</td>
-                </tr>
+                <?php
+}
+        ?>
             </table>
         </div>
         <!--Bottom Section-->

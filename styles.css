@@ -230,6 +230,10 @@ p {
   margin-left: 10px;
 }
 
+.order-detail > i {
+  cursor: pointer;
+}
+
 .divider {
   width: 100%;
   border: 1px dashed var(--grey);

@@ -2,14 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_id($session_id);
 session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
-$customer_email = $_SESSION['customer_email'];
 
 
 echo $customer_id;
@@ -146,8 +144,7 @@ echo $customer_email;
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="/action_page.php">
-
+                <form method="post">
                     <div class="row">
                         <div class="col-50">
                             <h3>Billing Address</h3>
@@ -205,13 +202,15 @@ echo $customer_email;
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                     </label>
-                    <button type="submit" class="btn">Continue to checkout</button>
+                    <input type="hidden" name="form_submitted" value="1">
+                    <button onclick="location.href='server.php'">Order now</button>
                 </form>
             </div>
         </div>
-        <div class="col-25">
+        <div class=" col-25">
             <div class="container">
-                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span>
+                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i>
+                        <b>4</b></span>
                 </h4>
                 <?php
                 $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
