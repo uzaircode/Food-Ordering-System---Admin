@@ -76,26 +76,17 @@ if (isset($_GET['edit'])) {
                     <th>Unit Price</th>
                     <th>Price</th> -->
                 </tr>
-
                 <?php
-                // Fetch the product details from the order table that have a foreign key referenced in the invoice table
-                $product_records = mysqli_query($db, "SELECT `order`.*, product.*
-                FROM `order`
-                INNER JOIN product ON order.product_id = product.product_id
-                INNER JOIN receipt ON order.order_id = receipt.order_id
-                WHERE receipt.customer_id = '$customer_id'");
-
-                // Loop through the result set and display the product details
-                while($row = mysqli_fetch_array($order_records)) {
-                ?>
+                $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
+                while($row = mysqli_fetch_array($receipt_results)) { ?>
                 <tr>
                     <td><?php echo $row['product_name']; ?></td>
                     <td><?php echo $row['product_image']; ?></td>
                     <td><?php echo $row['product_price']; ?></td>
                 </tr>
                 <?php
-}
-        ?>
+                    }
+                    ?>
             </table>
         </div>
         <!--Bottom Section-->
