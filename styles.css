@@ -24,14 +24,28 @@ p {
   font-size: 14px;
 }
 
+.dashboard-wrapper {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  grid-template-columns: 174px 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "sidebar main";
+}
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 174px;
   height: 100%;
+  grid-area: sidebar;
   background-color: #000000;
-  padding-top: 70px;
+  padding: 10px;
+}
+
+.dashboard {
+  grid-area: main;
 }
 
 .sidebar-menu {
@@ -89,10 +103,9 @@ p {
 }
 
 .dashboard-menu {
-  display: flex;
   gap: 10px;
   padding: 0.3rem 1rem;
-  overflow-x: auto;
+  text-align: center;
 }
 
 .dashboard-menu > a {
@@ -156,11 +169,8 @@ p {
   padding-top: 10px;
 }
 
-.dashboard {
-  padding-left: 174px;
-}
-
 .dashboard-order {
+  display: none;
   width: 340px;
   height: 100vh;
   position: fixed;
@@ -419,6 +429,142 @@ label {
 .card-div {
   padding: 200px;
 }
+
+.progress-main {
+  width: 100%;
+  font-family: pop;
+  flex-direction: column;
+  background-color: aqua;
+}
+.progress-main ul {
+  display: flex;
+  margin-top: 80px;
+}
+.progress-main ul li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress-main ul li .icon {
+  font-size: 35px;
+  color: #ff4732;
+  margin: 0 60px;
+}
+.progress-main ul li .text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff4732;
+}
+
+/* Progress Div Css  */
+
+.progress-main ul li .progress {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(68, 68, 68, 0.781);
+  margin: 14px 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+.progress::after {
+  content: " ";
+  position: absolute;
+  width: 125px;
+  height: 5px;
+  background-color: rgba(68, 68, 68, 0.781);
+  right: 30px;
+}
+.one::after {
+  width: 0;
+  height: 0;
+}
+.progress-main ul li .progress .uil {
+  display: none;
+}
+.progress-main ul li .progress p {
+  font-size: 13px;
+}
+
+/* Active Css  */
+
+.progress-main ul li .active {
+  background-color: #ff4732;
+  display: grid;
+  place-items: center;
+}
+.progress-main li .active::after {
+  background-color: #ff4732;
+}
+.progress-main ul li .active p {
+  display: none;
+}
+.progress-main ul li .active .uil {
+  font-size: 20px;
+  display: flex;
+}
+
+/* TABLE RECENT ORDER */
+main .recent-table-list {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+main .recent-table-list-title-section {
+  background-color: red;
+}
+
+main .recent-table-list-title-section button {
+  background-color: transparent;
+  border: 2px dashed var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 0.5rem;
+  width: 100px;
+  height: 40px;
+}
+
+main .recent-table-list-title-section-right {
+  float: right;
+  margin-bottom: 10px;
+}
+
+main .recent-table-list-title-section button:hover {
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+}
+
+main .recent-table-list table {
+  background: var(--color-white);
+  width: 100%;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: box-shadow 300ms ease, color 300ms ease;
+  font-size: 13px;
+}
+
+.recent-table-list-center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+main .recent-table-list table:hover {
+  box-shadow: none;
+}
+
+/* main .recent-table-list span {
+  color: var(--color-danger);
+}
+main .recent-table-list span {
+  color: var(--color-danger);
+} */
 
 @media screen and (min-width: 900px) {
   .split-screen {

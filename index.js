@@ -1,7 +1,9 @@
-const sideMenu = document.querySelector("aside");
+const sideMenu = document.querySelector("closeCart");
 const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
 const themeToggler = document.querySelector(".theme-toggler");
+
+const labelCart = document.querySelector(".label-cart");
 
 const input = document.getElementById("upload");
 const text = document.getElementById("text");
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   menuBtn.addEventListener("click", () => {
-    sideMenu.style.display = "block";
+    sideMenu.style.display = "none";
   });
 });
 
@@ -34,6 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
     sideMenu.style.display = "none";
   });
 });
+
+if (labelCart) {
+  labelCart.addEventListener("click", function () {
+    const dashboardOrder = document.querySelector(".dashboard-order");
+    if (dashboardOrder.style.display === "none") {
+      dashboardOrder.style.display = "block";
+    } else {
+      dashboardOrder.style.display = "none";
+    }
+  });
+}
 
 const lightModeSpan = themeToggler.querySelector("span:nth-child(1)");
 const darkModeSpan = themeToggler.querySelector("span:nth-child(2)");

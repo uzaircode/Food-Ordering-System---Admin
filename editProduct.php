@@ -30,40 +30,40 @@ if (isset($_GET['edit'])) {
 <body>
     <div class="container">
         <aside>
-            <!-- <div class="sidebar"> -->
-            <a href="index.php">
-                <span class="material-symbols-outlined">dashboard</span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="customer.php">
-                <span class="material-symbols-outlined">person</span>
-                <h3>Customers</h3>
-            </a>
-            <a href="order.php">
-                <span class="material-symbols-outlined">receipt_long</span>
-                <h3>Orders</h3>
-            </a>
-            <a href="feedback.php">
-                <span class="material-symbols-outlined">auto_awesome</span>
-                <h3>Feedbacks</h3>
-            </a>
-            <a href="product.php" class="active">
-                <span class="material-symbols-outlined">inventory</span>
-                <h3>Products</h3>
-            </a>
-            <a href="invoice.php">
-                <span class="material-symbols-outlined">receipt</span>
-                <h3>Invoices</h3>
-            </a>
-            <a href="editProfile.php">
-                <span class="material-symbols-outlined">settings</span>
-                <h3>Settings</h3>
-            </a>
-            <a href="login.php">
-                <span class="material-symbols-outlined">logout</span>
-                <h3>Logout</h3>
-            </a>
-            <!-- </div> -->
+            <div class="sidebar">
+                <a href="index.php">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="customer.php">
+                    <span class="material-symbols-outlined">person</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="order.php">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="feedback.php">
+                    <span class="material-symbols-outlined">auto_awesome</span>
+                    <h3>Feedbacks</h3>
+                </a>
+                <a href="product.php" class="active">
+                    <span class="material-symbols-outlined">inventory</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="invoice.php">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <h3>Invoices</h3>
+                </a>
+                <a href="editProfile.php">
+                    <span class="material-symbols-outlined">settings</span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="login.php">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
         </aside>
 
         <main>

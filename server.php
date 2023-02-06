@@ -13,9 +13,13 @@ $username = "";
 $email = "";
 $password = "";
 $errors = array();
+
 $customer_username = "";
+$customer_name = "";
 $customer_email = "";
 $customer_id = "";
+$customer_phone = "";
+$customer_password = "";
 
 $admin_name = "";
 $admin_password = "";
@@ -49,7 +53,7 @@ if (isset($_POST['update'])) {
     $product_image = $_POST['upload'];
     $id = mysqli_real_escape_string($db, $_POST['id']);
 
-    $query = "UPDATE product SET product_name='$name', product_price='$price', product_description='$description', product_image='$upload' WHERE product_id=$id";
+    $query = "UPDATE product SET product_name='$name', product_price='$price', product_description='$description', product_image='$product_image' WHERE product_id=$id";
     mysqli_query($db, $query);
     header('location: product.php');
 }
@@ -249,20 +253,6 @@ if (isset($_POST['action_id'])) {
   }
 }
 
-
-// update product records
-// if (isset($_POST['update'])) {
-//     $name = mysqli_real_escape_string($db, $_POST['product_name']);
-//     $price = mysqli_real_escape_string($db, $_POST['product_price']);
-//     $description = mysqli_real_escape_string($db, $_POST['product_description']);
-//     $product_image = $_POST['upload'];
-//     $id = mysqli_real_escape_string($db, $_POST['id']);
-
-//     $query = "UPDATE product SET product_name='$name', product_price='$price', product_description='$description', product_image='$upload' WHERE product_id=$id";
-//     mysqli_query($db, $query);
-//     header('location: product.php');
-// }
-
 // update admin profile
 if (isset($_POST['adminUpdate'])) {
   $admin_name = mysqli_real_escape_string($db, $_POST['admin_name']);
@@ -277,6 +267,21 @@ if (isset($_POST['adminUpdate'])) {
   $query = "UPDATE user SET admin_name='$admin_name', admin_email='$admin_email', admin_phone='$admin_phone', admin_password='$admin_password' WHERE admin_id=$admin_id";
   mysqli_query($db, $query);
   header('location: index.php');
+}
+
+if (isset($_POST['customerUpdate'])) {
+  $customer_name = mysqli_real_escape_string($db, $_POST['customer_name']);
+  $customer_email = mysqli_real_escape_string($db, $_POST['customer_email']);
+  $customer_phone = mysqli_real_escape_string($db, $_POST['customer_phone']);
+  $customer_password = mysqli_real_escape_string($db, $_POST['customer_password']);
+  $customer_id = mysqli_real_escape_string($db, $_POST['customer_id']);
+
+  // Hash the password before storing it in the database
+  $customer_password = md5($customer_password);
+
+  $query = "UPDATE customer SET customer_name='$customer_name', customer_email='$customer_email', customer_phone='$customer_phone', customer_password='$customer_password' WHERE customer_id=$customer_id";
+  mysqli_query($db, $query);
+  header('location: customerProfile.php');
 }
 
 
