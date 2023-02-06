@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // initialize variables
 $name = "";
 $address = "";
@@ -12,6 +16,12 @@ $errors = array();
 $customer_username = "";
 $customer_email = "";
 $customer_id = "";
+
+$admin_name = "";
+$admin_password = "";
+$admin_email = "";
+$admin_phone = "";
+
 
 $productId = "";
 $customerId = "";
@@ -59,24 +69,31 @@ $customer_results = mysqli_query($db, "SELECT * FROM customer");
 
 // if the admin register button is clicked
 if (isset($_POST['register'])) {
-    $username = mysqli_real_escape_string($db, $_POST['admin_name']);
-    $email = mysqli_real_escape_string($db, $_POST['admin_email']);
-    $password = mysqli_real_escape_string($db, $_POST['admin_password']);
+  $username = mysqli_real_escape_string($db, $_POST['admin_name']);
+  $email = mysqli_real_escape_string($db, $_POST['admin_email']);
+  $password = mysqli_real_escape_string($db, $_POST['admin_password']);
 
-    $password = md5($password);
-    $sql = "INSERT INTO user (admin_name, admin_email, admin_password) VALUES ('$username', '$email', '$password')";
-    mysqli_query($db, $sql);
+  $password = md5($password);
+  $sql = "INSERT INTO user (admin_name, admin_email, admin_password) VALUES ('$username', '$email', '$password')";
+  mysqli_query($db, $sql);
 
-    session_start();
-    // set session variable with the username
-    $_SESSION['admin_name'] = $username;
-    $_SESSION['admin_email'] = $email;
+  // Get the `admin_id` of the newly created user
+  $admin_id = mysqli_insert_id($db);
 
-    // redirect to register page
-    header('location: product.php');
+  // Start the session
+  session_start();
 
+  // Set the `admin_id` session variable
+  $_SESSION['admin_id'] = $admin_id;
+  $_SESSION['admin_name'] = $username;
+  $_SESSION['admin_email'] = $email;
 
+  // Redirect to the desired page
+  header('location: index.php');
 }
+
+
+
 
 // if the customer register button is clicked
 if (isset($_POST['customerRegister'])) {
@@ -93,11 +110,11 @@ if (isset($_POST['customerRegister'])) {
   $_SESSION['customer_name'] = $customer_username;
 
   // redirect to register page
-  header('location: product.php');
+  header('location: userLogin.php');
 
 }
 
-// if the login button is clicked
+// if the admin login button is clicked
 if (isset($_POST['login'])) {
   $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
   $password = mysqli_real_escape_string($db, $_POST['admin_password']);
@@ -113,12 +130,13 @@ if (isset($_POST['login'])) {
     // Store the user's information in a session
     $_SESSION['admin_name'] = $row['admin_name'];
     $_SESSION['admin_email'] = $row['admin_email'];
-    header("location: product.php");
+    $_SESSION['admin_id'] = (int)$row['admin_id'];
+
+    header("location: index.php");
   } else {
     // If the login fails, redirect the user to the login page
     header("location: login.php");
   }
-
 }
 
 // if the customer login button is clicked
@@ -230,6 +248,37 @@ if (isset($_POST['action_id'])) {
     // handle unknown action_id here
   }
 }
+
+
+// update product records
+// if (isset($_POST['update'])) {
+//     $name = mysqli_real_escape_string($db, $_POST['product_name']);
+//     $price = mysqli_real_escape_string($db, $_POST['product_price']);
+//     $description = mysqli_real_escape_string($db, $_POST['product_description']);
+//     $product_image = $_POST['upload'];
+//     $id = mysqli_real_escape_string($db, $_POST['id']);
+
+//     $query = "UPDATE product SET product_name='$name', product_price='$price', product_description='$description', product_image='$upload' WHERE product_id=$id";
+//     mysqli_query($db, $query);
+//     header('location: product.php');
+// }
+
+// update admin profile
+if (isset($_POST['adminUpdate'])) {
+  $admin_name = mysqli_real_escape_string($db, $_POST['admin_name']);
+  $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
+  $admin_phone = mysqli_real_escape_string($db, $_POST['admin_phone']);
+  $admin_password = mysqli_real_escape_string($db, $_POST['admin_password']);
+  $admin_id = mysqli_real_escape_string($db, $_POST['admin_id']);
+
+  // Hash the password before storing it in the database
+  $admin_password = md5($admin_password);
+
+  $query = "UPDATE user SET admin_name='$admin_name', admin_email='$admin_email', admin_phone='$admin_phone', admin_password='$admin_password' WHERE admin_id=$admin_id";
+  mysqli_query($db, $query);
+  header('location: index.php');
+}
+
 
 
 
