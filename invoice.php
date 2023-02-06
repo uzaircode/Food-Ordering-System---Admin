@@ -65,18 +65,16 @@ include('server.php');
                     <thread>
                         <tr>
                             <th>Invoice ID</th>
-                            <th>Invoice Date</th>
                             <th>Customer Name</th>
                             <th>Invoice Status</th>
                             <th>Invoice Detail</th>
                         </tr>
                     </thread>
                     <tbody>
-                        <?php while($row = mysqli_fetch_array($customer_results)) { ?>
+                        <?php while($row = mysqli_fetch_array($receipt_results)) { ?>
                         <tr>
-                            <td>#12049</td>
-                            <td>11/1/2023</td>
-                            <td>Nik Uzair</td>
+                            <td>#<?php echo $row['order_id']; ?></td>
+                            <td><?php echo $row['customer_name']; ?></td>
                             <td class="success">PAID</td>
                             <td><a href="report.php?edit=<?php echo $row['customer_id']; ?>"><span
                                         class="material-symbols-outlined warning">receipt_long</span></a></td>
