@@ -1,23 +1,8 @@
 <?php
 session_start();
-include('server.php');
+// phpinfo(); // Works correctly
 ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-
-$admin_id = $_SESSION['admin_id'];
-echo $admin_id;
-
-if (isset($_GET['edit'])) {
-$query = "SELECT * FROM user WHERE admin_id=$admin_id";
-$result = mysqli_query($db, $query);
-$row = mysqli_fetch_assoc($result);
-$admin_name = $row['admin_name'];
-$admin_email = $row['admin_email'];
-$admin_phone = $row['admin_phone'];
-$admin_password = $row['admin_password'];
-}
-
+include('server.php');
 ?>
 
 <!DOCTYPE html>
@@ -81,30 +66,29 @@ $admin_password = $row['admin_password'];
                     </div>
                 </div>
                 <div class="container-login">
-                    <form method="post" action="server.php">
-                        <input type="hidden" name="admin_id" value="<?php echo $admin_id; ?>">
+                    <form action="">
                         <div class="form-group">
                             <p>Name</p>
-                            <input type="text" name="admin_name" value="<?php echo $admin_name; ?>">
+                            <input type="email" name="fname" required type="email" />
                         </div>
                         <br />
                         <div class="form-group">
                             <p>Email</p>
-                            <input type="email" name="admin_email" value="<?php echo $admin_email; ?>">
+                            <input type="email" name="fname" required type="email" />
                         </div>
                         <br />
                         <div class="form-group">
                             <p>Contact Number</p>
-                            <input type="text" name="admin_phone" value="<?php echo $admin_phone; ?>">
+                            <input type="password" name="fname" required type="password" />
                         </div>
                         <br>
                         <div class="form-group">
                             <p>Password</p>
-                            <input type="password" name="admin_password" value="<?php echo $admin_password; ?>">
+                            <input type="password" name="fname" required type="password" />
                         </div>
                         <br>
                         <div>
-                            <button class="button-login" input type="submit" name="adminUpdate">
+                            <button class="button-login" input type="submit" onClick="location.href='index.html'">
                                 Save
                             </button>
                         </div>
@@ -113,7 +97,7 @@ $admin_password = $row['admin_password'];
             </div>
         </main>
 
-        <div class=" right">
+        <div class="right">
             <div class="top">
                 <button id="menu-btn">
                     <span class="material-symbols-outlined">menu</span>
