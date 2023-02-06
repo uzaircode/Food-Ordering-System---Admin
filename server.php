@@ -54,6 +54,9 @@ if (isset($_GET['del'])) {
 // retrieve product records
 $results = mysqli_query($db, "SELECT * FROM product");
 
+// retrieve product records
+$customer_results = mysqli_query($db, "SELECT * FROM customer");
+
 // if the admin register button is clicked
 if (isset($_POST['register'])) {
     $username = mysqli_real_escape_string($db, $_POST['admin_name']);
@@ -166,6 +169,8 @@ if(isset($_POST['form_submitted'])) {
 
     // Perform your database operation here to record the order
     $result = mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
+    $order_id = mysqli_insert_id($db);
+    $receipt_result = mysqli_query($db, "INSERT INTO receipt (order_id) VALUES ('$order_id')");
 
     if ($result) {
         header('location: payment.php');

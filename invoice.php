@@ -65,42 +65,23 @@ include('server.php');
                     <thread>
                         <tr>
                             <th>Invoice ID</th>
-                            <th>Invoice Date </th>
+                            <th>Invoice Date</th>
                             <th>Customer Name</th>
                             <th>Invoice Status</th>
+                            <th>Invoice Detail</th>
                         </tr>
                     </thread>
                     <tbody>
+                        <?php while($row = mysqli_fetch_array($customer_results)) { ?>
                         <tr>
                             <td>#12049</td>
                             <td>11/1/2023</td>
                             <td>Nik Uzair</td>
                             <td class="success">PAID</td>
+                            <td><a href="report.php?edit=<?php echo $row['customer_id']; ?>"><span
+                                        class="material-symbols-outlined warning">receipt_long</span></a></td>
                         </tr>
-                        <tr>
-                            <td>#36472</td>
-                            <td>15/1/2023</td>
-                            <td>Nur Anise Nabila</td>
-                            <td class="success">PAID</td>
-                        </tr>
-                        <tr>
-                            <td>#86940</td>
-                            <td>17/1/2023</td>
-                            <td>Haziq Fikri</td>
-                            <td class="success">PAID</td>
-                        </tr>
-                        <tr>
-                            <td>#18594</td>
-                            <td>1/1/2023</td>
-                            <td>Faiz Imtiyaz</td>
-                            <td class="success">PAID</td>
-                        </tr>
-                        <tr>
-                            <td>#39483</td>
-                            <td>30/1/2023</td>
-                            <td>Lisa Elizabeth</td>
-                            <td class="success">PAID</td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
