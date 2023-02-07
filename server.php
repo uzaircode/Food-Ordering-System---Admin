@@ -32,6 +32,11 @@ $cart_id = "1";
 $productId = "";
 $customerId = "";
 
+$customer_id = "";
+$feedback_order_description = "";
+$feedback_pickup_description = "";
+$feedback_rating = "";
+
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
@@ -45,6 +50,19 @@ if(isset($_POST['save'])) {
     $query = "INSERT INTO product (product_name, product_price, product_description, product_image) VALUES ('$name','$price','$description','$product_image')";
     mysqli_query($db, $query);
     header('location: product.php');
+}
+
+
+// save customer feedbacks
+if(isset($_POST['customerFeedbackSave'])) {
+  $customer_id = $_POST['customer_id'];
+  $feedback_order_description = $_POST['feedback_order_description'];
+  $feedback_pickup_experience = $_POST['feedback_pickup_experience'];
+  $feedback_rating = $_POST['feedback_rating'];
+
+  $query = "INSERT INTO feedback (customer_id, feedback_order_description, feedback_pickup_experience, feedback_rating) VALUES ('$customer_id', '$feedback_order_description','$feedback_pickup_experience','$feedback_rating')";
+  mysqli_query($db, $query);
+  header('location: feedback.php');
 }
 
 // update product records
@@ -73,11 +91,11 @@ $results = mysqli_query($db, "SELECT * FROM product");
 // retrieve product records
 $customer_results = mysqli_query($db, "SELECT * FROM customer");
 
-// retrieve customer receipt
+// retrieve customer receipts
 $receipt_results = mysqli_query($db, "SELECT `receipt`.*, `customer`.* FROM `receipt` INNER JOIN `customer` ON `receipt`.`customer_id` = `customer`.`customer_id`");
 
-// retrieve customer's product based on order
-
+// retrieve customer feedbacks
+$feedback_results = mysqli_query($db, "SELECT * FROM feedback");
 
 
 
@@ -170,6 +188,7 @@ if (isset($_POST['customerLogin'])) {
     session_start();
     $_SESSION['customer_name'] = $row['customer_name'];
     $_SESSION['customer_email'] = $row['customer_email'];
+    $_SESSION['customer_phone'] = $row['customer_phone'];
     $_SESSION['customer_id'] = (int)$row['customer_id'];
 
 
@@ -228,21 +247,6 @@ if(isset($_POST['form_submitted'])) {
     }
   }
 }
-
-
-
-
-
-// if(isset($_POST['save'])) {
-//     $name = $_POST['product_name'];
-//     $price = $_POST['product_price'];
-//     $description = $_POST['product_description'];
-//     $product_image = $_POST['upload'];
-
-//     $query = "INSERT INTO product (product_name, product_price, product_description, product_image) VALUES ('$name','$price','$description','$product_image')";
-//     mysqli_query($db, $query);
-//     header('location: product.php');
-// }
 
 
 // record cart when customer place add to cart
