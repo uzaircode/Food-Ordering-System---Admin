@@ -64,10 +64,11 @@ include('server.php');
                 <table>
                     <thread>
                         <tr>
-                            <th>Customer Id</th>
+                            <th>Customer ID</th>
                             <th>Customer Name</th>
                             <th>Customer Email</th>
                             <th>Customer Phone Number</th>
+                            <th>Order History</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -76,7 +77,9 @@ include('server.php');
                             <td><?php echo $row['customer_id']; ?></td>
                             <td><?php echo $row['customer_name']; ?></td>
                             <td><?php echo $row['customer_email']; ?></td>
-                            <td><?php echo $row['customer_phone']; ?></td>
+                            <td>+6<?php echo $row['customer_phone']; ?></td>
+                            <td><a href="customerHistory.php?orderHistory=<?php echo $row['customer_id']; ?>"><span
+                                        class="material-symbols-outlined warning">history</span></a></td>
                         </tr>
                         <?php } ?>
                     </tbody>

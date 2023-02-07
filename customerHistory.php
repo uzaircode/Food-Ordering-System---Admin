@@ -1,9 +1,21 @@
 <?php
 session_start();
-// phpinfo(); // Works correctly
-ini_set('display_errors', 1);
 include('server.php');
+
+if (isset($_GET['orderHistory'])) {
+  $customer_id = $_GET['orderHistory'];
+  $query = "SELECT * FROM `order`
+  JOIN `customer` ON `order`.`customer_id` = `customer`.`customer_id`
+   WHERE `order`.`customer_id` = $customer_id";
+  $result = mysqli_query($db, $query);
+
+  while ($record = mysqli_fetch_assoc($result)) {
+    $order_id = $record['order_id'];
+    $customer_name = $record['customer_name'];
+  }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +39,7 @@ include('server.php');
                     <span class="material-symbols-outlined">dashboard</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="customer.php">
+                <a href="customer.php" class="active">
                     <span class="material-symbols-outlined">person</span>
                     <h3>Customers</h3>
                 </a>
@@ -43,7 +55,7 @@ include('server.php');
                     <span class="material-symbols-outlined">inventory</span>
                     <h3>Products</h3>
                 </a>
-                <a href="invoice.php" class="active">
+                <a href="invoice.php">
                     <span class="material-symbols-outlined">receipt</span>
                     <h3>Invoices</h3>
                 </a>
@@ -59,25 +71,22 @@ include('server.php');
         </aside>
 
         <main>
-            <h1>Recent Invoices</h1>
+            <h1>Recent Customers</h1>
             <div class="recent-table-list">
                 <table>
                     <thread>
                         <tr>
-                            <th>Invoice ID</th>
+                            <th>Customer ID</th>
                             <th>Customer Name</th>
-                            <th>Invoice Status</th>
-                            <th>Invoice Detail</th>
+                            <th>Order ID</th>
                         </tr>
                     </thread>
                     <tbody>
-                        <?php while($row = mysqli_fetch_array($receipt_results)) { ?>
+                        <?php while($row = mysqli_fetch_array($customer_records)) { ?>
                         <tr>
-                            <td>#<?php echo $row['receipt_id']; ?></td>
-                            <td><?php echo $row['customer_name']; ?></td>
-                            <td class="success">PAID</td>
-                            <td><a href="report.php?edit=<?php echo $row['receipt_id']; ?>"><span
-                                        class="material-symbols-outlined warning">receipt_long</span></a></td>
+                            <td><?php echo $customer_id ?></td>
+                            <td><?php echo $customer_name?></td>
+                            <td><?php echo $order_id ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -107,9 +116,7 @@ include('server.php');
                 </div>
             </div>
         </div>
-        <script src="orders.js" async defer></script>
-        <script src="index.js" async defer></script>
-
+        <script src="index.js"></script>
 </body>
 
 </html>

@@ -26,6 +26,8 @@ $admin_password = "";
 $admin_email = "";
 $admin_phone = "";
 
+$cart_id = "1";
+
 
 $productId = "";
 $customerId = "";
@@ -71,6 +73,14 @@ $results = mysqli_query($db, "SELECT * FROM product");
 // retrieve product records
 $customer_results = mysqli_query($db, "SELECT * FROM customer");
 
+// retrieve customer receipt
+$receipt_results = mysqli_query($db, "SELECT `receipt`.*, `customer`.* FROM `receipt` INNER JOIN `customer` ON `receipt`.`customer_id` = `customer`.`customer_id`");
+
+// retrieve customer's product based on order
+
+
+
+
 // if the admin register button is clicked
 if (isset($_POST['register'])) {
   $username = mysqli_real_escape_string($db, $_POST['admin_name']);
@@ -106,7 +116,7 @@ if (isset($_POST['customerRegister'])) {
   $email = mysqli_real_escape_string($db, $_POST['customer_email']);
 
   $password = md5($password);
-  $sql = "INSERT INTO customer (customer_name, customer_password, customer_email) VALUES ('$customer_username', '$password', '$email')";
+  $sql = "INSERT INTO customer (customer_name, customer_password, customer_email, customer_phone) VALUES ('$customer_username', '$password', '$email', '0189002414')";
   mysqli_query($db, $sql);
 
   session_start();
@@ -148,6 +158,7 @@ if (isset($_POST['customerLogin'])) {
   $customer_email = mysqli_real_escape_string($db, $_POST['customer_email']);
   $password = mysqli_real_escape_string($db, $_POST['customer_password']);
 
+  $password = md5($password);
   // Check if the user exists in the database
   $query = "SELECT * FROM customer WHERE customer_email='$customer_email' AND customer_password='$password'";
   $results = mysqli_query($db, $query);
@@ -164,8 +175,10 @@ if (isset($_POST['customerLogin'])) {
 
     header("location: userHomepage.php");
   } else {
+      $error = mysqli_error($db);
+      header("location: userLogin.php?error=$error");
+      echo $error;
     // If the login fails, redirect the user to the login page
-    header("location: userLogin.php");
   }
 }
 
@@ -189,19 +202,36 @@ if(isset($_POST['form_submitted'])) {
   if(isset($_SESSION['customer_id'])) {
     $customer_id = $_SESSION['customer_id'];
 
-    // Perform your database operation here to record the order
-    $result = mysqli_query($db, "INSERT INTO `order` (customer_id) VALUES ('$customer_id')");
-    $order_id = mysqli_insert_id($db);
-    $receipt_result = mysqli_query($db, "INSERT INTO receipt (order_id) VALUES ('$order_id')");
+    $check_cart = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id'");
+    $cart = mysqli_fetch_assoc($check_cart);
+    $cart_id = $cart['cart_id'];
 
-    if ($result) {
-        header('location: payment.php');
+    // update the foreign key of order_id in the customer table
+    $update_customer_query = "UPDATE customer SET cart_id = $cart_id  WHERE customer_id = '$customer_id'";
+    mysqli_query($db, $update_customer_query);
+
+
+    // insert new order into order table
+    $result = mysqli_query($db, "INSERT INTO `order` (customer_id, cart_id) VALUES ('$customer_id', '$cart_id')");
+
+    $order_id = mysqli_insert_id($db);
+
+    // insert order information into receipt table
+    $receipt_result = mysqli_query($db, "INSERT INTO receipt (order_id, customer_id, cart_id) VALUES ('$order_id', '$customer_id', '$cart_id')");
+
+    if ($receipt_result) {
+        unset($_SESSION['cart_id']);
+        header('location: userHomepage.php');
         exit();
     } else {
         echo "Error: " . mysqli_error($db);
     }
   }
 }
+
+
+
+
 
 // if(isset($_POST['save'])) {
 //     $name = $_POST['product_name'];
@@ -218,29 +248,43 @@ if(isset($_POST['form_submitted'])) {
 // record cart when customer place add to cart
 if (isset($_POST['action_id'])) {
   $action_id = $_POST['action_id'];
-  if ($action_id == "add_to_cart") {
-    if(isset($_POST['product_id']) && isset($_POST['customer_id'])) {
+if ($action_id == "add_to_cart") {
+  if(isset($_POST['product_id']) && isset($_POST['customer_id'])) {
     $product_id = $_POST['product_id'];
     $customer_id = $_POST['customer_id'];
 
-    // Check if a cart item with the same customer ID and product ID already exists
-    $check_cart_item = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+    // Check if a cart with the same customer ID already exists
+    $check_cart = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id'");
+
+    if(mysqli_num_rows($check_cart) > 0) {
+    // If it exists, insert a new cart with a new cart ID
+    mysqli_query($db, "INSERT INTO cart (customer_id, cart_quantity) VALUES ('$customer_id', 1)");
+    $cart_id = mysqli_insert_id($db);
+    } else {
+    // If it doesn't exist, insert a new cart
+    mysqli_query($db, "INSERT INTO cart (customer_id, cart_quantity) VALUES ('$customer_id', 1)");
+    $cart_id = mysqli_insert_id($db);
+    }
+
+    // Check if a cart item with the same cart ID and product ID already exists
+    $check_cart_item = mysqli_query($db, "SELECT * FROM cart_item WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+
     if(mysqli_num_rows($check_cart_item) > 0) {
       // If it exists, update the quantity of that item
-      mysqli_query($db, "UPDATE cart SET cart_quantity = cart_quantity + 1 WHERE customer_id = '$customer_id' AND product_id = '$product_id'");
+      mysqli_query($db, "UPDATE cart_item SET product_quantity = product_quantity + 1 WHERE cart_id = '$cart_id' AND product_id = '$product_id'");
     } else {
       // If it doesn't exist, insert a new cart item
-      mysqli_query($db, "INSERT INTO cart (customer_id, product_id, cart_quantity) VALUES ('$customer_id', '$product_id', 1)");
+      mysqli_query($db, "INSERT INTO cart_item (cart_id, customer_id, product_id, product_quantity) VALUES ('$cart_id','$customer_id', '$product_id', 1)");
     }
     echo "success";
     exit;
-}
-  } else if ($action_id == "delete_from_cart") {
+  }
+} else if ($action_id == "delete_from_cart") {
     if(isset($_POST['customer_id']) && isset($_POST['product_id'])) {
     $customer_id = $_POST['customer_id'];
     $product_id = $_POST['product_id'];
 
-    $delete_query = "DELETE FROM cart WHERE product_id = $product_id AND customer_id = $customer_id";
+    $delete_query = "DELETE FROM cart_item WHERE product_id = $product_id AND customer_id = $customer_id";
     $result = mysqli_query($db, $delete_query);
     if (!$result) {
         die("Query failed: " . mysqli_error($db));

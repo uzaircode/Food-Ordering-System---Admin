@@ -170,7 +170,6 @@ p {
 }
 
 .dashboard-order {
-  display: none;
   width: 340px;
   height: 100vh;
   position: fixed;

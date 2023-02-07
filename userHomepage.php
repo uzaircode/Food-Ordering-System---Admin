@@ -7,8 +7,12 @@ include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
 $customer_name = $_SESSION['customer_id'];
+$cart_id = $_SESSION['cart_id'];
 
-// echo $customer_id;
+
+echo $customer_id;
+echo $cart_id;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -109,7 +113,7 @@ error_reporting(E_ALL);
 
             <div class="order-wrapper">
                 <?php
-          $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
+          $cart_records = mysqli_query($db, "SELECT cart_item.*, product.product_name, product.product_image, product.product_price FROM cart_item INNER JOIN product ON cart_item.product_id = product.product_id WHERE cart_item.customer_id = '$customer_id'");
           while($row = mysqli_fetch_array($cart_records)) {
         ?>
                 <div class="order-card" id="order-card-<?php echo $row['product_id']; ?>">
@@ -118,7 +122,7 @@ error_reporting(E_ALL);
                         <p><?php echo $row['product_name']; ?></p>
                         <i id="remove_<?php echo $row['product_id']; ?>" class="fas fa-times"
                             onclick="removeFromCart(<?php echo $row['product_id']; ?>, <?php echo $customer_id; ?>)"></i>
-                        <input type="text" value="<?php echo $row['cart_quantity']; ?>" disabled />
+                        <input type="text" value="<?php echo $row['product_quantity']; ?>" disabled />
                     </div>
                     <?php echo $row['product_price']; ?>
                 </div>

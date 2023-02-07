@@ -1,8 +1,9 @@
 <?php
+error_reporting(E_ALL);
 session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
-error_reporting(E_ALL); ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 include('server.php');
 ?>
 
@@ -57,7 +58,7 @@ include('server.php');
                 <section class="copy legal">
                     <p>
                         Don't have an account?
-                        <strong> <a href="register.html">Sign up for free</a> </strong>
+                        <strong> <a href="userRegister.php">Sign up for free</a> </strong>
                     </p>
                 </section>
             </form>
