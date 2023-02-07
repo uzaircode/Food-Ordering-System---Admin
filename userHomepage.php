@@ -5,13 +5,13 @@ error_reporting(E_ALL);
 session_start();
 include('server.php');
 
-$customer_id = $_SESSION['customer_id'];
-$customer_name = $_SESSION['customer_id'];
-$cart_id = $_SESSION['cart_id'];
+// $customer_id = $_SESSION['customer_id'];
+// $customer_name = $_SESSION['customer_id'];
+// $cart_id = $_SESSION['cart_id'];
 
 
-echo $customer_id;
-echo $cart_id;
+// echo $customer_id;
+// echo $cart_id;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -30,6 +30,7 @@ error_reporting(E_ALL);
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Main Page</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -46,24 +47,32 @@ error_reporting(E_ALL);
     <div class="dashboard-wrapper">
         <div class="sidebar">
             <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
+                <a href="userHomepage.php"><img src="images/company_logo.png" width="145" height="55" /></a>
+            </div>
+            <hr>
+            <div class="sidebar-menu">
+                <img src="images/profile_icon.png" width="95" height="75" />
                 <a href="customerProfile.php">Profile</a>
             </div>
             <div class="sidebar-menu">
-                <label for="cart" class="label-cart" id="label-cart"><span class="fas fa-shopping-cart"></span></label>
-                <!-- <label for="cart" class="label-cart" id="label-cart"><object data="images/svgexport-7.svg" width="300"
-                        height="300">
-                    </object>
-                </label> -->
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/cart_icon.png" width="85" height="60" />
+                </label>
                 <a href="#">Basket</a>
             </div>
+            <hr>
             <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
-                <a href="#">Profile</a>
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/call_item.png" width="85" height="60" />
+                </label>
+                <a href="#">+60 175838374</a>
+                <a href="#" style="text-decoration: underline;">Call from above</a>
             </div>
             <div class="sidebar-menu">
-                <span class="fas fa-sliders-h"></span>
-                <a href="#">Setting</a>
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/open_item.png" width="85" height="60" />
+                </label>
+                <a href="#">8:00—23:00</a>
             </div>
         </div>
         <div class="dashboard">
