@@ -146,7 +146,7 @@ echo $customer_email;
             <div class="container">
                 <form method="post">
                     <div class="row">
-                        <div class="col-50">
+                        <!-- <div class="col-50">
                             <h3>Billing Address</h3>
                             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
                             <input type="text" id="fname" name="firstname" placeholder="John M. Doe"
@@ -169,7 +169,7 @@ echo $customer_email;
                                     <input type="text" id="zip" name="zip" placeholder="10001">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-50">
                             <h3>Payment</h3>

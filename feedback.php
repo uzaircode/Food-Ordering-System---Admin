@@ -65,53 +65,32 @@ include('server.php');
                     <thread>
                         <tr>
                             <th>Feedback <br> ID</th>
-                            <th>Customer <br> Name</th>
-                            <th>Feedback <br> Date</th>
-                            <th>Feedback Description</th>
+                            <th>Customer <br> ID</th>
+                            <th>Feedback Order <br> Description</th>
+                            <th>Feedback Pickup <br> Description</th>
                             <th>Feedback Rating</th>
                         </tr>
                     </thread>
                     <tbody>
-                        <tr>
-                            <td>#12049</td>
+                        <!-- <tr>
+                            <!-- <td>#12049</td>
                             <td>Nik Uzair</td>
                             <td>19/1/2023</td>
                             <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit, magna aliqua.</td>
                             <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                        </tr>
+                        </tr> -->
+                        <?php while($row = mysqli_fetch_array($feedback_results)) { ?>
                         <tr>
-                            <td>#36472</td>
-                            <td>Nur Anise Nabila</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
+                            <td><?php echo $row['feedback_id']; ?></td>
+                            <td><?php echo $row['customer_id']; ?></td>
+                            <td class="warning" style="text-align: left">
+                                <?php echo $row['feedback_order_description']; ?></td>
+                            <td class="warning" style="text-align: left">
+                                <?php echo $row['feedback_pickup_experience']; ?></td>
+                            <td><?php echo $row['feedback_rating']; ?></td>
                         </tr>
-                        <tr>
-                            <td>#86940</td>
-                            <td>Haziq Fikri</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️</td>
-                        </tr>
-                        <tr>
-                            <td>#18594</td>
-                            <td>Faiz Imtiyaz</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                        </tr>
-                        <tr>
-                            <td>#39483</td>
-                            <td>Lisa Elizabeth</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️</td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
