@@ -138,6 +138,7 @@ $admin_password = $row['admin_password'];
         </div>
         <script src="orders.js" async defer></script>
         <script src="index.js" async defer></script>
+    </div>
 
 </body>
 
