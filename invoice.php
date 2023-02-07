@@ -73,10 +73,10 @@ include('server.php');
                     <tbody>
                         <?php while($row = mysqli_fetch_array($receipt_results)) { ?>
                         <tr>
-                            <td>#<?php echo $row['order_id']; ?></td>
+                            <td>#<?php echo $row['receipt_id']; ?></td>
                             <td><?php echo $row['customer_name']; ?></td>
                             <td class="success">PAID</td>
-                            <td><a href="report.php?edit=<?php echo $row['customer_id']; ?>"><span
+                            <td><a href="report.php?edit=<?php echo $row['receipt_id']; ?>"><span
                                         class="material-symbols-outlined warning">receipt_long</span></a></td>
                         </tr>
                         <?php } ?>

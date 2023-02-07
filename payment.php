@@ -213,7 +213,7 @@ echo $customer_email;
                         <b>4</b></span>
                 </h4>
                 <?php
-                $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
+          $cart_records = mysqli_query($db, "SELECT cart_item.*, product.product_name, product.product_image, product.product_price FROM cart_item INNER JOIN product ON cart_item.product_id = product.product_id WHERE cart_item.customer_id = '$customer_id'");
                 while ($row = mysqli_fetch_array($cart_records)) {
             ?>
                 <p><a href="#"><?php echo $row['product_name']; ?></a> <span

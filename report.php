@@ -10,15 +10,26 @@ $customer_id = $_SESSION['customer_id'];
 
 
 if (isset($_GET['edit'])) {
-  $id = $_GET['edit'];
-  $rec = mysqli_query($db, "SELECT * FROM customer WHERE customer_id=$id");
-  $record = mysqli_fetch_array($rec);
-  $name = $record['customer_name'];
-  $email = $record['customer_email'];
-  $phone = $record['customer_phone'];
-  $productName = $record['product_name'];
-  $description = $record['product_description'];
-  $product_image = $record['product_image'];
+  $receipt_id = $_GET['edit'];
+  $query = "SELECT customer.*, receipt.*
+            FROM customer
+            INNER JOIN receipt ON customer.customer_id = receipt.customer_id
+            WHERE receipt.receipt_id = $receipt_id";
+  $result = mysqli_query($db, $query);
+  $row = mysqli_fetch_assoc($result);
+  $customer_name = $row['customer_name'];
+  $customer_email = $row['customer_email'];
+  $customer_phone = $row['customer_phone'];
+
+  $query1 = "SELECT receipt.cart_id, cart_item.product_id, product.product_name, product.product_image, product.product_price
+              FROM receipt
+              LEFT JOIN cart_item ON receipt.cart_id = cart_item.cart_id
+              LEFT JOIN product ON cart_item.product_id = product.product_id
+              WHERE receipt.receipt_id = '$receipt_id'
+              ";
+
+  $receipt_order_results = mysqli_query($db, $query1);
+  // and so on for all the customer information
 }
 ?>
 
@@ -55,9 +66,9 @@ if (isset($_GET['edit'])) {
         <!--Billed to-->
         <div class="billing-to">
             <div class="sub-title">
-                <p><strong>Sold to: </strong><?php echo $name; ?></p>
-                <p><strong>Email : </strong><?php echo $email; ?></p>
-                <p><strong>Phone Number: </strong>+60 <?php echo $phone; ?></p>
+                <p><strong>Sold to: </strong><?php echo $customer_name; ?></p>
+                <p><strong>Email : </strong><?php echo $customer_email; ?></p>
+                <p><strong>Phone Number: </strong>+60 <?php echo $customer_phone; ?></p>
             </div>
 
             <div class="sub-title">
@@ -70,23 +81,27 @@ if (isset($_GET['edit'])) {
         <!--Invoice Table-->
         <div class="table">
             <table>
-                <tr>
-                    <th>Dish</th>
-                    <!-- <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Price</th> -->
-                </tr>
-                <?php
-                $cart_records = mysqli_query($db, "SELECT cart.*, product.product_name, product.product_image, product.product_price FROM cart INNER JOIN product ON cart.product_id = product.product_id WHERE cart.customer_id = '$customer_id'");
-                while($row = mysqli_fetch_array($receipt_results)) { ?>
-                <tr>
-                    <td><?php echo $row['product_name']; ?></td>
-                    <td><?php echo $row['product_image']; ?></td>
-                    <td><?php echo $row['product_price']; ?></td>
-                </tr>
-                <?php
+                <thread>
+                    <tr>
+                        <th>Dish</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Price</th>
+                    </tr>
+                </thread>
+
+                <body>
+                    <?php
+                    while ($receipt_order_row = mysqli_fetch_assoc($receipt_order_results)) {
+                        ?>
+                    <tr>
+                        <td><?php echo $receipt_order_row['product_name']; ?></td>
+                        <td><?php echo $receipt_order_row['product_price']; ?></td>
+                    </tr>
+                    <?php
                     }
                     ?>
+                </body>
             </table>
         </div>
         <!--Bottom Section-->
