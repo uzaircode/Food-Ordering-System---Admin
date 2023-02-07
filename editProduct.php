@@ -20,6 +20,7 @@ if (isset($_GET['edit'])) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <meta name="description" content="" />

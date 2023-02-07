@@ -37,6 +37,12 @@ $feedback_order_description = "";
 $feedback_pickup_description = "";
 $feedback_rating = "";
 
+$card_name = "";
+$card_number = "";
+$card_expired_month = "";
+$card_expired_year = "";
+$card_cvv = "";
+
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
@@ -61,6 +67,20 @@ if(isset($_POST['customerFeedbackSave'])) {
   $feedback_rating = $_POST['feedback_rating'];
 
   $query = "INSERT INTO feedback (customer_id, feedback_order_description, feedback_pickup_experience, feedback_rating) VALUES ('$customer_id', '$feedback_order_description','$feedback_pickup_experience','$feedback_rating')";
+  mysqli_query($db, $query);
+  header('location: feedback.php');
+}
+
+// save customer credit cards
+if(isset($_POST['customerCardSave'])) {
+  $customer_id = $_POST['customer_id'];
+  $card_name = $_POST['card_name'];
+  $card_number = $_POST['card_number'];
+  $card_expired_month = $_POST['card_expired_month'];
+  $card_expired_year = $_POST['card_expired_year'];
+  $card_cvv = $_POST['card_cvv'];
+
+  $query = "INSERT INTO payment_method (customer_id, card_name, card_number, card_expired_month, card_expired_year, card_cvv) VALUES ('$customer_id', '$card_name', '$card_number', '$card_expired_month', '$card_expired_year', '$card_cvv')";
   mysqli_query($db, $query);
   header('location: feedback.php');
 }
@@ -190,6 +210,7 @@ if (isset($_POST['customerLogin'])) {
     $_SESSION['customer_email'] = $row['customer_email'];
     $_SESSION['customer_phone'] = $row['customer_phone'];
     $_SESSION['customer_id'] = (int)$row['customer_id'];
+    $_SESSION['payment_method'] = $row['payment_method'];
 
 
     header("location: userHomepage.php");
@@ -317,6 +338,8 @@ if (isset($_POST['adminUpdate'])) {
   header('location: index.php');
 }
 
+
+// update customer profile
 if (isset($_POST['customerUpdate'])) {
   $customer_name = mysqli_real_escape_string($db, $_POST['customer_name']);
   $customer_email = mysqli_real_escape_string($db, $_POST['customer_email']);
@@ -328,6 +351,20 @@ if (isset($_POST['customerUpdate'])) {
   $customer_password = md5($customer_password);
 
   $query = "UPDATE customer SET customer_name='$customer_name', customer_email='$customer_email', customer_phone='$customer_phone', customer_password='$customer_password' WHERE customer_id=$customer_id";
+  mysqli_query($db, $query);
+  header('location: customerProfile.php');
+}
+
+// update customer payment method
+if (isset($_POST['customerPaymentUpdate'])) {
+  $card_id = $_POST['card_id'];
+  $card_number = mysqli_real_escape_string($db, $_POST['card_number']);
+  $card_expired_month = mysqli_real_escape_string($db, $_POST['card_expired_month']);
+  $card_expired_year = mysqli_real_escape_string($db, $_POST['card_expired_year']);
+  $card_cvv = mysqli_real_escape_string($db, $_POST['card_cvv']);
+  $card_id = mysqli_real_escape_string($db, $_POST['card_id']);
+
+  $query = "UPDATE payment_method SET card_id='$card_id', card_name='$card_name', card_expired_month='$card_expired_month', card_expired_year='$card_expired_year', card_cvv='$card_cvv' WHERE card_id=$card_id";
   mysqli_query($db, $query);
   header('location: customerProfile.php');
 }

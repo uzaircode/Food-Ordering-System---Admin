@@ -51,19 +51,18 @@ p {
 .sidebar-menu {
   width: 100%;
   text-align: center;
-  padding: 40px 5px;
+  padding: 35px 5px;
   color: #ffffff;
   cursor: pointer;
 }
 
 .sidebar-menu > span {
   width: 100%;
-  line-height: 1.5;
 }
 
 .sidebar-menu > a {
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #ffffff;
 }
 

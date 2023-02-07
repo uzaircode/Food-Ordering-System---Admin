@@ -12,6 +12,7 @@ include('server.php');
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" />

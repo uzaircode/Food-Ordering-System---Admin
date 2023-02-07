@@ -18,6 +18,7 @@ echo $customer_id;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animated Step Progress Bar</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" />
     <!-- <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" /> -->
 
