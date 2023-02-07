@@ -173,3 +173,16 @@ function addToCart(customerId, productId) {
     },
   });
 }
+
+$("#search-button").click(function () {
+  var searchTerm = $("#search-input").val();
+
+  $.ajax({
+    type: "POST",
+    url: "search.php",
+    data: { searchTerm: searchTerm },
+    success: function (response) {
+      $("#result").html(response);
+    },
+  });
+});
