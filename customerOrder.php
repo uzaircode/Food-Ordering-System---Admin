@@ -30,22 +30,34 @@ echo $customer_id;
     <div class="dashboard-wrapper">
         <div class="sidebar">
             <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
-                <a href="userHomepage.php">Profile</a>
+                <a href="userHomepage.php"><img src="images/company_logo.png" width="145" height="55" /></a>
             </div>
+            <hr>
             <div class="sidebar-menu">
-                <label for="cart" class="label-cart">
-                    <span class="fas fa-shopping-cart"></span>
+                <a href="customerProfile.php">
+                    <img src="images/profile_icon.png" width="95" height="75" />
+                    <a>Profile</a>
+            </div>
+            </a>
+            <div class="sidebar-menu">
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/cart_icon.png" width="85" height="60" />
                 </label>
-                <a href="#">Basket</a>
+                <a>Basket</a>
+            </div>
+            <hr>
+            <div class="sidebar-menu">
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/call_item.png" width="85" height="60" />
+                </label>
+                <a href="#">+60 175838374</a>
+                <a href="#" style="text-decoration: underline;">Call from above</a>
             </div>
             <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
-                <a href="customerProfile.php">Profile</a>
-            </div>
-            <div class="sidebar-menu">
-                <span class="fas fa-sliders-h"></span>
-                <a href="#">Setting</a>
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/open_item.png" width="85" height="60" />
+                </label>
+                <a href="#">8:00—23:00</a>
             </div>
         </div>
         <div class="dashboard">
@@ -56,8 +68,8 @@ echo $customer_id;
                     <a href="#">My Payment Methods</a>
                 </div>
             </div>
-            <div class="dashboard-content">
-                <div class="progress-main">
+            <div class="dashboard-content-profile">
+                <div class="progress-main profile-content">
                     <h1>tracking</h1>
                     <ul>
                         <li>

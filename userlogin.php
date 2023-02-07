@@ -31,7 +31,7 @@ include('server.php');
         <div class="right">
             <form method="post" action="server.php">
                 <section class="copy">
-                    <h2>Sign In</h2>
+                    <h1>Sign In</h1>
                     <div class="login-container">
                         <p>Welcome back! Please enter your details.</p>
                     </div>

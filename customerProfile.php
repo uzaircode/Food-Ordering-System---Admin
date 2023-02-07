@@ -76,10 +76,9 @@ $customer_password = $row['customer_password'];
                     <a href="customerPaymentMethod.php">My Payment Methods</a>
                 </div>
             </div>
-            <div class="dashboard-content">
-                <div class="recent-table-list">
-                    <h1>Edit Profile</h1>
-
+            <div class="dashboard-content-profile">
+                <div class="recent-table-list profile-content">
+                    <h1>My Profile</h1>
                     <div class="recent-table-list-title-section">
                         <div class="recent-table-list-title-section-right">
                         </div>
