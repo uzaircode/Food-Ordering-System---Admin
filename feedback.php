@@ -17,51 +17,6 @@ include('server.php');
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
-    <style>
-    /* Style inputs with type="text", select elements and textareas */
-    input[type=text],
-    select,
-    textarea {
-        width: 100%;
-        /* Full width */
-        padding: 12px;
-        /* Some padding */
-        border: 1px solid #ccc;
-        /* Gray border */
-        border-radius: 4px;
-        /* Rounded borders */
-        box-sizing: border-box;
-        /* Make sure that padding and width stays in place */
-        margin-top: 6px;
-        /* Add a top margin */
-        margin-bottom: 16px;
-        /* Bottom margin */
-        resize: vertical
-            /* Allow the user to vertically resize the textarea (not horizontally) */
-    }
-
-    /* Style the submit button with a specific background color etc */
-    input[type=submit] {
-        background-color: #04AA6D;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    /* When moving the mouse over the submit button, add a darker green color */
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    /* Add a background color and some padding around the form */
-    .container {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-    </style>
 </head>
 
 <body>
@@ -110,53 +65,32 @@ include('server.php');
                     <thread>
                         <tr>
                             <th>Feedback <br> ID</th>
-                            <th>Customer <br> Name</th>
-                            <th>Feedback <br> Date</th>
-                            <th>Feedback Description</th>
+                            <th>Customer <br> ID</th>
+                            <th>Feedback Order <br> Description</th>
+                            <th>Feedback Pickup <br> Description</th>
                             <th>Feedback Rating</th>
                         </tr>
                     </thread>
                     <tbody>
-                        <tr>
-                            <td>#12049</td>
+                        <!-- <tr>
+                            <!-- <td>#12049</td>
                             <td>Nik Uzair</td>
                             <td>19/1/2023</td>
                             <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit, magna aliqua.</td>
                             <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                        </tr>
+                        </tr> -->
+                        <?php while($row = mysqli_fetch_array($feedback_results)) { ?>
                         <tr>
-                            <td>#36472</td>
-                            <td>Nur Anise Nabila</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
+                            <td><?php echo $row['feedback_id']; ?></td>
+                            <td><?php echo $row['customer_id']; ?></td>
+                            <td class="warning" style="text-align: left">
+                                <?php echo $row['feedback_order_description']; ?></td>
+                            <td class="warning" style="text-align: left">
+                                <?php echo $row['feedback_pickup_experience']; ?></td>
+                            <td><?php echo $row['feedback_rating']; ?></td>
                         </tr>
-                        <tr>
-                            <td>#86940</td>
-                            <td>Haziq Fikri</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️</td>
-                        </tr>
-                        <tr>
-                            <td>#18594</td>
-                            <td>Faiz Imtiyaz</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️⭐️</td>
-                        </tr>
-                        <tr>
-                            <td>#39483</td>
-                            <td>Lisa Elizabeth</td>
-                            <td>19/1/2023</td>
-                            <td class="warning" style="text-align: left">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, magna aliqua.</td>
-                            <td class="primary">⭐️⭐️⭐️⭐️</td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
