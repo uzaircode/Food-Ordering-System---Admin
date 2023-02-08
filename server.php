@@ -46,7 +46,7 @@ $card_cvv = "";
 
 $searchTerm = "";
 
-$total = "0";
+$total = "";
 
 $cart_item_id = "";
 
@@ -230,6 +230,7 @@ if (isset($_POST['customerLogin'])) {
       // If the shopping session id exists, fetch the shopping session id
       $row = mysqli_fetch_assoc($results);
       $_SESSION['session_id'] = (int)$row['shopping_session_id'];
+      $_SESSION['total'] = $total;
     } else {
       // If the shopping session id does not exist, create a new shopping session id
       $query = "INSERT INTO shopping_session (customer_id, total) VALUES ('$customer_id', '$total')";

@@ -32,9 +32,7 @@ include('server.php');
             <form method="post" action="server.php">
                 <section class="copy">
                     <h1>Sign In</h1>
-                    <div class="login-container">
-                        <p>Welcome back! Please enter your details.</p>
-                    </div>
+                    <br>
                 </section>
                 <div class="input-container email">
                     <label for="email">Email</label>
@@ -44,14 +42,7 @@ include('server.php');
                 <div class="input-container password">
                     <label for="password">Password</label>
                     <input id="password" name="customer_password" value="<?php echo $password; ?>"
-                        placeholder="Must be at least 6 characters" type="password" />
-                </div>
-                <div class="input-container cta">
-                    <label class="checkbox-container">
-                        <input type="checkbox" />
-                        <span class="checkmark"> </span>
-                        Remember me
-                    </label>
+                        placeholder="Password" type="password" />
                 </div>
                 <button class="button-login" input type="submit" name="customerLogin">
                     Log In
@@ -59,7 +50,7 @@ include('server.php');
                 <section class="copy legal">
                     <p>
                         Don't have an account?
-                        <strong> <a href="userRegister.php">Sign up for free</a> </strong>
+                        <strong> <a href="userRegister.php" style="color: orange;">Sign up for free</a> </strong>
                     </p>
                 </section>
             </form>

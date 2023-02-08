@@ -8,9 +8,10 @@ include('server.php');
 $customer_id = $_SESSION['customer_id'];
 $customer_name = $_SESSION['customer_id'];
 $session_id = $_SESSION['session_id'];
+$total = $_SESSION['total'];
 
 
-echo $cart_id;
+echo $total;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -87,7 +88,7 @@ error_reporting(E_ALL);
                 </div>
             </div>
             <form class="search-bar" id="searchbar" method="post">
-                <input type="text" name="searchTerm" id="search-input" placeholder="Search products">
+                <input type="text" name="searchTerm" id="search-input" placeholder="Search Menu">
                 <input type="submit" name="search" value="Search">
             </form>
             <div id="result" class="dashboard-content">
@@ -125,38 +126,44 @@ error_reporting(E_ALL);
             <h3 style="text-align: center;">Shopping Basket</h3>
             <div class="order-wrapper">
                 <?php
-            $cart = mysqli_query($db, "SELECT * FROM cart WHERE session_id = '$session_id'");
-            $cart_row = mysqli_fetch_array($cart);
-            $cart_id = $cart_row['cart_id'];
-            $cart_records = mysqli_query($db, "SELECT cart_items.*, product.product_name, product.product_image, product.product_price FROM cart_items INNER JOIN product ON cart_items.product_id = product.product_id WHERE cart_items.cart_id = '$cart_id'");
-          while($row = mysqli_fetch_array($cart_records)) {
-        ?>
+      $cart = mysqli_query($db, "SELECT * FROM cart WHERE session_id = '$session_id'");
+      $cart_row = mysqli_fetch_array($cart);
+      $cart_id = $cart_row['cart_id'];
+      $cart_records = mysqli_query($db, "SELECT cart_items.*, product.product_name, product.product_image, product.product_price FROM cart_items INNER JOIN product ON cart_items.product_id = product.product_id WHERE cart_items.cart_id = '$cart_id'");
+
+      $total = 0;
+      while($row = mysqli_fetch_array($cart_records)) {
+        $total += $row['product_price'] * $row['quantity'];
+    ?>
                 <div class="order-card" id="order-card-<?php echo $row['product_id']; ?>">
                     <img src="images/<?php echo $row['product_image']; ?>" alt="" class="order-image" />
                     <div class="order-detail">
-                        <p><?php echo $row['product_name']; ?></p>
+                        <p style="margin-bottom: 5px;"><?php echo $row['product_name']; ?></p>
                         <i id="remove_<?php echo $row['product_id']; ?>" class="fas fa-times"
-                            onclick="removeFromCart(<?php echo $customer_id ?>, <?php echo $customer_id; ?>, <?php echo $row['product_id']; ?>)"></i>
+                            onclick="removeFromCart(<?php echo $customer_id ?>, <?php echo $session_id; ?>, <?php echo $row['product_id']; ?>)"></i>
                         <input type="text" value="<?php echo $row['quantity']; ?>" disabled />
                     </div>
-                    <!-- <?php echo $row['product_price']; ?> -->
+                    <?php echo $row['product_price']; ?>
                 </div>
-
                 <?php
-          }
+      }
 
-        ?>
+    ?>
             </div>
             <hr class="divider" />
             <div class="order-total">
-                <p>Subtotal <span>$15.6</span></p>
-                <p>Tax (10%) <span>$15.6</span></p>
-                <p>Delivery Fee <span>$3</span></p>
+                <p>Subtotal <span>$<?php echo number_format($total, 2); ?></span></p>
+                <p>Tax (10%) <span>$<?php echo number_format($total * 0.1, 2); ?></span></p>
 
                 <hr class="divider" />
                 <br />
-                <p>Total <span>$174.6 </span></p>
+                <p>Total <span id="order-total">$<?php echo number_format($total * 1.1, 2); ?></span></p>
                 <br />
+                <?php
+                // update the shopping_session table
+                $query = "UPDATE shopping_session SET total='$total' WHERE customer_id='$customer_id'";
+                mysqli_query($db, $query);
+                ?>
             </div>
             <button class="checkout" onclick="window.location.href='payment.php'">Checkout</button>
         </div>

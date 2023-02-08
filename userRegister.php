@@ -33,7 +33,7 @@ include('server.php');
                 <section class="copy">
                     <h1>Sign Up</h1>
                     <div class="login-container">
-                        <p>Already have an account? <a href="userlogin.php">Log In</a></p>
+                        <p>Already have an account? <a href="userlogin.php" style="color: orange">Log In</a></p>
                     </div>
                 </section>
                 <div class="input-container name" style="color: white;">
@@ -51,21 +51,7 @@ include('server.php');
                     <input id="password" name="customer_password" value="<?php echo $password; ?>"
                         placeholder="Must be at least 6 characters" type="password" />
                 </div>
-                <div class="input-container cta">
-                    <label class="checkbox-container">
-                        <input type="checkbox" />
-                        <span class="checkmark"> </span>
-                        Sign Up for email updates.
-                    </label>
-                </div>
                 <button class="signup-btn" input type="submit" name="customerRegister">Sign Up</button>
-                <section class="copy legal">
-                    <p>
-                        <span class="small">By continuing, you agree to accept our <br />
-                            <a href="#">Privacy Policy</a> &amp;
-                            <a href="#">Terms of Service</a>.</span>
-                    </p>
-                </section>
             </form>
         </div>
     </div>
