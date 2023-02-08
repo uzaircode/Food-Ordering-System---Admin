@@ -29,8 +29,8 @@ include('server.php');
                     <div class="content-right">
                         <h1 class="fs-200 text-neutral-400">Sign In</h1>
                         <p class="fs-150 text-neutral-200 fw-thin">
-                            Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                            consectetur adipisicing.
+                            Welcome to the admin login section of our website. Please enter your
+                            login credentials to continue.
                         </p>
                         <br />
                         <div class="container-login">

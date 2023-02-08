@@ -25,12 +25,12 @@ include('server.php');
         <section class="padding-block-1000">
             <div class="container-login">
                 <div class="even-columns">
-                    <!-- <img src="images/svg-login.svg" class="signup-svg" /> -->
+                    <img src="images/svg-login.svg" class="signup-svg" />
                     <div class="content-right">
                         <h1 class="fs-200 text-neutral-400">Sign Up</h1>
                         <p class="fs-150 text-neutral-200 fw-thin">
-                            Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                            consectetur adipisicing.
+                            Welcome to the admin login section of our website. Please enter your
+                            register credentials to continue.
                         </p>
                         <br />
                         <div class="container-login">
@@ -54,13 +54,13 @@ include('server.php');
                                 <br>
                                 <div class="form-group">
                                     <input required name="admin_phone" type="text" value="<?php echo $phone; ?>"
-                                        placeholder="phone" />
+                                        placeholder="Phone Number" />
                                 </div>
                                 <br />
-                                <div style="display: flex; justify-content: space-between">
+                                <!-- <div style="display: flex; justify-content: space-between">
                                     <a href="" class="text-neutral-300" style="text-decoration: none"><span
                                             class="fs-100">I agree all statements in Terms of service</span></a>
-                                </div>
+                                </div> -->
                                 <br />
                                 <div>
                                     <button class="button-login" input type="submit" name="register">
