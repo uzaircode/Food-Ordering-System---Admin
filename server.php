@@ -37,6 +37,14 @@ $feedback_order_description = "";
 $feedback_pickup_description = "";
 $feedback_rating = "";
 
+$card_name = "";
+$card_number = "";
+$card_expired_month = "";
+$card_expired_year = "";
+$card_cvv = "";
+
+$searchTerm = "";
+
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
@@ -61,6 +69,20 @@ if(isset($_POST['customerFeedbackSave'])) {
   $feedback_rating = $_POST['feedback_rating'];
 
   $query = "INSERT INTO feedback (customer_id, feedback_order_description, feedback_pickup_experience, feedback_rating) VALUES ('$customer_id', '$feedback_order_description','$feedback_pickup_experience','$feedback_rating')";
+  mysqli_query($db, $query);
+  header('location: feedback.php');
+}
+
+// save customer credit cards
+if(isset($_POST['customerCardSave'])) {
+  $customer_id = $_POST['customer_id'];
+  $card_name = $_POST['card_name'];
+  $card_number = $_POST['card_number'];
+  $card_expired_month = $_POST['card_expired_month'];
+  $card_expired_year = $_POST['card_expired_year'];
+  $card_cvv = $_POST['card_cvv'];
+
+  $query = "INSERT INTO payment_method (customer_id, card_name, card_number, card_expired_month, card_expired_year, card_cvv) VALUES ('$customer_id', '$card_name', '$card_number', '$card_expired_month', '$card_expired_year', '$card_cvv')";
   mysqli_query($db, $query);
   header('location: feedback.php');
 }
@@ -190,6 +212,7 @@ if (isset($_POST['customerLogin'])) {
     $_SESSION['customer_email'] = $row['customer_email'];
     $_SESSION['customer_phone'] = $row['customer_phone'];
     $_SESSION['customer_id'] = (int)$row['customer_id'];
+    $_SESSION['payment_method'] = $row['payment_method'];
 
 
     header("location: userHomepage.php");
@@ -261,13 +284,14 @@ if ($action_id == "add_to_cart") {
     $check_cart = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id'");
 
     if(mysqli_num_rows($check_cart) > 0) {
-    // If it exists, insert a new cart with a new cart ID
-    mysqli_query($db, "INSERT INTO cart (customer_id, cart_quantity) VALUES ('$customer_id', 1)");
-    $cart_id = mysqli_insert_id($db);
+      $cart = mysqli_fetch_assoc($check_cart);
+      $cart_id = $cart['cart_id'];
     } else {
-    // If it doesn't exist, insert a new cart
-    mysqli_query($db, "INSERT INTO cart (customer_id, cart_quantity) VALUES ('$customer_id', 1)");
-    $cart_id = mysqli_insert_id($db);
+      // If it doesn't exist, insert a new cart
+      mysqli_query($db, "INSERT INTO cart (customer_id, cart_quantity) VALUES ('$customer_id', 1)");
+
+      // Get the cart_id of the newly inserted cart
+      $cart_id = mysqli_insert_id($db);
     }
 
     // Check if a cart item with the same cart ID and product ID already exists
@@ -283,7 +307,8 @@ if ($action_id == "add_to_cart") {
     echo "success";
     exit;
   }
-} else if ($action_id == "delete_from_cart") {
+}
+ else if ($action_id == "delete_from_cart") {
     if(isset($_POST['customer_id']) && isset($_POST['product_id'])) {
     $customer_id = $_POST['customer_id'];
     $product_id = $_POST['product_id'];
@@ -317,6 +342,8 @@ if (isset($_POST['adminUpdate'])) {
   header('location: index.php');
 }
 
+
+// update customer profile
 if (isset($_POST['customerUpdate'])) {
   $customer_name = mysqli_real_escape_string($db, $_POST['customer_name']);
   $customer_email = mysqli_real_escape_string($db, $_POST['customer_email']);
@@ -331,6 +358,54 @@ if (isset($_POST['customerUpdate'])) {
   mysqli_query($db, $query);
   header('location: customerProfile.php');
 }
+
+// update customer payment method
+if (isset($_POST['customerPaymentUpdate'])) {
+  $card_id = $_POST['card_id'];
+  $card_number = mysqli_real_escape_string($db, $_POST['card_number']);
+  $card_expired_month = mysqli_real_escape_string($db, $_POST['card_expired_month']);
+  $card_expired_year = mysqli_real_escape_string($db, $_POST['card_expired_year']);
+  $card_cvv = mysqli_real_escape_string($db, $_POST['card_cvv']);
+  $card_id = mysqli_real_escape_string($db, $_POST['card_id']);
+
+  $query = "UPDATE payment_method SET card_id='$card_id', card_name='$card_name', card_expired_month='$card_expired_month', card_expired_year='$card_expired_year', card_cvv='$card_cvv' WHERE card_id=$card_id";
+  mysqli_query($db, $query);
+  header('location: customerProfile.php');
+}
+
+if (isset($_POST['product_name'])) {
+    $product_name = $_POST['product_name'];
+
+    // Connect to the database and retrieve the list of products with matching product name
+    // Placeholder code, replace with your own database connection and query logic
+    $products = [
+        [
+            'product_id' => 1,
+            'product_name' => 'Product 1',
+            'product_price' => '$10.00'
+        ],
+        [
+            'product_id' => 2,
+            'product_name' => 'Product 2',
+            'product_price' => '$20.00'
+        ],
+        [
+            'product_id' => 3,
+            'product_name' => 'Product 3',
+            'product_price' => '$30.00'
+        ],
+    ];
+
+    // Iterate through the list of products and display the matching ones
+    foreach ($products as $product) {
+        if (strpos(strtolower($product['product_name']), strtolower($product_name)) !== false) {
+            echo '<p>' . $product['product_name'] . ' - ' . $product['product_price'] . '</p>';
+        }
+    }
+}
+
+?>
+
 
 
 

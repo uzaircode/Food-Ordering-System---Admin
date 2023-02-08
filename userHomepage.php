@@ -7,11 +7,10 @@ include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
 $customer_name = $_SESSION['customer_id'];
-$cart_id = $_SESSION['cart_id'];
 
 
 echo $customer_id;
-echo $cart_id;
+// echo $cart_id;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -30,6 +29,7 @@ error_reporting(E_ALL);
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Main Page</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -46,24 +46,34 @@ error_reporting(E_ALL);
     <div class="dashboard-wrapper">
         <div class="sidebar">
             <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
-                <a href="customerProfile.php">Profile</a>
+                <a href="userHomepage.php"><img src="images/company_logo.png" width="145" height="55" /></a>
+            </div>
+            <hr>
+            <div class="sidebar-menu">
+                <a href="customerProfile.php">
+                    <img src="images/profile_icon.png" width="95" height="75" />
+                    <a>Profile</a>
+            </div>
+            </a>
+            <div class="sidebar-menu">
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/cart_icon.png" width="85" height="60" />
+                </label>
+                <a>Basket</a>
+            </div>
+            <hr>
+            <div class="sidebar-menu">
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/call_item.png" width="85" height="60" />
+                </label>
+                <a href="#">+60 175838374</a>
+                <a href="#" style="text-decoration: underline;">Call from above</a>
             </div>
             <div class="sidebar-menu">
-                <label for="cart" class="label-cart" id="label-cart"><span class="fas fa-shopping-cart"></span></label>
-                <!-- <label for="cart" class="label-cart" id="label-cart"><object data="images/svgexport-7.svg" width="300"
-                        height="300">
-                    </object>
-                </label> -->
-                <a href="#">Basket</a>
-            </div>
-            <div class="sidebar-menu">
-                <span class="fas fa-user"></span>
-                <a href="#">Profile</a>
-            </div>
-            <div class="sidebar-menu">
-                <span class="fas fa-sliders-h"></span>
-                <a href="#">Setting</a>
+                <label for="cart" class="label-cart" id="label-cart">
+                    <img src="images/open_item.png" width="85" height="60" />
+                </label>
+                <a href="#">8:00—23:00</a>
             </div>
         </div>
         <div class="dashboard">
@@ -76,41 +86,43 @@ error_reporting(E_ALL);
                     </h1> -->
                 </div>
             </div>
-            <div class="dashboard-content">
+            <form id="searchbar" method="post">
+                <input type="text" name="searchTerm" id="search-input" placeholder="Search products">
+                <input type="submit" name="search" value="Search">
+            </form>
+            <div id="result" class="dashboard-content">
                 <?php
-          $product_records = mysqli_query($db, "SELECT * FROM product");
-          while($row = mysqli_fetch_array($product_records)) {
-        ?>
-                <div class="dashboard-card">
-                    <img src="images/<?php echo $row['product_image']; ?>" alt="" class="card-image" />
-                    <div class="card-detail">
-                        <h3><?php echo $row['product_name']; ?></h3>
-                        <br />
-                        <p><?php echo $row['product_description']; ?></p>
-                        <br />
-                        <button class="order-button"
-                            onclick="addToCart(<?php echo $_SESSION['customer_id']; ?>, <?php echo $row['product_id']; ?>)">Order</button>
+            if(isset($_POST['search'])) {
+                $searchTerm = $_POST['searchTerm'];
+                $query = mysqli_query($db, "SELECT * FROM product WHERE product_name LIKE '%$searchTerm%'");
+            } else {
+                $query = mysqli_query($db, "SELECT * FROM product");
+            }
+            // Connect to the database
+            $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 
-                    </div>
+            // Retrieve the products based on the search term
+            $product_records = mysqli_query($db, "SELECT * FROM product WHERE product_name LIKE '%$searchTerm%'");
+
+            // Display the products
+            while($row = mysqli_fetch_array($product_records)) {
+                echo '<div class="dashboard-card">
+                <img src="images/' . $row['product_image'] . '" alt="" class="card-image" />
+                <div class="card-detail">
+                    <h3>' . $row['product_name'] . '</h3>
+                    <br />
+                    <p>' . $row['product_description'] . '</p>
+                    <br />
+                    <button class="order-button" onclick="addToCart(' . $_SESSION['customer_id'] . ', ' . $row['product_id'] . ')">Order</button>
                 </div>
-                <?php
-          }
-        ?>
+                </div>';
+            }
+            ?>
             </div>
+
         </div>
         <div class="dashboard-order" id="closeCart">
-            <h3>Order Menu</h3>
-            <div class="order-address">
-                <br />
-                <p>Pickup Delivery</p>
-                <br />
-                <h4>221 B Baker Street, Malaysia</h4>
-            </div>
-            <div class="order-time">
-                <br />
-                <span class="fas fa-clock"></span> 30 mins
-            </div>
-
+            <h3 style="text-align: center;">Shopping Basket</h3>
             <div class="order-wrapper">
                 <?php
           $cart_records = mysqli_query($db, "SELECT cart_item.*, product.product_name, product.product_image, product.product_price FROM cart_item INNER JOIN product ON cart_item.product_id = product.product_id WHERE cart_item.customer_id = '$customer_id'");

@@ -12,10 +12,10 @@ $customer_phone = $_SESSION['customer_phone'];
 
 
 
-echo $customer_id;
-echo $cart_id;
-echo $customer_phone;
-echo $customer_name;
+// echo $customer_id;
+// echo $cart_id;
+// echo $customer_phone;
+// echo $customer_name;
 
 
 ini_set('display_errors', 1);
@@ -35,6 +35,8 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -76,12 +78,30 @@ error_reporting(E_ALL);
         background-color: #f2f2f2;
         padding: 20px;
     }
+
+    .btn-primary {
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #444;
+    }
     </style>
     <title>Feedback</title>
 </head>
 
 <body>
     <div class="container">
+        <h1>Customer Feedback</h1>
         <form method="post" action="server.php">
             <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
             <div class="form-group">

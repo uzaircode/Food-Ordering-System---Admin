@@ -14,6 +14,7 @@ include('server.php');
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" />
@@ -30,7 +31,7 @@ include('server.php');
         <div class="right">
             <form method="post" action="server.php">
                 <section class="copy">
-                    <h2>Sign In</h2>
+                    <h1>Sign In</h1>
                     <div class="login-container">
                         <p>Welcome back! Please enter your details.</p>
                     </div>

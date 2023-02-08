@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 
 $admin_id = $_SESSION['admin_id'];
-echo $admin_id;
+// echo $admin_id;
 
 if (isset($_GET['edit'])) {
 $query = "SELECT * FROM user WHERE admin_id=$admin_id";
@@ -27,6 +27,7 @@ $admin_password = $row['admin_password'];
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="images/pizza_icon.png">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <meta name="description" content="" />
@@ -137,6 +138,7 @@ $admin_password = $row['admin_password'];
         </div>
         <script src="orders.js" async defer></script>
         <script src="index.js" async defer></script>
+    </div>
 
 </body>
 

@@ -1,18 +1,22 @@
 <?php
 session_start();
 include('server.php');
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+$customer_id = $_SESSION['customer_id'];
+echo $customer_id;
+$query = "SELECT * FROM payment_method WHERE customer_id='$customer_id'";
+$results = mysqli_query($db, $query);
 
-
-if (isset($_GET['edit'])) {
-$query = "SELECT * FROM customer WHERE customer_id=$customer_id";
-$result = mysqli_query($db, $query);
-$row = mysqli_fetch_assoc($result);
-$customer_name = $row['customer_name'];
-$customer_email = $row['customer_email'];
-$customer_phone = $row['customer_phone'];
-$customer_password = $row['customer_password'];
+if (mysqli_num_rows($results) > 0) {
+  while ($row = mysqli_fetch_assoc($results)) {
+    // access each payment method information
+    $card_id = $row['card_id'];
+    $card_name = $row['card_name'];
+    $card_number = $row['card_number'];
+    $card_expired_month = $row['card_expired_month'];
+    $card_expired_year = $row['card_expired_year'];
+    $card_cvv = $row['card_cvv'];
+    // do something with the payment method information
+  }
 }
 
 ?>
@@ -44,14 +48,16 @@ $customer_password = $row['customer_password'];
             </div>
             <hr>
             <div class="sidebar-menu">
-                <img src="images/profile_icon.png" width="95" height="75" />
-                <a href="customerProfile.php">Profile</a>
+                <a href="customerProfile.php">
+                    <img src="images/profile_icon.png" width="95" height="75" />
+                    <a>Profile</a>
             </div>
+            </a>
             <div class="sidebar-menu">
                 <label for="cart" class="label-cart" id="label-cart">
                     <img src="images/cart_icon.png" width="85" height="60" />
                 </label>
-                <a href="#">Basket</a>
+                <a>Basket</a>
             </div>
             <hr>
             <div class="sidebar-menu">
@@ -73,42 +79,48 @@ $customer_password = $row['customer_password'];
                 <div class="dashboard-menu">
                     <a href="customerProfile.php">Manage Profile</a>
                     <a href="customerOrder.php">My Orders</a>
-                    <a href="customerPaymentMethod.php">My Payment Methods</a>
+                    <a href="#">My Payment Methods</a>
                 </div>
             </div>
             <div class="dashboard-content-profile">
                 <div class="recent-table-list profile-content">
-                    <h1>My Profile</h1>
+                    <h1>Manage Payment method</h1>
+
                     <div class="recent-table-list-title-section">
                         <div class="recent-table-list-title-section-right">
                         </div>
                     </div>
                     <div class="container-login">
                         <form method="post" action="server.php">
-                            <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+                            <input type="hidden" name="card_id" value="<?php echo $card_id; ?>">
                             <div class="form-group">
-                                <p>Name</p>
-                                <input type="text" name="customer_name" value="<?php echo $customer_name; ?>">
+                                <p>Card Name</p>
+                                <input type="text" name="customer_name"
+                                    value="<?php echo $_SESSION['customer_name']; ?>">
                             </div>
                             <br />
                             <div class="form-group">
-                                <p>Email</p>
-                                <input type="email" name="customer_email" value="<?php echo $customer_email; ?>">
+                                <p>Card Number</p>
+                                <input type="text" name="card_number" value="<?php echo $card_number; ?>">
                             </div>
                             <br />
                             <div class="form-group">
-                                <p>Contact Number</p>
-                                <input type="text" name="customer_phone" value="<?php echo $customer_phone; ?>">
+                                <p>Card Expired Month</p>
+                                <input type="text" name="card_expired_month" value="<?php echo $card_expired_month; ?>">
                             </div>
                             <br>
                             <div class="form-group">
-                                <p>Password</p>
-                                <input type="password" name="customer_password"
-                                    value="<?php echo $customer_password; ?>">
+                                <p>Card Expired Year</p>
+                                <input type="text" name="card_expired_year" value="<?php echo $card_expired_year; ?>">
                             </div>
                             <br>
+                            <br>
+                            <div class="form-group">
+                                <p>Card CVV</p>
+                                <input type="password" name="card_cvv" value="<?php echo $card_cvv; ?>">
+                            </div>
                             <div>
-                                <button class="button-login" input type="submit" name="customerUpdate">
+                                <button class="button-login" input type="submit" name="customerPaymentUpdate">
                                     Save
                                 </button>
                             </div>
