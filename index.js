@@ -193,3 +193,25 @@ $("#search-button").click(function () {
     },
   });
 });
+
+function handleCheckboxClick() {
+  const checkbox = document.querySelector('input[type="checkbox"]');
+  const inputs = document.querySelectorAll('input[type="text"]');
+  checkbox.addEventListener("click", function () {
+    inputs.forEach(function (input) {
+      input.disabled = checkbox.checked;
+    });
+  });
+}
+
+window.addEventListener("load", handleCheckboxClick);
+
+$(document).ready(function () {
+  $('input[type="checkbox"]').click(function () {
+    if (this.checked) {
+      $('input[type="text"]').prop("disabled", true);
+    } else {
+      $('input[type="text"]').prop("disabled", false);
+    }
+  });
+});
