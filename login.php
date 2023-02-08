@@ -46,8 +46,6 @@ include('server.php');
                                 </div>
                                 <br />
                                 <div style="display: flex; justify-content: space-between">
-                                    <a href="" class="text-neutral-300" style="text-decoration: none"><span
-                                            class="fs-100">Remember me</span></a>
                                     <a href="" class="text-neutral-300"><span class="fs-100">Forgot password?</span></a>
                                 </div>
                                 <br />

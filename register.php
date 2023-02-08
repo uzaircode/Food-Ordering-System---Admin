@@ -51,6 +51,11 @@ include('server.php');
                                     <input required name="admin_password" type="password"
                                         value="<?php echo $password; ?>" placeholder="Password" />
                                 </div>
+                                <br>
+                                <div class="form-group">
+                                    <input required name="admin_phone" type="text" value="<?php echo $phone; ?>"
+                                        placeholder="phone" />
+                                </div>
                                 <br />
                                 <div style="display: flex; justify-content: space-between">
                                     <a href="" class="text-neutral-300" style="text-decoration: none"><span

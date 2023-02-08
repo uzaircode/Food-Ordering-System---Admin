@@ -152,16 +152,23 @@ function removeFromCart(productId, customerId) {
   });
 }
 
-function addToCart(customerId, productId) {
+function addToCart(customerId, sessionId, productId) {
   $.ajax({
     type: "POST",
     url: "server.php",
     data: {
-      product_id: productId,
       customer_id: customerId,
+      session_id: sessionId,
+      product_id: productId,
       action_id: "add_to_cart",
     },
     success: function (data) {
+      console.log("Data sent: ", {
+        customer_id: customerId,
+        session_id: sessionId,
+        product_id: productId,
+        action_id: "add_to_cart",
+      });
       console.log("Data received: ", data);
       // alert("Item added to cart successfully!");
       // refresh the order-card div
