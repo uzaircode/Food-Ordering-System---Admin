@@ -68,7 +68,7 @@ p {
 
 .sidebar-menu:hover,
 .sidebar-menu:hover > a {
-  color: var(--yellow);
+  color: orange;
 }
 
 .dashboard-banner {
@@ -500,7 +500,8 @@ label {
   letter-spacing: 0.5px;
 }
 .signup-btn:hover {
-  background: #2c4893;
+  background-color: white;
+  color: black;
 }
 
 .card-div {
@@ -791,7 +792,8 @@ aside .sidebar .message-count {
   width: 100%;
 }
 
-.input-container p {
+.input-container p,
+.input-container label {
   color: white;
 }
 
