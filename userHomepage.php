@@ -136,7 +136,7 @@ error_reporting(E_ALL);
                     <div class="order-detail">
                         <p><?php echo $row['product_name']; ?></p>
                         <i id="remove_<?php echo $row['product_id']; ?>" class="fas fa-times"
-                            onclick="removeFromCart(<?php echo $row['product_id']; ?>, <?php echo $customer_id; ?>)"></i>
+                            onclick="removeFromCart(<?php echo $customer_id ?>, <?php echo $customer_id; ?>, <?php echo $row['product_id']; ?>)"></i>
                         <input type="text" value="<?php echo $row['quantity']; ?>" disabled />
                     </div>
                     <!-- <?php echo $row['product_price']; ?> -->

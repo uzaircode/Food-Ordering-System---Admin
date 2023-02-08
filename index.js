@@ -109,13 +109,14 @@ minus.addEventListener("click", function () {
 //   document.querySelector("table tbody").appendChild(tr);
 // });
 
-function removeFromCart(productId, customerId) {
+function removeFromCart(customerId, sessionId, productId) {
   $.ajax({
     type: "POST",
     url: "server.php",
     data: {
-      product_id: productId,
       customer_id: customerId,
+      session_id: sessionId,
+      product_id: productId,
       action_id: "delete_from_cart",
     },
     success: function (data) {
@@ -191,5 +192,27 @@ $("#search-button").click(function () {
     success: function (response) {
       $("#result").html(response);
     },
+  });
+});
+
+function handleCheckboxClick() {
+  const checkbox = document.querySelector('input[type="checkbox"]');
+  const inputs = document.querySelectorAll('input[type="text"]');
+  checkbox.addEventListener("click", function () {
+    inputs.forEach(function (input) {
+      input.disabled = checkbox.checked;
+    });
+  });
+}
+
+window.addEventListener("load", handleCheckboxClick);
+
+$(document).ready(function () {
+  $('input[type="checkbox"]').click(function () {
+    if (this.checked) {
+      $('input[type="text"]').prop("disabled", true);
+    } else {
+      $('input[type="text"]').prop("disabled", false);
+    }
   });
 });
