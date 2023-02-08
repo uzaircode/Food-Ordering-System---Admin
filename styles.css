@@ -788,3 +788,35 @@ aside .sidebar .message-count {
 .input-container p {
   color: white;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+#search-input {
+  width: 25%;
+  font-size: 16px;
+  border-radius: 5px 0 0 5px;
+  /* border: none; */
+  margin: 20px 0;
+  margin-left: 30px;
+}
+
+input[type="submit"] {
+  padding: 12px;
+  font-size: 16px;
+  background-color: lightgray;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  cursor: pointer;
+}
+
+input .span {
+  padding: 12px;
+  font-size: 16px;
+  background-color: lightgray;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  cursor: pointer;
+}

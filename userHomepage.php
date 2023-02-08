@@ -86,7 +86,7 @@ error_reporting(E_ALL);
                     </h1> -->
                 </div>
             </div>
-            <form id="searchbar" method="post">
+            <form class="search-bar" id="searchbar" method="post">
                 <input type="text" name="searchTerm" id="search-input" placeholder="Search products">
                 <input type="submit" name="search" value="Search">
             </form>

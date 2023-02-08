@@ -10,11 +10,10 @@ include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
 $session_id = $_SESSION['session_id'];
-$cart_id = $_SESSION['cart_id'];
 
 
-echo $customer_id;
-echo $session_id;
+// echo $customer_id;
+// echo $session_id;
 
 
 ?>
@@ -34,6 +33,7 @@ echo $session_id;
         font-family: Arial;
         font-size: 17px;
         padding: 8px;
+        background-color: #f5f5f5;
     }
 
     * {
@@ -76,18 +76,28 @@ echo $session_id;
     }
 
     .container {
-        background-color: #f2f2f2;
+        background-color: #ffffff;
         padding: 5px 20px 15px 20px;
-        border: 1px solid lightgrey;
-        border-radius: 3px;
+        border: 3px solid black;
+        border-radius: 15px;
     }
 
-    input[type=text] {
+    form input[type="text"] {
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        padding: 10px 12px;
         width: 100%;
+        box-sizing: border-box;
         margin-bottom: 20px;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="password"]:focus {
+        border-color: black;
+        outline: none;
     }
 
     label {
@@ -96,33 +106,40 @@ echo $session_id;
     }
 
     .icon-container {
-        margin-bottom: 20px;
+        margin: 20px 0px;
         padding: 7px 0;
         font-size: 24px;
     }
 
     .btn {
-        background-color: #04AA6D;
+        background-color: black;
         color: white;
         padding: 12px;
         margin: 10px 0;
         border: none;
         width: 100%;
-        border-radius: 3px;
+        border-radius: 20px;
         cursor: pointer;
         font-size: 17px;
+        font-weight: bold;
     }
 
     .btn:hover {
-        background-color: #45a049;
+        background-color: #701820;
     }
 
     a {
-        color: #2196F3;
+        color: #4b4b4b;
+        text-decoration: none;
+        font-weight: bold;
     }
 
     hr {
         border: 1px solid lightgrey;
+    }
+
+    h4 {
+        font-size: 1.3rem;
     }
 
     span.price {
@@ -145,9 +162,8 @@ echo $session_id;
 
 <body>
 
-    <h2>Responsive Checkout Form</h2>
-    <p>Resize the browser window to see the effect. When the screen is less than 800px wide, make the two columns stack
-        on top of each other instead of next to each other.</p>
+    <h2>Payment Form</h2>
+
     <div class="row">
         <div class="col-75">
             <div class="container">
@@ -156,8 +172,6 @@ echo $session_id;
                     <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
                     <div class="row">
                         <div class="col-50">
-                            <h3>Payment</h3>
-                            <label for="fname">Accepted Cards</label>
                             <div class="icon-container">
                                 <i class="fa fa-cc-visa" style="color:navy;"></i>
                                 <i class="fa fa-cc-amex" style="color:blue;"></i>
@@ -189,15 +203,13 @@ echo $session_id;
                         </div>
                     </div>
                     <input type="hidden" name="form_submitted" value="1">
-                    <button name="submit">Order now</button>
+                    <button class="btn" name="submit">Order now</button>
                 </form>
             </div>
         </div>
         <div class=" col-25">
             <div class="container">
-                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i>
-                        <b>4</b></span>
-                </h4>
+                <h4>Cart</h4>
                 <?php
             $cart = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' OR session_id = '$session_id'");
             $cart_row = mysqli_fetch_array($cart);
