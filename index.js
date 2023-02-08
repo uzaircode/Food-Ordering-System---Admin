@@ -109,13 +109,14 @@ minus.addEventListener("click", function () {
 //   document.querySelector("table tbody").appendChild(tr);
 // });
 
-function removeFromCart(productId, customerId) {
+function removeFromCart(customerId, sessionId, productId) {
   $.ajax({
     type: "POST",
     url: "server.php",
     data: {
-      product_id: productId,
       customer_id: customerId,
+      session_id: sessionId,
+      product_id: productId,
       action_id: "delete_from_cart",
     },
     success: function (data) {

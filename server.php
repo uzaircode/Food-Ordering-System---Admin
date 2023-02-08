@@ -329,14 +329,13 @@ if ($action_id == "add_to_cart") {
     echo "success";
     exit;
   }
-}
- else if ($action_id == "delete_from_cart") {
+} else if ($action_id == "delete_from_cart") {
     if(isset($_POST['customer_id']) && isset($_POST['session_id']) && isset($_POST['product_id'])) {
     $customer_id = $_POST['customer_id'];
     $product_id = $_POST['product_id'];
     $session_id = $_POST['session_id'];
 
-    $delete_query = "DELETE FROM cart_items WHERE product_id = $product_id AND customer_id = $customer_id AND session_id = $session_id";
+    $delete_query = "DELETE FROM cart_items WHERE product_id = $product_id";
     $result = mysqli_query($db, $delete_query);
     if (!$result) {
         die("Query failed: " . mysqli_error($db));
