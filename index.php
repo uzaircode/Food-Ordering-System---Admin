@@ -4,8 +4,9 @@ session_start();
 ini_set('display_errors', 1);
 include('server.php');
 
-// $admin_id = $_SESSION['admin_id'];
+$admin_id = $_SESSION['admin_id'];
 // echo $admin_id;
+
 ?>
 
 <!DOCTYPE html>

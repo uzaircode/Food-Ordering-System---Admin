@@ -11,6 +11,10 @@ $customer_id = $_SESSION['customer_id'];
 
 if (isset($_GET['edit'])) {
   $receipt_id = $_GET['edit'];
+  $rec = mysqli_query($db, "SELECT * FROM receipt WHERE receipt_id=$id");
+  $record = mysqli_fetch_array($rec);
+
+
   $query = "SELECT customer.*, receipt.*
             FROM customer
             INNER JOIN receipt ON customer.customer_id = receipt.customer_id
@@ -21,12 +25,14 @@ if (isset($_GET['edit'])) {
   $customer_email = $row['customer_email'];
   $customer_phone = $row['customer_phone'];
 
-  $query1 = "SELECT receipt.cart_id, cart_item.product_id, product.product_name, product.product_image, product.product_price
-              FROM receipt
-              LEFT JOIN cart_item ON receipt.cart_id = cart_item.cart_id
-              LEFT JOIN product ON cart_item.product_id = product.product_id
-              WHERE receipt.receipt_id = '$receipt_id'
-              ";
+$query1 = "SELECT ci.product_id, ci.quantity, p.product_name, p.product_price
+FROM cart_items ci
+JOIN cart c ON c.cart_id = ci.cart_id
+JOIN `order` o ON o.session_id = c.session_id
+JOIN receipt ro ON ro.order_id = o.order_id
+JOIN product p ON ci.product_id = p.product_id
+WHERE ro.receipt_id = $receipt_id";
+
 
   $receipt_order_results = mysqli_query($db, $query1);
   // and so on for all the customer information

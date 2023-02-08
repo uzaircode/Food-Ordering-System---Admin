@@ -2,16 +2,19 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+
 session_start();
 // phpinfo(); // Works correctly
 ini_set('display_errors', 1);
 include('server.php');
 
 $customer_id = $_SESSION['customer_id'];
+$session_id = $_SESSION['session_id'];
+$cart_id = $_SESSION['cart_id'];
 
 
 echo $customer_id;
-// echo $customer_email;
+echo $session_id;
 
 
 ?>
@@ -148,8 +151,9 @@ echo $customer_id;
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form method="post" action="server.php">
+                <form method="post">
                     <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+                    <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
                     <div class="row">
                         <div class="col-50">
                             <h3>Payment</h3>
@@ -184,11 +188,8 @@ echo $customer_id;
                             </div>
                         </div>
                     </div>
-                    <label>
-                        <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                    </label>
                     <input type="hidden" name="form_submitted" value="1">
-                    <button onclick="location.href='server.php'" name="customerCardSave">Order now</button>
+                    <button name="submit">Order now</button>
                 </form>
             </div>
         </div>
@@ -198,7 +199,10 @@ echo $customer_id;
                         <b>4</b></span>
                 </h4>
                 <?php
-          $cart_records = mysqli_query($db, "SELECT cart_item.*, product.product_name, product.product_image, product.product_price FROM cart_item INNER JOIN product ON cart_item.product_id = product.product_id WHERE cart_item.customer_id = '$customer_id'");
+            $cart = mysqli_query($db, "SELECT * FROM cart WHERE customer_id = '$customer_id' OR session_id = '$session_id'");
+            $cart_row = mysqli_fetch_array($cart);
+            $cart_id = $cart_row['cart_id'];
+            $cart_records = mysqli_query($db, "SELECT cart_items.*, product.product_name, product.product_image, product.product_price FROM cart_items INNER JOIN product ON cart_items.product_id = product.product_id WHERE cart_items.cart_id = '$cart_id'");
                 while ($row = mysqli_fetch_array($cart_records)) {
             ?>
                 <p><a href="#"><?php echo $row['product_name']; ?></a> <span
