@@ -183,6 +183,7 @@ $session_id = $_SESSION['session_id'];
                 <form method="post">
                     <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
                     <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
+                    <input type="hidden" name="session_id" value="<?php echo $session_id; ?>">
                     <div class="row">
                         <div class="col-50">
                             <div class="icon-container">
