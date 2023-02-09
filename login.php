@@ -36,22 +36,22 @@ include('server.php');
                         <div class="container-login">
                             <form method="post" action="server.php">
                                 <div class="form-group">
-                                    <input name="admin_email" required type="email" value="<?php echo $email; ?>"
+                                    <input name="email" required type="email" value="<?php echo $email; ?>"
                                         placeholder="Email" />
                                 </div>
                                 <br />
                                 <div class="form-group">
-                                    <input required name="admin_password" type="password"
-                                        value="<?php echo $password; ?>" placeholder="Password" />
+                                    <input required name="password" type="password" value="<?php echo $password; ?>"
+                                        placeholder="Password" />
                                 </div>
                                 <br />
-                                <div style="display: flex; justify-content: space-between">
+                                <!-- <div style="display: flex; justify-content: space-between">
                                     <a href="" class="text-neutral-300"><span class="fs-100">Forgot password?</span></a>
-                                </div>
+                                </div> -->
                                 <br />
                                 <div>
                                     <button class="button-login" input type="submit" name="login"
-                                        onClick="location.href='index.html'">
+                                        onClick="location.href='index.php'">
                                         Log In
                                     </button>
                                 </div>
