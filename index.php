@@ -4,9 +4,6 @@ session_start();
 ini_set('display_errors', 1);
 include('server.php');
 
-$admin_id = $_SESSION['admin_id'];
-// echo $admin_id;
-
 ?>
 
 <!DOCTYPE html>
@@ -105,8 +102,6 @@ $admin_id = $_SESSION['admin_id'];
                             <th>Product Image</th>
                             <th>Product Name</th>
                             <th>Product Number</th>
-                            <th>Payment</th>
-                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thread>
@@ -117,8 +112,6 @@ $admin_id = $_SESSION['admin_id'];
                             <!-- <td><img src="images/pizza2.jpeg" alt=""></td> -->
                             <td><?php echo $row['product_name']; ?></td>
                             <td><?php echo $row['product_id']; ?></td>
-                            <td class="warning">Pending</td>
-                            <td class="primary">Details</td>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -155,9 +148,8 @@ $admin_id = $_SESSION['admin_id'];
                             <img src="images/anise.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Anise</b> received his order of Night lion tech GPS drone.</p>
+                            <p><b>Anise</b> received his order.</p>
                             <small class="text-muted">2 Minutes Ago</small>
-                            <p>hello</p>
                         </div>
                     </div>
                     <div class="update">
@@ -165,9 +157,8 @@ $admin_id = $_SESSION['admin_id'];
                             <img src="images/haziq.jpeg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Haziq Fikri</b> received his order of Night lion tech GPS drone.</p>
+                            <p><b>Haziq Fikri</b> received his order.</p>
                             <small class="text-muted">2 Minutes Ago</small>
-                            <p>hello</p>
                         </div>
                     </div>
                     <div class="update">
@@ -175,9 +166,8 @@ $admin_id = $_SESSION['admin_id'];
                             <img src="images/nik-fikri.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Nik Fikri</b> received his order of Night lion tech GPS drone.</p>
+                            <p><b>Nik Fikri</b> received his order.</p>
                             <small class="text-muted">2 Minutes Ago</small>
-                            <p>hello</p>
                         </div>
                     </div>
                 </div>
