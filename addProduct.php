@@ -77,7 +77,7 @@ include('server.php');
                                 </div>
                                 <div class="input-box">
                                     <span class="details">Description</span>
-                                    <input type="type" name="product_description" />
+                                    <input type="text" name="product_description" />
                                 </div>
                                 <div class="input-box">
                                     <label for="upload" id="upload-btn">
