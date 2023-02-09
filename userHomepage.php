@@ -12,6 +12,8 @@ $total = $_SESSION['total'];
 
 
 echo $total;
+echo $customer_id;
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -160,8 +162,11 @@ error_reporting(E_ALL);
                 <p>Total <span id="order-total">$<?php echo number_format($total * 1.1, 2); ?></span></p>
                 <br />
                 <?php
+                $tax_amount = $total * 0.1;
+                $total_with_tax = $total + $tax_amount;
+
                 // update the shopping_session table
-                $query = "UPDATE shopping_session SET total='$total' WHERE customer_id='$customer_id'";
+                $query = "UPDATE shopping_session SET total='$total_with_tax' WHERE customer_id='$customer_id'";
                 mysqli_query($db, $query);
                 ?>
             </div>

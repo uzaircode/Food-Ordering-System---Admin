@@ -29,7 +29,7 @@ include('server.php');
                     <div class="content-right">
                         <h1 class="fs-200 text-neutral-400">Sign In</h1>
                         <p class="fs-150 text-neutral-200 fw-thin">
-                            Welcome to the admin login section of our website. Please enter your
+                            Welcome to the staff login section of our website. Please enter your
                             login credentials to continue.
                         </p>
                         <br />
@@ -50,14 +50,14 @@ include('server.php');
                                 </div> -->
                                 <br />
                                 <div>
-                                    <button class="button-login" input type="submit" name="login"
+                                    <button class="button-login" input type="submit" name="staffLogin"
                                         onClick="location.href='index.php'">
                                         Log In
                                     </button>
                                 </div>
                                 <br />
                                 <span class="fs-100 text-neutral-300">Don’t have an account?</span><a
-                                    href="register.php" class="fs-100 text-neutral-300">
+                                    href="staffRegister.php" class="fs-100 text-neutral-300">
                                     Sign up</a>
                             </form>
                         </div>

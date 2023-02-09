@@ -25,35 +25,19 @@ include('server.php');
     <div class="container">
         <aside>
             <div class="sidebar">
-                <a href="index.php" class="active">
+                <a href="staffDashboard.php" class="active">
                     <span class="material-symbols-outlined">dashboard</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="customer.php">
-                    <span class="material-symbols-outlined">person</span>
-                    <h3>Customers</h3>
-                </a>
-                <a href="order.php">
+                <a href="staffOrder.php">
                     <span class="material-symbols-outlined">receipt_long</span>
                     <h3>Orders</h3>
                 </a>
-                <a href="feedback.php">
-                    <span class="material-symbols-outlined">auto_awesome</span>
-                    <h3>Feedbacks</h3>
-                </a>
-                <a href="product.php">
-                    <span class="material-symbols-outlined">inventory</span>
-                    <h3>Products</h3>
-                </a>
-                <a href="invoice.php">
-                    <span class="material-symbols-outlined">receipt</span>
-                    <h3>Invoices</h3>
-                </a>
-                <a href="editProfile.php">
+                <a href="staffEditProfile.php">
                     <span class="material-symbols-outlined">settings</span>
                     <h3>Settings</h3>
                 </a>
-                <a href="login.php">
+                <a href="staffLogin.php">
                     <span class="material-symbols-outlined">logout</span>
                     <h3>Logout</h3>
                 </a>
@@ -130,8 +114,8 @@ include('server.php');
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <?php if (isset($_SESSION["admin_name"])): ?>
-                        <p>Hey, <b><?php echo $_SESSION['admin_name']; ?></b></p>
+                        <?php if (isset($_SESSION["staff_name"])): ?>
+                        <p>Hey, <b><?php echo $_SESSION['staff_name']; ?></b></p>
                         <small class="text-muted">Admin</small>
                         <?php endif ?>
                     </div>

@@ -46,9 +46,13 @@ $card_cvv = "";
 
 $searchTerm = "";
 
-$total = "";
+$total = "0";
 
 $cart_item_id = "";
+
+$staff_name = "";
+$staff_email = "";
+$staff_id = "";
 
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');
@@ -57,7 +61,7 @@ $db = mysqli_connect('localhost', 'root', '', 'admin_database');
 if(isset($_POST['save'])) {
     $name = $_POST['product_name'];
     $price = $_POST['product_price'];
-    $description = $_POST['product_description'];
+    $description = mysqli_real_escape_string($db, $_POST['product_description']);
     $product_image = $_POST['upload'];
 
     $query = "INSERT INTO product (product_name, product_price, product_description, product_image) VALUES ('$name','$price','$description','$product_image')";
@@ -133,7 +137,7 @@ if (isset($_POST['register'])) {
   $password = mysqli_real_escape_string($db, $_POST['admin_password']);
   $phone = mysqli_real_escape_string($db, $_POST['admin_phone']);
 
-  $password = md5($password);
+  // $password = md5($password);
   $sql = "INSERT INTO user (admin_name, admin_email, admin_password, admin_phone) VALUES ('$username', '$email', '$password', '$phone')";
   mysqli_query($db, $sql);
 
@@ -150,6 +154,32 @@ if (isset($_POST['register'])) {
 
   // Redirect to the desired page
   header('location: index.php');
+}
+
+// if the staff register button is clicked
+if (isset($_POST['staffRegister'])) {
+  $username = mysqli_real_escape_string($db, $_POST['staff_name']);
+  $email = mysqli_real_escape_string($db, $_POST['staff_email']);
+  $password = mysqli_real_escape_string($db, $_POST['staff_password']);
+  $phone = mysqli_real_escape_string($db, $_POST['staff_phone']);
+
+  // $password = md5($password);
+  $sql = "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone) VALUES ('$username', '$email', '$password', '$phone')";
+  mysqli_query($db, $sql);
+
+  // Get the `admin_id` of the newly created user
+  $admin_id = mysqli_insert_id($db);
+
+  // Start the session
+  session_start();
+  // Set the `admin_id` session variable
+  $_SESSION['staff_id'] = $admin_id;
+  $_SESSION['staff_name'] = $username;
+  $_SESSION['staff_email'] = $email;
+  $_SESSION['staff_phone'] = $phone;
+
+  // Redirect to the desired page
+  header('location: staffLogin.php');
 }
 
 
@@ -171,31 +201,59 @@ if (isset($_POST['customerRegister'])) {
 
   // redirect to register page
   header('location: userLogin.php');
-
 }
 
 // if the admin login button is clicked
 if (isset($_POST['login'])) {
-  $admin_email = mysqli_real_escape_string($db, $_POST['admin_email']);
-  $password = mysqli_real_escape_string($db, $_POST['admin_password']);
+  $email = mysqli_real_escape_string($db, $_POST['email']);
+  $password = mysqli_real_escape_string($db, $_POST['password']);
 
-  // Check if the user exists in the database
-  $password = md5($password);
-  $query = "SELECT * FROM user WHERE admin_email='$admin_email' AND admin_password='$password'";
+  // Check if the user exists in the admin table
+  // $password = md5($password);
+  $query = "SELECT * FROM user WHERE admin_email='$email' AND admin_password='$password'";
   $results = mysqli_query($db, $query);
 
   if (mysqli_num_rows($results) == 1) {
-    // Fetch the user's information
+    // Fetch the admin's information
     $row = mysqli_fetch_assoc($results);
-    // Store the user's information in a session
+    // Store the admin's information in a session
     $_SESSION['admin_name'] = $row['admin_name'];
     $_SESSION['admin_email'] = $row['admin_email'];
     $_SESSION['admin_id'] = $row['admin_id'];
+    $_SESSION['staff_password'] = $row['staff_password'];
+    $_SESSION['staff_phone'] = $row['staff_phone'];
 
     header("location: index.php");
   } else {
     // If the login fails, redirect the user to the login page
     header("location: login.php");
+  }
+}
+
+// if the admin login button is clicked
+if (isset($_POST['staffLogin'])) {
+  $email = mysqli_real_escape_string($db, $_POST['email']);
+  $password = mysqli_real_escape_string($db, $_POST['password']);
+
+  // Check if the user exists in the admin table
+  // $password = md5($password);
+  $query = "SELECT * FROM staff WHERE staff_email='$email' AND staff_password='$password'";
+  $results = mysqli_query($db, $query);
+
+  if (mysqli_num_rows($results) == 1) {
+    // Fetch the admin's information
+    $row = mysqli_fetch_assoc($results);
+    // Store the admin's information in a session
+    $_SESSION['staff_name'] = $row['staff_name'];
+    $_SESSION['staff_email'] = $row['staff_email'];
+    $_SESSION['staff_id'] = $row['staff_id'];
+    $_SESSION['staff_password'] = $row['staff_password'];
+    $_SESSION['staff_phone'] = $row['staff_phone'];
+
+    header("location: staffDashboard.php");
+  } else {
+    // If the login fails, redirect the user to the login page
+    header("location: staffLogin.php");
   }
 }
 
@@ -266,7 +324,7 @@ $order_records = mysqli_query($db, "SELECT `order`.*, `customer`.`customer_name`
 
 // record order when customer order
 if(isset($_POST['form_submitted'])) {
-  if(isset($_SESSION['customer_id'])) {
+  if(isset($_SESSION['customer_id']) && isset($_SESSION['session_id'])) {
     $customer_id = $_SESSION['customer_id'];
     $session_id = $_SESSION['session_id'];
 
@@ -284,6 +342,8 @@ if(isset($_POST['form_submitted'])) {
 
     if ($receipt_result) {
         unset($_SESSION['session_id']);
+        $query = "INSERT INTO shopping_session (customer_id, total) VALUES ('$customer_id', '$total')";
+        mysqli_query($db, $query);
         header('location: userHomepage.php');
         exit();
     } else {
@@ -361,6 +421,22 @@ if (isset($_POST['adminUpdate'])) {
   $admin_password = md5($admin_password);
 
   $query = "UPDATE user SET admin_name='$admin_name', admin_email='$admin_email', admin_phone='$admin_phone', admin_password='$admin_password' WHERE admin_id=$admin_id";
+  mysqli_query($db, $query);
+  header('location: index.php');
+}
+
+// update staff profile
+if (isset($_POST['staffUpdate'])) {
+  $staff_name = mysqli_real_escape_string($db, $_POST['staff_name']);
+  $staff_email = mysqli_real_escape_string($db, $_POST['staff_email']);
+  $staff_phone = mysqli_real_escape_string($db, $_POST['staff_phone']);
+  $staff_password = mysqli_real_escape_string($db, $_POST['staff_password']);
+  $staff_id = mysqli_real_escape_string($db, $_POST['staff_id']);
+
+  // Hash the password before storing it in the database
+  // $admin_password = md5($admin_password);
+
+  $query = "UPDATE staff SET staff_name='$staff_name', staff_email='$staff_email', staff_phone='$staff_phone', staff_password='$admin_password' WHERE staff_id=$staff_id";
   mysqli_query($db, $query);
   header('location: index.php');
 }

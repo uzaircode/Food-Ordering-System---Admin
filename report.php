@@ -44,7 +44,7 @@ WHERE ro.receipt_id = $receipt_id";
 
 <head>
     <meta charset="UTF-8" />
-    <title>Invoice | Siti Khadijah Online</title>
+    <title>Invoice</title>
     <link rel="stylesheet" href="report.css" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
 </head>
@@ -55,9 +55,7 @@ WHERE ro.receipt_id = $receipt_id";
         <div class="top-section">
             <div class="address">
                 <div class="address-content">
-                    <h1>Food Ordering System</h1>
-                    <br />
-                    <p>no name Sdn Bhd</p>
+                    <h1>Pizza Moto</h1>
                 </div>
             </div>
         </div>
@@ -72,15 +70,12 @@ WHERE ro.receipt_id = $receipt_id";
         <!--Billed to-->
         <div class="billing-to">
             <div class="sub-title">
-                <p><strong>Sold to: </strong><?php echo $customer_name; ?></p>
+                <p><strong>Sold to : </strong><?php echo $customer_name; ?></p>
                 <p><strong>Email : </strong><?php echo $customer_email; ?></p>
-                <p><strong>Phone Number: </strong>+60 <?php echo $customer_phone; ?></p>
+                <p><strong>Phone Number: </strong>+6<?php echo $customer_phone; ?></p>
             </div>
 
             <div class="sub-title">
-                <p><strong>Tax receipt: </strong>07km-49a7</p>
-                <p><strong>Date : </strong>2023-01-05 14:23</p>
-                <p><strong>SST No: </strong>+W10-18088-31001268</p>
             </div>
         </div>
 
@@ -102,7 +97,10 @@ WHERE ro.receipt_id = $receipt_id";
                         ?>
                     <tr>
                         <td><?php echo $receipt_order_row['product_name']; ?></td>
-                        <td><?php echo $receipt_order_row['product_price']; ?></td>
+                        <!-- <td><?php echo $receipt_order_row['product_price']; ?></td> -->
+                        <td>2</td>
+                        <td>15.99</td>
+                        <td>31.98</td>
                     </tr>
                     <?php
                     }
@@ -115,7 +113,6 @@ WHERE ro.receipt_id = $receipt_id";
             <div class="status-content">
                 <h4>Payment Status</h4>
                 <p class="status paid"></p>
-                <p>Payment Method : <span>Maybank2u</span></p>
             </div>
         </div>
     </div>

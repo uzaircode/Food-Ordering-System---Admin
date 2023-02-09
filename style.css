@@ -986,19 +986,19 @@ form .bttn1 input:hover {
 }
 
 .input-box label {
-  background-color: red;
+  background-color: var(--color-danger);
   color: white;
   display: flex;
   align-items: center;
   height: 60px;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 0 25px;
   cursor: pointer;
   transition: all ease-out 200ms;
 }
 
 .input-box label:not(.chosen):hover {
-  background-color: blue;
+  background-color: var(--color-warning);
   box-shadow: 0 0 10px 0 rgb(red, green, blue);
 }
 
