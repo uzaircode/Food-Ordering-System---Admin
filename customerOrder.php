@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 
 $customer_id = $_SESSION['customer_id'];
-echo $customer_id;
+// echo $customer_id;
 
 ?>
 
@@ -60,23 +60,23 @@ echo $customer_id;
                 <a href="#">8:00—23:00</a>
             </div>
         </div>
-        <div class="dashboard">
+        <div class="dashboard dashboard-background">
             <div class="dashboard-banner">
                 <div class="dashboard-menu">
                     <a href="customerProfile.php">Manage Profile</a>
                     <a href="customerOrder.php">My Orders</a>
-                    <a href="#">My Payment Methods</a>
+                    <a href="customerPaymentMethod.php">My Payment Methods</a>
                 </div>
             </div>
             <div class="dashboard-content-profile">
                 <div class="progress-main profile-content">
-                    <h1>tracking</h1>
+                    <h1 style="text-align: left;">Tracking</h1>
                     <ul>
                         <li>
                             <i class="icon uil uil-capture"></i>
                             <div class="progress one">
                                 <p>1</p>
-                                <i class="uil uil-check"></i>
+                                <i class="uiluil-check"></i>
                             </div>
                             <p class="text">Add To Cart</p>
                         </li>
@@ -110,10 +110,12 @@ echo $customer_id;
                                 <p>5</p>
                                 <i class="uil uil-check"></i>
                             </div>
-                            <p class="text">Order Arrived</p>
+                            <p class="text">Order Success</p>
                         </li>
                     </ul>
+                    <br>
                     <main>
+                        <br>
                         <br>
                         <h1>Recent Orders</h1>
                         <div class="recent-table-list">
@@ -134,8 +136,11 @@ echo $customer_id;
                             <td class="success">PAID</td>
                         </tr>
                     </tbody> -->
-                                <tbody>
-                                    <?php while($row = mysqli_fetch_array($order_records)) { ?>
+                                <tbody class="customer-order-table">
+                                    <?php
+                                    $query = "SELECT `order`.*, `customer`.`customer_name` FROM `order` INNER JOIN `customer` ON `order`.`customer_id` = `customer`.`customer_id`";
+                                    $order_records = mysqli_query($db, $query);
+                                    while($row = mysqli_fetch_array($order_records)) { ?>
                                     <tr>
                                         <td>#<?php echo $row['order_id']; ?></td>
                                         <td><?php echo $row['customer_name']; ?></td>

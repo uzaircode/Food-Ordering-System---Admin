@@ -53,6 +53,8 @@ $cart_item_id = "";
 $staff_name = "";
 $staff_email = "";
 $staff_id = "";
+$staff_phone = "";
+$staff_password = "";
 
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'admin_database');

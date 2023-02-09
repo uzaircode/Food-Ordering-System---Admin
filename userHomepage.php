@@ -11,8 +11,8 @@ $session_id = $_SESSION['session_id'];
 $total = $_SESSION['total'];
 
 
-echo $total;
-echo $customer_id;
+// echo $total;
+// echo $customer_id;
 
 
 ini_set('display_errors', 1);

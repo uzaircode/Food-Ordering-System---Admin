@@ -48,6 +48,12 @@ p {
   grid-area: main;
 }
 
+.dashboard-background {
+  background-image: url(images/section-background.png);
+  background-size: cover;
+  background-repeat: repeat;
+}
+
 .sidebar-menu {
   width: 100%;
   text-align: center;
@@ -102,24 +108,22 @@ p {
 }
 
 .dashboard-menu {
-  gap: 10px;
   padding: 0.3rem 1rem;
   text-align: center;
 }
 
-.dashboard-menu > a {
+.dashboard-menu a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 10px;
+  background-color: black;
+  color: #ffffff;
   text-decoration: none;
-  text-align: center;
-  border-radius: 20px;
-  min-width: 120px;
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  color: var(--darkBlack);
-  background-color: var(--lightGrey);
+  border-radius: 5px;
 }
 
 .dashboard-menu > a:hover {
-  background-color: var(--red);
+  background-color: #701820;
   color: var(--lightGrey);
 }
 
@@ -150,16 +154,17 @@ p {
 }
 
 .profile-content {
+  margin-left: 50px;
   align-self: center;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 2px 4px #ccc;
   padding: 20px;
+  background-color: black;
+  color: white;
 }
 
 .profile-content button {
   width: 100%;
-  background-color: #333;
+  background-color: #701820;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -171,7 +176,7 @@ p {
 }
 
 .profile-content button:hover {
-  background-color: #444;
+  background-color: rgba(112, 24, 32, 0.8);
 }
 
 .dashboard-card {
@@ -525,13 +530,13 @@ label {
 }
 .progress-main ul li .icon {
   font-size: 35px;
-  color: #ff4732;
+  color: orange;
   margin: 0 60px;
 }
 .progress-main ul li .text {
   font-size: 14px;
   font-weight: 600;
-  color: #ff4732;
+  color: orange;
 }
 
 /* Progress Div Css  */
@@ -540,20 +545,21 @@ label {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: rgba(68, 68, 68, 0.781);
+  background-color: orange;
   margin: 14px 0;
   display: grid;
   place-items: center;
   color: #fff;
   position: relative;
   cursor: pointer;
+  margin-left: 50px;
 }
 .progress::after {
   content: " ";
   position: absolute;
   width: 125px;
   height: 5px;
-  background-color: rgba(68, 68, 68, 0.781);
+  background-color: orange;
   right: 30px;
 }
 .one::after {
@@ -570,12 +576,12 @@ label {
 /* Active Css  */
 
 .progress-main ul li .active {
-  background-color: #ff4732;
+  background-color: orange;
   display: grid;
   place-items: center;
 }
 .progress-main li .active::after {
-  background-color: #ff4732;
+  background-color: orange;
 }
 .progress-main ul li .active p {
   display: none;
@@ -591,8 +597,8 @@ main .recent-table-list {
   width: 100%;
 }
 
-main .recent-table-list-title-section {
-  background-color: red;
+.recent-table-list-title-section {
+  background-color: black;
 }
 
 main .recent-table-list-title-section button {
@@ -827,4 +833,30 @@ input .span {
   border-radius: 0 5px 5px 0;
   border: none;
   cursor: pointer;
+}
+
+.customer-order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.customer-order-table td,
+.customer-order-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.customer-order-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.customer-order-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.customer-order-table .success {
+  background-color: green;
+  color: white;
 }

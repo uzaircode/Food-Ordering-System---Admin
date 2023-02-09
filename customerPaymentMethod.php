@@ -2,7 +2,7 @@
 session_start();
 include('server.php');
 $customer_id = $_SESSION['customer_id'];
-echo $customer_id;
+// echo $customer_id;
 $query = "SELECT * FROM payment_method WHERE customer_id='$customer_id'";
 $results = mysqli_query($db, $query);
 
@@ -74,7 +74,7 @@ if (mysqli_num_rows($results) > 0) {
                 <a href="#">8:00—23:00</a>
             </div>
         </div>
-        <div class="dashboard">
+        <div class="dashboard dashboard-background">
             <div class="dashboard-banner">
                 <div class="dashboard-menu">
                     <a href="customerProfile.php">Manage Profile</a>

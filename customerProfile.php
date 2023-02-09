@@ -68,7 +68,7 @@ $customer_password = $row['customer_password'];
                 <a href="#">8:00—23:00</a>
             </div>
         </div>
-        <div class="dashboard">
+        <div class="dashboard dashboard-background">
             <div class="dashboard-banner">
                 <div class="dashboard-menu">
                     <a href="customerProfile.php">Manage Profile</a>
@@ -117,8 +117,9 @@ $customer_password = $row['customer_password'];
                 </div>
             </div>
         </div>
+    </div>
 
-        <input type="checkbox" id="cart" />
+    <input type="checkbox" id="cart" />
 
     </div>
     <script src="index.js"></script>
